@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 export default function MissionSection() {
   return (
     <section id="mission" className="bg-bg px-6 py-24 lg:px-10 lg:py-30">
-      <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+      <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
         <div className="order-2 flex flex-col lg:order-none">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -23,7 +23,7 @@ export default function MissionSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="mt-6 font-body text-xs leading-relaxed text-neutral-700 md:text-sm"
+            className="mt-6 font-body text-xs leading-relaxed text-neutral-700 md:text-base"
           >
             Our mission is to provide excellent care aimed at improving the
             quality of life for patients affected by arthritis, lupus,
@@ -32,7 +32,7 @@ export default function MissionSection() {
             present cutting edge treatments to an underserved population. This
             commitment guides every decision we make, from diagnosis through
             long-term treatment. We remain dedicated to serving our patients
-            with compassion, expertise, and integrity..
+            with compassion, expertise, and integrity.
           </motion.p>
 
           <motion.a

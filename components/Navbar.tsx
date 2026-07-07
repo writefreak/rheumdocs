@@ -47,7 +47,7 @@ export default function Navbar() {
                   href={link.href}
                   className={`focus-ring rounded font-body text-sm font-medium transition-colors ${
                     scrolled
-                      ? "text-ink hover:text-primary"
+                      ? "text-neutral-900 hover:text-primary"
                       : "text-[#f8f5ef]/60 hover:text-white"
                   }`}
                 >

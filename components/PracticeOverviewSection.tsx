@@ -51,7 +51,7 @@ const offerings = [
 
 export default function PracticeOverviewSection() {
   return (
-    <section id="services" className="bg-bg-alt px-6 py-24 lg:px-10 lg:py-30">
+    <section id="services" className="bg-bg-alt px-4 py-24 lg:px-14 lg:py-30">
       <div className="mx-auto max-w-7xl">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -60,7 +60,7 @@ export default function PracticeOverviewSection() {
           transition={{ duration: 0.55 }}
           className="max-w-2xl font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl"
         >
-          Everything a rheumatology visit requires, handled in one building.
+          What we offer
         </motion.h2>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
