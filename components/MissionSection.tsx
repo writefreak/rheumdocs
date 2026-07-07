@@ -23,7 +23,7 @@ export default function MissionSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="mt-6 font-body text-xs leading-relaxed text-neutral-700 md:text-base"
+            className="mt-6 font-body text-xs leading-relaxed text-neutral-600 md:text-base"
           >
             Our mission is to provide excellent care aimed at improving the
             quality of life for patients affected by arthritis, lupus,
