@@ -19,7 +19,7 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-50 h-full w-full bg-bg px-8 py-8 lg:hidden"
+          className="fixed inset-0 z-50 h-full w-full bg-bg px-4 py-8 lg:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"
