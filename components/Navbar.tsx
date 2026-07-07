@@ -6,12 +6,11 @@ import { Menu, CalendarCheck, ArrowRight } from "lucide-react";
 import MobileNav from "./MobileNav";
 
 export const navLinks = [
-  { label: "Mission", href: "#mission" },
+  { label: "Home", href: "#" },
+  { label: "About Us", href: "#about" },
   { label: "Services", href: "#services" },
-  { label: "Conditions", href: "#conditions" },
-  { label: "Research", href: "#research" },
-  { label: "Our Team", href: "#team" },
-  { label: "Contact", href: "#contact" },
+  { label: "Patient Forms", href: "#forms" },
+  { label: "Contact Us", href: "#contact" },
 ];
 
 export default function Navbar() {
@@ -34,9 +33,9 @@ export default function Navbar() {
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="flex h-20 items-center justify-between">
-            <Link href="/" className="h-14 pb-1">
+            <Link href="/" className="h-14 md:h-18 pb-1">
               <img
-                src="/rheumlogo.png"
+                src={scrolled ? "/rheumvar.png" : "/rheumwhite.png"}
                 alt=""
                 className="object-cover h-full w-full"
               />
@@ -49,7 +48,7 @@ export default function Navbar() {
                   className={`focus-ring rounded font-body text-sm font-medium transition-colors ${
                     scrolled
                       ? "text-ink hover:text-primary"
-                      : "text-[#f8f5ef]/60 hover:text-bg"
+                      : "text-[#f8f5ef]/60 hover:text-white"
                   }`}
                 >
                   {link.label}
