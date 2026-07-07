@@ -1,5 +1,13 @@
 import { MapPin, Phone, Clock } from "lucide-react";
-import { navLinks } from "./Navbar";
+
+const navLinks = [
+  { label: "Mission", href: "#mission" },
+  { label: "Services", href: "#services" },
+  { label: "Conditions", href: "#conditions" },
+  { label: "Research", href: "#research" },
+  { label: "Our Team", href: "#team" },
+  { label: "Contact", href: "#contact" },
+];
 
 export default function Footer() {
   return (
@@ -7,7 +15,9 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="font-display text-xl font-semibold">Rheumatology Consultants</p>
+            <p className="font-display text-xl font-semibold">
+              Rheumatology Consultants
+            </p>
             <p className="mt-3 font-body text-sm leading-relaxed text-bg/70">
               Western Maryland&apos;s independent rheumatology and osteoporosis
               specialty practice, serving patients since 1994.
@@ -38,7 +48,11 @@ export default function Footer() {
             </p>
             <div className="mt-4 space-y-3">
               <div className="flex items-start gap-3">
-                <MapPin size={18} strokeWidth={1.75} className="mt-0.5 shrink-0 text-accent" />
+                <MapPin
+                  size={18}
+                  strokeWidth={1.75}
+                  className="mt-0.5 shrink-0 text-accent"
+                />
                 <p className="font-body text-sm text-bg/85">
                   346 Mill Street
                   <br />
@@ -46,7 +60,11 @@ export default function Footer() {
                 </p>
               </div>
               <div className="flex items-start gap-3">
-                <Phone size={18} strokeWidth={1.75} className="mt-0.5 shrink-0 text-accent" />
+                <Phone
+                  size={18}
+                  strokeWidth={1.75}
+                  className="mt-0.5 shrink-0 text-accent"
+                />
                 <p className="font-body text-sm text-bg/85">
                   301-791-6680
                   <br />
@@ -61,7 +79,11 @@ export default function Footer() {
               Hours
             </p>
             <div className="mt-4 flex items-start gap-3">
-              <Clock size={18} strokeWidth={1.75} className="mt-0.5 shrink-0 text-accent" />
+              <Clock
+                size={18}
+                strokeWidth={1.75}
+                className="mt-0.5 shrink-0 text-accent"
+              />
               <p className="font-body text-sm text-bg/85">
                 Monday to Thursday
                 <br />
@@ -77,7 +99,8 @@ export default function Footer() {
 
         <div className="mt-12 border-t border-bg/15 pt-6">
           <p className="font-body text-xs text-bg/55">
-            © {new Date().getFullYear()} Rheumatology Consultants. All rights reserved.
+            © {new Date().getFullYear()} Rheumatology Consultants. All rights
+            reserved.
           </p>
         </div>
       </div>
