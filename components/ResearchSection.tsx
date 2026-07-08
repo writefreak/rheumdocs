@@ -7,15 +7,40 @@ import ImgageSlider from "./img-slider";
 
 const researchImages = [
   {
-    src: "/research/apex-study.jpg",
+    src: "/rh1.jpg",
     alt: "The APEX psoriatic arthritis clinical study",
   },
   {
-    src: "/research/allegory-lupus.jpg",
+    src: "/rh2.jpg",
     alt: "The ALLEGORY lupus research study",
   },
+
   {
-    src: "/research/baseline-ra.jpg",
+    src: "/rh4.jpg",
+    alt: "Project Baseline rheumatoid arthritis study",
+  },
+  {
+    src: "/rh5.jpg",
+    alt: "Project Baseline rheumatoid arthritis study",
+  },
+  {
+    src: "/rh6.jpg",
+    alt: "Project Baseline rheumatoid arthritis study",
+  },
+  {
+    src: "/rh7.jpg",
+    alt: "Project Baseline rheumatoid arthritis study",
+  },
+  {
+    src: "/rh8.jpg",
+    alt: "Project Baseline rheumatoid arthritis study",
+  },
+  {
+    src: "/rh9.jpg",
+    alt: "Project Baseline rheumatoid arthritis study",
+  },
+  {
+    src: "/rh10.jpg",
     alt: "Project Baseline rheumatoid arthritis study",
   },
 ];
@@ -27,7 +52,7 @@ export default function ResearchSection() {
       className="bg-primary px-4 py-24 text-bg lg:px-14 lg:py-30"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="grid md:gap-12 gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+        <div className="grid md:gap-12 gap-12 items-center lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
           <div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}

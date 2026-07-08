@@ -86,8 +86,8 @@ export default function ImgageSlider({ images }: { images: SlideImage[] }) {
         </AnimatePresence>
       </div>
 
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
+      <div className="">
+        {/* <div className="flex items-center gap-2">
           {images.map((_, i) => (
             <button
               key={i}
@@ -103,14 +103,14 @@ export default function ImgageSlider({ images }: { images: SlideImage[] }) {
               }`}
             />
           ))}
-        </div>
+        </div> */}
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center gap-2">
           <button
             type="button"
             aria-label="Previous image"
             onClick={() => handleManualNav(-1)}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-bg/25 text-bg transition-colors duration-200 hover:bg-bg/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+            className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full border border-bg/25 text-bg transition-colors duration-200 hover:bg-bg/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
           >
             <ChevronLeft size={16} strokeWidth={1.75} />
           </button>
@@ -118,7 +118,7 @@ export default function ImgageSlider({ images }: { images: SlideImage[] }) {
             type="button"
             aria-label="Next image"
             onClick={() => handleManualNav(1)}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-bg/25 text-bg transition-colors duration-200 hover:bg-bg/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+            className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full border border-bg/25 text-bg transition-colors duration-200 hover:bg-bg/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
           >
             <ChevronRight size={16} strokeWidth={1.75} />
           </button>
