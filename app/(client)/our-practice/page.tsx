@@ -10,7 +10,7 @@ export default function page() {
     <main>
       <PageHero
         pageName="Our Practice"
-        image="/exam-room.png"
+        image="/med.jpg"
         description="At our state-of-the-art rheumatology office, your
             well-being is our top priority. We proudly offer a range of
             cutting-edge services to cater to your unique needs."
@@ -82,10 +82,6 @@ export default function page() {
                 className="h-full w-full object-cover"
               />
             </motion.div>
-          </div>
-
-          <div className="pt-14 md:pt-20">
-            <Features />
           </div>
         </div>
       </section>

@@ -86,7 +86,7 @@ export default function Hero() {
             <a href="/contact">
               <Button variant="accent">Schedule an Appointment</Button>
             </a>
-            <a href="/services">
+            <a href="/our-practice">
               <Button variant="glass" icon={null}>
                 Explore Our Services
                 {/* <ArrowRight size={16} strokeWidth={2.25} /> */}
