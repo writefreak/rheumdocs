@@ -1,4 +1,7 @@
+"use client";
+
 import { motion } from "framer-motion";
+
 const FEATURES = [
   {
     title: "DXA Scanners",
@@ -12,7 +15,7 @@ const FEATURES = [
     description:
       "X-ray facility available on-site utilizing Gendex-Del and Digital Fuji CR equipment, Onsite ultrasound utilizing Sonosite M-MSK Progressive Radiology",
     image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800&auto=format&crop",
   },
   {
     title: "Infusion Services",
@@ -25,7 +28,7 @@ const FEATURES = [
 
 export default function Features() {
   return (
-    <section className="">
+    <section>
       <motion.h3
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -36,12 +39,11 @@ export default function Features() {
         Our Facilities
       </motion.h3>
 
-      <div className="md:grid md:grid-cols-3 md:gap-5 flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:pb-0 scrollbar-none">
-        {" "}
+      <div className="md:grid md:grid-cols-3 md:gap-5 flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {FEATURES.map((step) => (
           <article
             key={step.title}
-            className="group border rounded-2xl relative flex shadow-sm flex-col gap-4 md:h-full h-80 w-72 md:w-auto shrink-0 snap-start"
+            className="group border rounded-2xl relative flex shadow-sm flex-col gap-4 min-h-[180px] md:h-full w-72 md:w-auto shrink-0 snap-start"
           >
             <div className="p-4 md:p-6 flex flex-col gap-4">
               <h3 className="font-display text-sm md:text-base font-bold text-foreground">
