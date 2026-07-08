@@ -88,7 +88,7 @@ export default function Hero() {
                 <ArrowRight size={16} strokeWidth={2.25} />
               </button>
             </a>
-            <a href="#services">
+            <a href="/services">
               <button className="inline-flex items-center gap-2 rounded-2xl glass-card px-5 md:px-7 py-3.5 text-bg font-body text-xs md:text-sm font-semibold transition-transform hover:scale-[1.02]">
                 Explore Our Services
                 {/* <ArrowRight size={16} strokeWidth={2.25} /> */}

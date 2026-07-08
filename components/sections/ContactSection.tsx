@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useMemo, useRef, useState } from "react";
+import { useActionState, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone,
@@ -8,13 +8,13 @@ import {
   Clock,
   CheckCircle2,
   AlertCircle,
-  ChevronDown,
   Stethoscope,
   CalendarCheck,
   FlaskConical,
   MessageCircleQuestion,
 } from "lucide-react";
 import { submitContactForm, type ContactFormState } from "@/app/actions";
+import { Select } from "@/components/ui/select";
 
 const initialState: ContactFormState = { status: "idle", message: "" };
 
@@ -40,170 +40,6 @@ type FieldErrors = {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function ReasonSelect({
-  value,
-  onChange,
-  invalid,
-  onOpenTouch,
-}: {
-  value: ReasonValue | "";
-  onChange: (v: ReasonValue) => void;
-  invalid: boolean;
-  onOpenTouch: () => void;
-}) {
-  const [open, setOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const rootRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const listRef = useRef<HTMLUListElement>(null);
-
-  const selected = REASONS.find((r) => r.value === value);
-
-  useEffect(() => {
-    function onClickOutside(e: MouseEvent) {
-      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", onClickOutside);
-    return () => document.removeEventListener("mousedown", onClickOutside);
-  }, []);
-
-  function openMenu() {
-    onOpenTouch();
-    setActiveIndex(
-      Math.max(
-        0,
-        REASONS.findIndex((r) => r.value === value),
-      ),
-    );
-    setOpen(true);
-  }
-
-  function selectOption(index: number) {
-    onChange(REASONS[index].value);
-    setOpen(false);
-    buttonRef.current?.focus();
-  }
-
-  function handleTriggerKeyDown(e: React.KeyboardEvent) {
-    if (
-      e.key === "Enter" ||
-      e.key === " " ||
-      e.key === "ArrowDown" ||
-      e.key === "ArrowUp"
-    ) {
-      e.preventDefault();
-      if (!open) openMenu();
-    } else if (e.key === "Escape") {
-      setOpen(false);
-    }
-  }
-
-  function handleListKeyDown(e: React.KeyboardEvent) {
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setActiveIndex((i) => (i + 1) % REASONS.length);
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      setActiveIndex((i) => (i - 1 + REASONS.length) % REASONS.length);
-    } else if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      selectOption(activeIndex);
-    } else if (e.key === "Escape") {
-      e.preventDefault();
-      setOpen(false);
-      buttonRef.current?.focus();
-    } else if (e.key === "Tab") {
-      setOpen(false);
-    }
-  }
-
-  return (
-    <div ref={rootRef} className="relative">
-      <button
-        ref={buttonRef}
-        type="button"
-        role="combobox"
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        aria-invalid={invalid}
-        aria-describedby={invalid ? "reason-error" : undefined}
-        onClick={() => (open ? setOpen(false) : openMenu())}
-        onKeyDown={handleTriggerKeyDown}
-        className={`focus-ring flex w-full items-center justify-between gap-2 rounded-lg border bg-bg px-4 py-2.5 text-left font-body text-sm transition-colors ${
-          invalid ? "border-red-400" : "border-ink/15"
-        }`}
-      >
-        <span
-          className={`flex items-center gap-2 ${selected ? "text-ink" : "text-ink-muted/60"}`}
-        >
-          {selected ? (
-            <selected.icon
-              size={15}
-              strokeWidth={1.75}
-              className="shrink-0 text-primary"
-            />
-          ) : null}
-          {selected ? selected.label : "Select one"}
-        </span>
-        <ChevronDown
-          size={16}
-          strokeWidth={1.75}
-          className={`shrink-0 text-ink-muted transition-transform ${open ? "rotate-180" : ""}`}
-        />
-      </button>
-
-      <AnimatePresence>
-        {open && (
-          <motion.ul
-            ref={listRef}
-            role="listbox"
-            tabIndex={-1}
-            initial={{ opacity: 0, y: -6, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -6, scale: 0.98 }}
-            transition={{ duration: 0.14 }}
-            onKeyDown={handleListKeyDown}
-            className="absolute z-20 mt-1.5 w-full overflow-hidden rounded-lg border border-ink/10 bg-bg py-1 shadow-card"
-          >
-            {REASONS.map((r, i) => {
-              const isSelected = r.value === value;
-              const isActive = i === activeIndex;
-              return (
-                <li
-                  key={r.value}
-                  role="option"
-                  aria-selected={isSelected}
-                  onMouseEnter={() => setActiveIndex(i)}
-                  onClick={() => selectOption(i)}
-                  className={`flex cursor-pointer items-center gap-2.5 px-4 py-2.5 font-body text-sm transition-colors ${
-                    isActive ? "bg-primary/10 text-ink" : "text-ink-muted"
-                  }`}
-                >
-                  <r.icon
-                    size={15}
-                    strokeWidth={1.75}
-                    className={`shrink-0 ${isSelected ? "text-primary" : "text-ink-muted"}`}
-                  />
-                  {r.label}
-                  {isSelected && (
-                    <CheckCircle2
-                      size={14}
-                      strokeWidth={2}
-                      className="ml-auto shrink-0 text-primary"
-                    />
-                  )}
-                </li>
-              );
-            })}
-          </motion.ul>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
 export default function ContactSection() {
   const [state, formAction, isPending] = useActionState(
     submitContactForm,
@@ -223,6 +59,14 @@ export default function ContactSection() {
   const emailRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const reasonRef = useRef<HTMLDivElement>(null);
+
+  // const [phone, setPhone] = useState("");
+
+  function handlePhoneChange(e: React.ChangeEvent<HTMLInputElement>) {
+    // Allow digits, spaces, +, -, (, ) — strip everything else
+    const cleaned = e.target.value.replace(/[^\d\s()+-]/g, "");
+    setPhone(cleaned);
+  }
 
   const errors: FieldErrors = useMemo(() => {
     const e: FieldErrors = {};
@@ -262,12 +106,12 @@ export default function ContactSection() {
   }
 
   const inputBase =
-    "focus-ring mt-1.5 w-full rounded-lg border bg-bg px-4 py-2.5 font-body text-sm text-ink placeholder:text-ink-muted/50 transition-colors";
+    "focus-ring mt-1.5 w-full rounded-lg border bg-bg px-4 py-2.5 font-body text-sm text-ink placeholder:text-sm md:placeholder:text-xs placeholder:text-ink-muted/50 transition-colors";
   const inputOk = "border-ink/15";
   const inputBad = "border-red-400 focus:border-red-500";
 
   return (
-    <section id="contact" className="bg-bg px-6 py-24 lg:px-10 lg:py-30">
+    <section id="contact" className="bg-bg px-4 py-24 lg:px-14 lg:py-30">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div>
@@ -347,7 +191,7 @@ export default function ContactSection() {
             className="rounded-card bg-bg-alt p-8"
           >
             {state.status === "success" ? (
-              <div className="flex flex-col items-center py-10 text-center">
+              <div className="flex flex-col items-center justify-center py-10 text-center">
                 <CheckCircle2
                   size={44}
                   strokeWidth={1.5}
@@ -472,7 +316,7 @@ export default function ContactSection() {
                     autoComplete="tel"
                     placeholder="(301) 555-0123"
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={handlePhoneChange}
                     className={`${inputBase} ${inputOk}`}
                   />
                 </div>
@@ -482,17 +326,16 @@ export default function ContactSection() {
                     Reason for Inquiry
                   </label>
                   <div className="mt-1.5">
-                    <ReasonSelect
+                    <Select
+                      name="reason"
+                      options={REASONS}
                       value={reason}
-                      onChange={(v) => setReason(v)}
+                      onChange={(v) => setReason(v as ReasonValue)}
                       invalid={!!showError("reason")}
-                      onOpenTouch={() =>
-                        setTouched((t) => ({ ...t, reason: true }))
-                      }
+                      errorId="reason-error"
+                      onOpen={() => setTouched((t) => ({ ...t, reason: true }))}
                     />
                   </div>
-                  {/* Hidden field so the server action still receives `reason` exactly as before */}
-                  <input type="hidden" name="reason" value={reason} />
                   <AnimatePresence>
                     {showError("reason") && (
                       <motion.p
@@ -524,7 +367,7 @@ export default function ContactSection() {
                     id="message"
                     name="message"
                     rows={4}
-                    placeholder="Tell us a bit about what you need. A condition, a study you're interested in, or a question you have."
+                    placeholder="Tell us a bit about what you need, a condition, a study you're interested in, or a question you have."
                     ref={messageRef}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
@@ -533,7 +376,7 @@ export default function ContactSection() {
                     aria-describedby={
                       showError("message") ? "message-error" : undefined
                     }
-                    className={`${inputBase} placeholder:text-xs placeholder:md:text-sm resize-none ${showError("message") ? inputBad : inputOk}`}
+                    className={`${inputBase} text-xs resize-none ${showError("message") ? inputBad : inputOk}`}
                   />
                   <AnimatePresence>
                     {showError("message") && (

@@ -97,7 +97,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-bg/15 pt-6">
+        <div className="mt-12 flex items-center text-center md:items-start md:text-left border-t border-bg/15 pt-6">
           <p className="font-body text-xs text-bg/55">
             © {new Date().getFullYear()} Rheumatology Consultants. All rights
             reserved.

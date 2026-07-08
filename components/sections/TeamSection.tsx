@@ -8,7 +8,7 @@ import {
   animate,
 } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import TeamCard from "./team-card";
+import TeamCard from "../ui/team-card";
 
 interface TeamMember {
   name: string;
@@ -119,7 +119,7 @@ export default function TeamSection() {
   const cards = [...team, ...team];
 
   return (
-    <section id="team" className="bg-bg-alt px-6 py-24 lg:px-10 lg:py-30">
+    <section id="team" className="bg-bg-alt px-4 py-24 lg:px-14 lg:py-30">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-4">
           <motion.h2
