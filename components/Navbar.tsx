@@ -6,11 +6,11 @@ import { Menu, CalendarCheck, ArrowRight } from "lucide-react";
 import MobileNav from "./MobileNav";
 
 export const navLinks = [
-  { label: "Home", href: "#" },
-  { label: "About Us", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Patient Forms", href: "#forms" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Patient Forms", href: "/patient-forms" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 export default function Navbar() {

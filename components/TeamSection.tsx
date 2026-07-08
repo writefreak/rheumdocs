@@ -1,7 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useAnimationFrame,
+  animate,
+} from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import TeamCard from "./team-card";
 
@@ -12,11 +17,7 @@ interface TeamMember {
 }
 
 const team: TeamMember[] = [
-  {
-    name: "Okechukwu Okoye, MD",
-    title: "Medical Director",
-    image: "/dr1.jpg",
-  },
+  { name: "Okechukwu Okoye, MD", title: "Medical Director", image: "/dr1.jpg" },
   {
     name: "Chinelo Okoye, FNP",
     title: "Nurse Practitioner",
@@ -27,11 +28,7 @@ const team: TeamMember[] = [
     title: "Physician Assistant",
     image: "/dr3.jpg",
   },
-  {
-    name: "Nicole Pottorff",
-    title: "Practice Management",
-    image: "/dr4.jpg",
-  },
+  { name: "Nicole Pottorff", title: "Practice Management", image: "/dr4.jpg" },
   {
     name: "Richard Robinson, BSN, LPN, CCRC",
     title: "Clinical Trial Coordinator",
@@ -54,65 +51,72 @@ const team: TeamMember[] = [
   },
 ];
 
-const AUTO_SCROLL_INTERVAL = 3500;
+const SPEED_PX_PER_SEC = 24;
+const RESUME_DELAY_MS = 700;
 
 export default function TeamSection() {
-  const [index, setIndex] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const userTookOverRef = useRef(false);
+  const resumeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [trackWidth, setTrackWidth] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isNudging, setIsNudging] = useState(false);
+  const x = useMotionValue(0);
 
   const count = team.length;
+  const isPlaying = !isHovering && !isDragging && !isNudging;
 
-  const goTo = useCallback(
-    (next: number) => {
-      setIndex(((next % count) + count) % count);
+  // Measure one full set's width (we render the list twice for a seamless loop)
+  useEffect(() => {
+    const measure = () => {
+      if (trackRef.current) setTrackWidth(trackRef.current.scrollWidth / 2);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  // Wrap x within one set's width, whether moved by autoplay, drag, or a nudge
+  useEffect(() => {
+    if (!trackWidth) return;
+    const unsubscribe = x.on("change", (latest) => {
+      if (latest <= -trackWidth) x.set(latest + trackWidth);
+      else if (latest > 0) x.set(latest - trackWidth);
+    });
+    return unsubscribe;
+  }, [x, trackWidth]);
+
+  // Continuous slide, same technique as the Work section
+  useAnimationFrame((_, delta) => {
+    if (!isPlaying || !trackWidth) return;
+    x.set(x.get() - (SPEED_PX_PER_SEC * delta) / 1000);
+  });
+
+  // Arrow buttons: smoothly animate to the next/previous card instead of
+  // snapping via scrollIntoView. Pauses autoplay briefly, then resumes.
+  const nudge = useCallback(
+    (dir: -1 | 1) => {
+      if (!trackWidth) return;
+      if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
+      setIsNudging(true);
+      const cardWidth = trackWidth / count;
+      const target = x.get() - dir * cardWidth;
+      animate(x, target, {
+        type: "spring",
+        stiffness: 260,
+        damping: 32,
+        onComplete: () => {
+          resumeTimeout.current = setTimeout(
+            () => setIsNudging(false),
+            RESUME_DELAY_MS,
+          );
+        },
+      });
     },
-    [count],
+    [count, trackWidth, x],
   );
 
-  const goNext = useCallback(() => goTo(index + 1), [index, goTo]);
-  const goPrev = useCallback(() => goTo(index - 1), [index, goTo]);
-
-  // Self-scrolling autoplay. Stops for good the moment the user takes
-  // over (arrow click or a manual drag/swipe on the track), matching
-  // "control in case of impatience" rather than fighting the user's
-  // own scrolling.
-  useEffect(() => {
-    if (userTookOverRef.current || count <= 1) return;
-
-    timerRef.current = setInterval(() => {
-      setIndex((prev) => (prev + 1) % count);
-    }, AUTO_SCROLL_INTERVAL);
-
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [count, index]);
-
-  // Scroll the track so the current index is in view. Uses the
-  // browser's own scrollIntoView instead of hand-computed pixel math,
-  // so it's correct on first paint and at every breakpoint.
-  useEffect(() => {
-    const track = trackRef.current;
-    const card = track?.children[index] as HTMLElement | undefined;
-    card?.scrollIntoView({
-      behavior: "smooth",
-      inline: "start",
-      block: "nearest",
-    });
-  }, [index]);
-
-  const takeOver = () => {
-    userTookOverRef.current = true;
-    if (timerRef.current) clearInterval(timerRef.current);
-  };
-
-  const handleArrowClick = (dir: -1 | 1) => {
-    takeOver();
-    if (dir === 1) goNext();
-    else goPrev();
-  };
+  const cards = [...team, ...team];
 
   return (
     <section id="team" className="bg-bg-alt px-6 py-24 lg:px-10 lg:py-30">
@@ -139,53 +143,49 @@ export default function TeamSection() {
             because the physicians and staff are a part of the latest advances
             in care through extensive clinical study participation.
           </motion.p>
-
-          {/* <div className="hidden shrink-0 items-center gap-2 sm:flex">
-            <button
-              type="button"
-              onClick={() => handleArrowClick(-1)}
-              aria-label="Previous team member"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-bg text-ink shadow-card transition-colors hover:bg-primary/10"
-            >
-              <ChevronLeft size={20} strokeWidth={2} />
-            </button>
-            <button
-              type="button"
-              onClick={() => handleArrowClick(1)}
-              aria-label="Next team member"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-bg text-ink shadow-card transition-colors hover:bg-primary/10"
-            >
-              <ChevronRight size={20} strokeWidth={2} />
-            </button>
-          </div> */}
         </div>
 
         <div
-          ref={trackRef}
-          onPointerDown={takeOver}
-          onTouchStart={takeOver}
-          onWheel={takeOver}
-          className="mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mt-14 overflow-hidden py-2"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
         >
-          {team.map((member, i) => (
-            <motion.div
-              key={member.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: (i % 4) * 0.06 }}
-              className="w-[78%] h-full shrink-0 snap-start sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)]"
-            >
-              <TeamCard member={member} />
-            </motion.div>
-          ))}
+          <motion.div
+            ref={trackRef}
+            style={{ x }}
+            drag="x"
+            dragMomentum={false}
+            onDragStart={() => {
+              if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
+              setIsDragging(true);
+            }}
+            onDragEnd={() => {
+              resumeTimeout.current = setTimeout(
+                () => setIsDragging(false),
+                RESUME_DELAY_MS,
+              );
+            }}
+            className="flex gap-5"
+          >
+            {cards.map((member, i) => (
+              <motion.div
+                key={`${member.name}-${i}`}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: (i % 4) * 0.06 }}
+                className="w-[78%] shrink-0 sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)]"
+              >
+                <TeamCard member={member} />
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
 
-        {/* Mobile-only controls, since the header row hides them below sm */}
         <div className="mt-6 flex items-center justify-end gap-2">
           <button
             type="button"
-            onClick={() => handleArrowClick(-1)}
+            onClick={() => nudge(-1)}
             aria-label="Previous team member"
             className="flex md:h-12 md:w-12 h-9 w-9 items-center justify-center rounded-full bg-primary text-bg shadow-card transition-colors hover:bg-primary/10"
           >
@@ -193,9 +193,9 @@ export default function TeamSection() {
           </button>
           <button
             type="button"
-            onClick={() => handleArrowClick(1)}
+            onClick={() => nudge(1)}
             aria-label="Next team member"
-            className="flex md:h-12 md:w-12 h-9 w-9  items-center justify-center rounded-full bg-primary text-bg shadow-card transition-colors hover:bg-primary/10"
+            className="flex md:h-12 md:w-12 h-9 w-9 items-center justify-center rounded-full bg-primary text-bg shadow-card transition-colors hover:bg-primary/10"
           >
             <ChevronRight size={16} strokeWidth={1.5} />
           </button>

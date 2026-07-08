@@ -1,30 +1,270 @@
 "use client";
 
-import { useActionState, useState } from "react";
-import { motion } from "framer-motion";
-import { Phone, MapPin, Clock, Mail, CheckCircle2 } from "lucide-react";
+import { useActionState, useEffect, useMemo, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Phone,
+  MapPin,
+  Clock,
+  CheckCircle2,
+  AlertCircle,
+  ChevronDown,
+  Stethoscope,
+  CalendarCheck,
+  FlaskConical,
+  MessageCircleQuestion,
+} from "lucide-react";
 import { submitContactForm, type ContactFormState } from "@/app/actions";
 
 const initialState: ContactFormState = { status: "idle", message: "" };
 
+const REASONS = [
+  { value: "general", label: "General Question", icon: MessageCircleQuestion },
+  { value: "appointment", label: "Appointment Request", icon: CalendarCheck },
+  {
+    value: "clinical-trial",
+    label: "Clinical Trial Interest",
+    icon: FlaskConical,
+  },
+  { value: "other", label: "Other", icon: Stethoscope },
+] as const;
+
+type ReasonValue = (typeof REASONS)[number]["value"];
+
+type FieldErrors = {
+  fullName?: string;
+  email?: string;
+  reason?: string;
+  message?: string;
+};
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function ReasonSelect({
+  value,
+  onChange,
+  invalid,
+  onOpenTouch,
+}: {
+  value: ReasonValue | "";
+  onChange: (v: ReasonValue) => void;
+  invalid: boolean;
+  onOpenTouch: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  const selected = REASONS.find((r) => r.value === value);
+
+  useEffect(() => {
+    function onClickOutside(e: MouseEvent) {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, []);
+
+  function openMenu() {
+    onOpenTouch();
+    setActiveIndex(
+      Math.max(
+        0,
+        REASONS.findIndex((r) => r.value === value),
+      ),
+    );
+    setOpen(true);
+  }
+
+  function selectOption(index: number) {
+    onChange(REASONS[index].value);
+    setOpen(false);
+    buttonRef.current?.focus();
+  }
+
+  function handleTriggerKeyDown(e: React.KeyboardEvent) {
+    if (
+      e.key === "Enter" ||
+      e.key === " " ||
+      e.key === "ArrowDown" ||
+      e.key === "ArrowUp"
+    ) {
+      e.preventDefault();
+      if (!open) openMenu();
+    } else if (e.key === "Escape") {
+      setOpen(false);
+    }
+  }
+
+  function handleListKeyDown(e: React.KeyboardEvent) {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveIndex((i) => (i + 1) % REASONS.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveIndex((i) => (i - 1 + REASONS.length) % REASONS.length);
+    } else if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      selectOption(activeIndex);
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      setOpen(false);
+      buttonRef.current?.focus();
+    } else if (e.key === "Tab") {
+      setOpen(false);
+    }
+  }
+
+  return (
+    <div ref={rootRef} className="relative">
+      <button
+        ref={buttonRef}
+        type="button"
+        role="combobox"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-invalid={invalid}
+        aria-describedby={invalid ? "reason-error" : undefined}
+        onClick={() => (open ? setOpen(false) : openMenu())}
+        onKeyDown={handleTriggerKeyDown}
+        className={`focus-ring flex w-full items-center justify-between gap-2 rounded-lg border bg-bg px-4 py-2.5 text-left font-body text-sm transition-colors ${
+          invalid ? "border-red-400" : "border-ink/15"
+        }`}
+      >
+        <span
+          className={`flex items-center gap-2 ${selected ? "text-ink" : "text-ink-muted/60"}`}
+        >
+          {selected ? (
+            <selected.icon
+              size={15}
+              strokeWidth={1.75}
+              className="shrink-0 text-primary"
+            />
+          ) : null}
+          {selected ? selected.label : "Select one"}
+        </span>
+        <ChevronDown
+          size={16}
+          strokeWidth={1.75}
+          className={`shrink-0 text-ink-muted transition-transform ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            ref={listRef}
+            role="listbox"
+            tabIndex={-1}
+            initial={{ opacity: 0, y: -6, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.98 }}
+            transition={{ duration: 0.14 }}
+            onKeyDown={handleListKeyDown}
+            className="absolute z-20 mt-1.5 w-full overflow-hidden rounded-lg border border-ink/10 bg-bg py-1 shadow-card"
+          >
+            {REASONS.map((r, i) => {
+              const isSelected = r.value === value;
+              const isActive = i === activeIndex;
+              return (
+                <li
+                  key={r.value}
+                  role="option"
+                  aria-selected={isSelected}
+                  onMouseEnter={() => setActiveIndex(i)}
+                  onClick={() => selectOption(i)}
+                  className={`flex cursor-pointer items-center gap-2.5 px-4 py-2.5 font-body text-sm transition-colors ${
+                    isActive ? "bg-primary/10 text-ink" : "text-ink-muted"
+                  }`}
+                >
+                  <r.icon
+                    size={15}
+                    strokeWidth={1.75}
+                    className={`shrink-0 ${isSelected ? "text-primary" : "text-ink-muted"}`}
+                  />
+                  {r.label}
+                  {isSelected && (
+                    <CheckCircle2
+                      size={14}
+                      strokeWidth={2}
+                      className="ml-auto shrink-0 text-primary"
+                    />
+                  )}
+                </li>
+              );
+            })}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function ContactSection() {
-  const [state, formAction, isPending] = useActionState(submitContactForm, initialState);
-  const [clientError, setClientError] = useState("");
+  const [state, formAction, isPending] = useActionState(
+    submitContactForm,
+    initialState,
+  );
+
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [reason, setReason] = useState<ReasonValue | "">("");
+  const [message, setMessage] = useState("");
+
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [attemptedSubmit, setAttemptedSubmit] = useState(false);
+
+  const fullNameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+  const reasonRef = useRef<HTMLDivElement>(null);
+
+  const errors: FieldErrors = useMemo(() => {
+    const e: FieldErrors = {};
+    if (!fullName.trim()) e.fullName = "Please enter your full name.";
+    if (!email.trim()) e.email = "Please enter your email address.";
+    else if (!EMAIL_RE.test(email.trim()))
+      e.email = "That email doesn't look quite right.";
+    if (!reason) e.reason = "Please select a reason for your inquiry.";
+    if (!message.trim()) e.message = "Let us know how we can help.";
+    else if (message.trim().length < 10)
+      e.message = "A few more details would help us assist you.";
+    return e;
+  }, [fullName, email, reason, message]);
+
+  const showError = (field: keyof FieldErrors) =>
+    (touched[field] || attemptedSubmit) && errors[field];
+
+  function handleBlur(field: string) {
+    setTouched((t) => ({ ...t, [field]: true }));
+  }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    const form = e.currentTarget;
-    const fullName = (form.elements.namedItem("fullName") as HTMLInputElement)?.value.trim();
-    const email = (form.elements.namedItem("email") as HTMLInputElement)?.value.trim();
-    const reason = (form.elements.namedItem("reason") as HTMLSelectElement)?.value;
-    const message = (form.elements.namedItem("message") as HTMLTextAreaElement)?.value.trim();
+    setAttemptedSubmit(true);
+    setTouched({ fullName: true, email: true, reason: true, message: true });
 
-    if (!fullName || !email || !reason || !message) {
+    if (Object.keys(errors).length > 0) {
       e.preventDefault();
-      setClientError("Please fill in your name, email, reason for inquiry, and message.");
-      return;
+      if (errors.fullName) fullNameRef.current?.focus();
+      else if (errors.email) emailRef.current?.focus();
+      else if (errors.reason)
+        reasonRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      else if (errors.message) messageRef.current?.focus();
     }
-    setClientError("");
   }
+
+  const inputBase =
+    "focus-ring mt-1.5 w-full rounded-lg border bg-bg px-4 py-2.5 font-body text-sm text-ink placeholder:text-ink-muted/50 transition-colors";
+  const inputOk = "border-ink/15";
+  const inputBad = "border-red-400 focus:border-red-500";
 
   return (
     <section id="contact" className="bg-bg px-6 py-24 lg:px-10 lg:py-30">
@@ -38,40 +278,58 @@ export default function ContactSection() {
               transition={{ duration: 0.55 }}
               className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl"
             >
-              Reach the office directly, no call center in between.
+              Application For Clinical Trials and General Inquiries
             </motion.h2>
-            <p className="mt-4 font-body text-lg leading-relaxed text-ink-muted">
-              Send a message below or call during office hours. New patients,
-              referrals, and clinical trial questions all come through this same
-              front desk.
+            <p className="mt-4 font-body text-xs md:text-base leading-relaxed text-ink-muted">
+              If you feel one, or several of our studies may apply to you or a
+              family member, please use the contact form below and we will be in
+              touch!
             </p>
 
-            <div className="mt-10 space-y-6">
+            <div className="pt-10 space-y-6">
               <div className="flex items-start gap-4">
-                <MapPin size={20} strokeWidth={1.75} className="mt-1 shrink-0 text-primary" />
+                <MapPin
+                  size={16}
+                  strokeWidth={1.5}
+                  className="mt-1 shrink-0 text-primary"
+                />
                 <div>
-                  <p className="font-body text-sm font-semibold text-ink">Office Address</p>
-                  <p className="font-body text-sm text-ink-muted">
+                  <p className="font-body text-sm font-semibold text-ink">
+                    Office Address
+                  </p>
+                  <p className="font-body text-xs text-ink-muted">
                     346 Mill Street, Hagerstown, Maryland 21740
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <Phone size={20} strokeWidth={1.75} className="mt-1 shrink-0 text-primary" />
+                <Phone
+                  size={20}
+                  strokeWidth={1.75}
+                  className="mt-1 shrink-0 text-primary"
+                />
                 <div>
-                  <p className="font-body text-sm font-semibold text-ink">Phone &amp; Fax</p>
-                  <p className="font-body text-sm text-ink-muted">
+                  <p className="font-body text-sm font-semibold text-ink">
+                    Phone &amp; Fax
+                  </p>
+                  <p className="font-body text-xs text-ink-muted">
                     Phone: 301-791-6680 &nbsp;·&nbsp; Fax: 301-714-1506
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <Clock size={20} strokeWidth={1.75} className="mt-1 shrink-0 text-primary" />
+                <Clock
+                  size={20}
+                  strokeWidth={1.75}
+                  className="mt-1 shrink-0 text-primary"
+                />
                 <div>
-                  <p className="font-body text-sm font-semibold text-ink">Office Hours</p>
-                  <p className="font-body text-sm text-ink-muted">
+                  <p className="font-body text-sm font-semibold text-ink">
+                    Office Hours
+                  </p>
+                  <p className="font-body text-xs text-ink-muted">
                     Monday to Thursday, 9:00 AM to 4:30 PM
                     <br />
                     Friday, 9:00 AM to 12:00 PM
@@ -90,7 +348,11 @@ export default function ContactSection() {
           >
             {state.status === "success" ? (
               <div className="flex flex-col items-center py-10 text-center">
-                <CheckCircle2 size={44} strokeWidth={1.5} className="text-primary" />
+                <CheckCircle2
+                  size={44}
+                  strokeWidth={1.5}
+                  className="text-primary"
+                />
                 <p className="mt-4 font-display text-xl font-semibold text-ink">
                   Message sent.
                 </p>
@@ -99,10 +361,18 @@ export default function ContactSection() {
                 </p>
               </div>
             ) : (
-              <form action={formAction} onSubmit={handleSubmit} className="space-y-5" noValidate>
+              <form
+                action={formAction}
+                onSubmit={handleSubmit}
+                className="space-y-5"
+                noValidate
+              >
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="fullName" className="font-body text-sm font-medium text-ink">
+                    <label
+                      htmlFor="fullName"
+                      className="font-body text-sm font-medium text-ink"
+                    >
                       Full Name
                     </label>
                     <input
@@ -110,11 +380,42 @@ export default function ContactSection() {
                       name="fullName"
                       type="text"
                       autoComplete="name"
-                      className="focus-ring mt-1.5 w-full rounded-lg border border-ink/15 bg-bg px-4 py-2.5 font-body text-sm text-ink"
+                      placeholder="Jane Doe"
+                      ref={fullNameRef}
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      onBlur={() => handleBlur("fullName")}
+                      aria-invalid={!!showError("fullName")}
+                      aria-describedby={
+                        showError("fullName") ? "fullName-error" : undefined
+                      }
+                      className={`${inputBase} ${showError("fullName") ? inputBad : inputOk}`}
                     />
+                    <AnimatePresence>
+                      {showError("fullName") && (
+                        <motion.p
+                          id="fullName-error"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="mt-1.5 flex items-center gap-1.5 font-body text-xs text-red-600"
+                        >
+                          <AlertCircle
+                            size={13}
+                            strokeWidth={2}
+                            className="shrink-0"
+                          />
+                          {errors.fullName}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
                   </div>
+
                   <div>
-                    <label htmlFor="email" className="font-body text-sm font-medium text-ink">
+                    <label
+                      htmlFor="email"
+                      className="font-body text-sm font-medium text-ink"
+                    >
                       Email
                     </label>
                     <input
@@ -122,71 +423,162 @@ export default function ContactSection() {
                       name="email"
                       type="email"
                       autoComplete="email"
-                      className="focus-ring mt-1.5 w-full rounded-lg border border-ink/15 bg-bg px-4 py-2.5 font-body text-sm text-ink"
+                      placeholder="you@example.com"
+                      ref={emailRef}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      onBlur={() => handleBlur("email")}
+                      aria-invalid={!!showError("email")}
+                      aria-describedby={
+                        showError("email") ? "email-error" : undefined
+                      }
+                      className={`${inputBase} ${showError("email") ? inputBad : inputOk}`}
                     />
-                  </div>
-                </div>
-
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <div>
-                    <label htmlFor="phone" className="font-body text-sm font-medium text-ink">
-                      Phone
-                    </label>
-                    <input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      autoComplete="tel"
-                      className="focus-ring mt-1.5 w-full rounded-lg border border-ink/15 bg-bg px-4 py-2.5 font-body text-sm text-ink"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="reason" className="font-body text-sm font-medium text-ink">
-                      Reason for Inquiry
-                    </label>
-                    <select
-                      id="reason"
-                      name="reason"
-                      defaultValue=""
-                      className="focus-ring mt-1.5 w-full rounded-lg border border-ink/15 bg-bg px-4 py-2.5 font-body text-sm text-ink"
-                    >
-                      <option value="" disabled>
-                        Select one
-                      </option>
-                      <option value="general">General Question</option>
-                      <option value="appointment">Appointment Request</option>
-                      <option value="clinical-trial">Clinical Trial Interest</option>
-                      <option value="other">Other</option>
-                    </select>
+                    <AnimatePresence>
+                      {showError("email") && (
+                        <motion.p
+                          id="email-error"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="mt-1.5 flex items-center gap-1.5 font-body text-xs text-red-600"
+                        >
+                          <AlertCircle
+                            size={13}
+                            strokeWidth={2}
+                            className="shrink-0"
+                          />
+                          {errors.email}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="font-body text-sm font-medium text-ink">
+                  <label
+                    htmlFor="phone"
+                    className="font-body text-sm font-medium text-ink"
+                  >
+                    Phone{" "}
+                    <span className="font-normal text-ink-muted">
+                      (optional)
+                    </span>
+                  </label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    placeholder="(301) 555-0123"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className={`${inputBase} ${inputOk}`}
+                  />
+                </div>
+
+                <div ref={reasonRef}>
+                  <label className="font-body text-sm font-medium text-ink">
+                    Reason for Inquiry
+                  </label>
+                  <div className="mt-1.5">
+                    <ReasonSelect
+                      value={reason}
+                      onChange={(v) => setReason(v)}
+                      invalid={!!showError("reason")}
+                      onOpenTouch={() =>
+                        setTouched((t) => ({ ...t, reason: true }))
+                      }
+                    />
+                  </div>
+                  {/* Hidden field so the server action still receives `reason` exactly as before */}
+                  <input type="hidden" name="reason" value={reason} />
+                  <AnimatePresence>
+                    {showError("reason") && (
+                      <motion.p
+                        id="reason-error"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="mt-1.5 flex items-center gap-1.5 font-body text-xs text-red-600"
+                      >
+                        <AlertCircle
+                          size={13}
+                          strokeWidth={2}
+                          className="shrink-0"
+                        />
+                        {errors.reason}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="font-body text-sm font-medium text-ink"
+                  >
                     Message
                   </label>
                   <textarea
                     id="message"
                     name="message"
                     rows={4}
-                    className="focus-ring mt-1.5 w-full rounded-lg border border-ink/15 bg-bg px-4 py-2.5 font-body text-sm text-ink"
+                    placeholder="Tell us a bit about what you need. A condition, a study you're interested in, or a question you have."
+                    ref={messageRef}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onBlur={() => handleBlur("message")}
+                    aria-invalid={!!showError("message")}
+                    aria-describedby={
+                      showError("message") ? "message-error" : undefined
+                    }
+                    className={`${inputBase} placeholder:text-xs placeholder:md:text-sm resize-none ${showError("message") ? inputBad : inputOk}`}
                   />
+                  <AnimatePresence>
+                    {showError("message") && (
+                      <motion.p
+                        id="message-error"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="mt-1.5 flex items-center gap-1.5 font-body text-xs text-red-600"
+                      >
+                        <AlertCircle
+                          size={13}
+                          strokeWidth={2}
+                          className="shrink-0"
+                        />
+                        {errors.message}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
                 </div>
 
-                {(clientError || (state.status === "error" && state.message)) && (
-                  <p className="font-body text-sm font-medium text-red-700">
-                    {clientError || state.message}
+                {state.status === "error" && state.message && (
+                  <p className="flex items-center gap-1.5 font-body text-sm font-medium text-red-700">
+                    <AlertCircle
+                      size={14}
+                      strokeWidth={2}
+                      className="shrink-0"
+                    />
+                    {state.message}
                   </p>
                 )}
 
-                <button
+                <motion.button
                   type="submit"
                   disabled={isPending}
-                  className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 font-body text-sm font-semibold text-bg transition-colors hover:bg-primary-dark disabled:opacity-60 sm:w-auto"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.55, delay: 0.2 }}
+                  className="focus-ring mt-8 flex w-fit items-center gap-2 rounded-2xl bg-primary px-6 py-3 font-body text-sm font-semibold text-bg transition-transform hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100"
                 >
-                  <Mail size={16} strokeWidth={2.25} />
-                  {isPending ? "Sending..." : "Send Message"}
-                </button>
+                  {isPending
+                    ? "Submitting Application..."
+                    : "Submit Application"}
+                </motion.button>
               </form>
             )}
           </motion.div>
