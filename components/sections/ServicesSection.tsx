@@ -152,7 +152,7 @@ export default function ConditionsCarouselSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-60px" }}
                     transition={{ duration: 0.4, delay: i * 0.05 }}
-                    className="w-[78vw] shrink-0 snap-start rounded-2xl border border-primary/30 bg-[#1f4548]/5 shadow-sm md:p-7 p-5 sm:w-80"
+                    className="w-[78vw] shrink-0 snap-start rounded-2xl border border-primary/30 bg-[#0f2829]/5 shadow-sm md:p-7 p-5 sm:w-80"
                   >
                     <img
                       src={item.image}
