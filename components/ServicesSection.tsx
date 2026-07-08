@@ -106,7 +106,7 @@ export default function ConditionsCarouselSection() {
   };
 
   return (
-    <section id="conditions" className="bg-bg-alt px-4 py-24 lg:px-14 lg:py-30">
+    <section id="conditions" className="bg-bg px-4 py-24 lg:px-14 lg:py-30">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[380px_1fr] lg:gap-14">
           {/* Left sidebar: heading, CTA, nav arrows */}
@@ -117,15 +117,23 @@ export default function ConditionsCarouselSection() {
             transition={{ duration: 0.55 }}
             className="flex flex-col justify-center lg:min-h-[420px]"
           >
-            <h2 className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
-              Symptoms and conditions we treat at the root.
-            </h2>
+            <div className="flex flex-col gap-4 md:pb-4">
+              <h2 className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
+                Our Consulting Services
+              </h2>
+
+              <p className="text-neutral-600 text-xs md:text-base">
+                We provide diagnosis and treatment of rheumatological diseases
+                and other related disorders affecting bones, muscles, and
+                joints, including:
+              </p>
+            </div>
 
             <a
               href="#contact"
-              className="mt-8 inline-flex w-fit items-center gap-2 rounded-full border border-ink px-6 py-3 text-sm font-medium text-ink transition-colors duration-200 hover:bg-ink hover:text-bg"
+              className="mt-8 inline-flex w-fit items-center gap-2 rounded-2xl bg-primary px-6 py-3 text-sm font-medium text-bg transition-colors duration-200 hover:bg-ink hover:text-bg"
             >
-              Book a consultation
+              Explore Our Services
               <ArrowRight size={16} strokeWidth={2} />
             </a>
 
@@ -163,7 +171,7 @@ export default function ConditionsCarouselSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.4, delay: i * 0.05 }}
-                  className="w-[78vw] shrink-0 snap-start rounded-2xl border border-primary/30 bg-bg p-8 sm:w-80"
+                  className="w-[78vw] shrink-0 snap-start rounded-2xl border border-primary/30 bg-[#1f4548]/10 p-8 sm:w-80"
                 >
                   <img
                     src={item.image}
