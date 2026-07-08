@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import PageHero from "@/components/shared/page-hero";
 import ContactSection from "@/components/sections/ContactSection";
 import ContactClinic from "@/components/sections/contact-clinic";
+import { ClientLogoStrip } from "@/components/services/client-logo-strip";
 
 const CONDITIONS = [
   "Rheumatoid arthritis",
@@ -27,7 +28,6 @@ export default function ClinicalTrialResearchPage() {
         description="Participate in groundbreaking rheumatology studies and
             help shape the future of treatment right here in Hagerstown."
       />
-
       {/* Diagnoses — numbered list, sticky image */}
       <section className="bg-bg px-4 py-20 lg:px-14 lg:py-28">
         <div className="mx-auto max-w-6xl">
@@ -124,6 +124,14 @@ export default function ClinicalTrialResearchPage() {
               directly beneath the marquee. */}
         </div>
       </section>
+      <div className="pt-5 pb-4 md:pt-14 flex flex-col gap-4 px-4 md:px-14">
+        <h3 className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl pb-3">
+          Our Proud Sponsors
+        </h3>
+      </div>
+      <div className="md:pb-10 pb-5">
+        <ClientLogoStrip />
+      </div>{" "}
       <ContactClinic />
     </main>
   );

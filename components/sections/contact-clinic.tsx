@@ -119,7 +119,10 @@ export default function ContactClinic({ className }: Props) {
   return (
     <section
       id="contact"
-      className={cn("bg-bg px-4 md:pb-28 pb-24 pt-10 lg:px-14", className)}
+      className={cn(
+        "bg-bg px-4 md:pb-28 pb-24 pt-14 md:pt-28 lg:px-14",
+        className,
+      )}
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
