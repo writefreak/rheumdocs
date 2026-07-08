@@ -10,7 +10,7 @@ export const navLinks = [
   { label: "About Us", href: "/about" },
   {
     label: "Services",
-    href: "/services",
+    href: "#",
     children: [
       { label: "Our Practice", href: "/our-practice" },
       { label: "Clinical Trial Research", href: "/clinical-trial-research" },

@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 interface PageHeroProps {
   pageName: string;
+  description?: string;
   image?: string;
 }
 
@@ -12,10 +13,11 @@ interface PageHeroProps {
  * Reusable page-title banner.
  * Fixed 300px height, background image with a soft primary-color overlay.
  * Background image parallaxes at a slower rate than scroll for depth.
- * Drop this at the top of any interior page: <PageHero pageName="About Us" />
+ * Drop this at the top of any interior page: <PageHero pageName="About Us" description="..." />
  */
 export default function PageHero({
   pageName,
+  description,
   image = "/exam-room.png",
 }: PageHeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -47,16 +49,17 @@ export default function PageHero({
         <h1 className="text-[26px] font-semibold leading-[1.08] text-bg sm:text-4xl lg:text-6xl">
           {pageName}
         </h1>{" "}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.55 }}
-          className="mb-14 max-w-lg font-body text-base font-medium text-neutral-300 sm:text-xl md:mb-20"
-        >
-          Rheumatology Consultants is the private practice{" "}
-          <br className="hidden md:block" /> of Okechukwu C. Okoye, M.D.
-        </motion.p>
+        {description && (
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.55 }}
+            className="mb-14 max-w-lg font-body text-base font-medium text-neutral-300 sm:text-xl md:mb-20"
+          >
+            {description}
+          </motion.p>
+        )}
       </div>
     </section>
   );

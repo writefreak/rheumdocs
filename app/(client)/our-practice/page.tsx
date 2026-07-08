@@ -8,23 +8,17 @@ import { Button } from "@/components/ui/button";
 export default function page() {
   return (
     <main>
-      <PageHero pageName="Our Practice" image="/exam-room.png" />
+      <PageHero
+        pageName="Our Practice"
+        image="/exam-room.png"
+        description="At our state-of-the-art rheumatology office, your
+            well-being is our top priority. We proudly offer a range of
+            cutting-edge services to cater to your unique needs."
+      />
 
       <section className="bg-bg px-4 py-20 lg:px-14 lg:py-30">
         <div className="mx-auto max-w-6xl">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.55 }}
-            className="max-w-2xl font-body text-base leading-relaxed text-ink-muted sm:text-lg"
-          >
-            Welcome to our state-of-the-art rheumatology office, where your
-            well-being is our top priority. We proudly offer a range of
-            cutting-edge services to cater to your unique needs.
-          </motion.p>
-
-          <div className="mt-14 grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="mt- grid gap-12 lg:grid-cols-2 lg:gap-16">
             {/* LHS — copy */}
             <div className="flex flex-col gap-8">
               <motion.div
