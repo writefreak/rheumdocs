@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowRight, ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
 
 type Condition = {
   title: string;
@@ -129,32 +129,12 @@ export default function ConditionsCarouselSection() {
               </p>
             </div>
 
-            <a
-              href="#contact"
-              className="mt-8 inline-flex w-fit items-center gap-2 rounded-2xl bg-primary px-6 py-3 text-sm font-medium text-bg transition-colors duration-200 hover:bg-ink hover:text-bg"
-            >
-              Explore Our Services
-              <ArrowRight size={16} strokeWidth={2} />
+            <a href="#" className="hidden md:block">
+              <button className="mt-8 inline-flex w-fit items-center gap-2 rounded-2xl bg-primary px-6 py-3 text-sm font-medium text-bg transition-colors duration-200 hover:bg-ink hover:text-bg">
+                Explore Our Services
+                <ArrowRight size={16} strokeWidth={2} />
+              </button>
             </a>
-
-            <div className="mt-10 hidden items-center gap-3 lg:flex">
-              <button
-                type="button"
-                onClick={() => scrollByCard(-1)}
-                aria-label="Previous condition"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/40 text-primary transition-colors duration-200 hover:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-              >
-                <ArrowLeft size={18} strokeWidth={2} />
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollByCard(1)}
-                aria-label="Next condition"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/40 text-primary transition-colors duration-200 hover:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-              >
-                <ArrowRight size={18} strokeWidth={2} />
-              </button>
-            </div>
           </motion.div>
 
           {/* Right: slidable cards */}
@@ -162,7 +142,7 @@ export default function ConditionsCarouselSection() {
             ref={scrollerRef}
             className="overflow-x-auto overflow-y-hidden overscroll-x-contain scroll-smooth snap-x snap-mandatory py-2 [-webkit-overflow-scrolling:touch] scrollbar-none [&::-webkit-scrollbar]:hidden"
           >
-            <div className="flex gap-6">
+            <div className="flex gap-4 md:gap-5">
               {conditions.map((item, i) => (
                 <motion.div
                   key={item.title}
@@ -171,7 +151,7 @@ export default function ConditionsCarouselSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.4, delay: i * 0.05 }}
-                  className="w-[78vw] shrink-0 snap-start rounded-2xl border border-primary/30 bg-[#1f4548]/10 p-8 sm:w-80"
+                  className="w-[78vw] shrink-0 snap-start rounded-2xl border border-primary/30 bg-[#1f4548]/10 shadow-sm md:p-7 p-5 sm:w-80"
                 >
                   <img
                     src={item.image}
@@ -187,26 +167,56 @@ export default function ConditionsCarouselSection() {
                 </motion.div>
               ))}
             </div>
+            <div
+              className="lg:flex items-center gap-3 hidden justify-end pt-8
+            "
+            >
+              <button
+                type="button"
+                onClick={() => scrollByCard(-1)}
+                aria-label="Previous condition"
+                className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-primary text-bg transition-colors duration-200 hover:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+              >
+                <ChevronLeft size={16} strokeWidth={1.6} />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollByCard(1)}
+                aria-label="Next condition"
+                className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-primary text-bg transition-colors duration-200 hover:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+              >
+                <ChevronRight size={16} strokeWidth={1.6} />
+              </button>
+            </div>
           </div>
 
-          {/* Mobile nav arrows, below the cards */}
-          <div className="flex items-center gap-3 lg:hidden">
-            <button
-              type="button"
-              onClick={() => scrollByCard(-1)}
-              aria-label="Previous condition"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/40 text-primary transition-colors duration-200 hover:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-            >
-              <ArrowLeft size={18} strokeWidth={2} />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollByCard(1)}
-              aria-label="Next condition"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/40 text-primary transition-colors duration-200 hover:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-            >
-              <ArrowRight size={18} strokeWidth={2} />
-            </button>
+          <div className="flex items-center justify-between gap-4 lg:hidden">
+            {" "}
+            {/* Mobile nav arrows, below the cards */}
+            <a href="#">
+              <button className=" inline-flex w-fit items-center gap-2 rounded-2xl bg-primary px-6 py-3 text-xs font-medium text-bg transition-colors duration-200 hover:bg-ink hover:text-bg">
+                Explore Services
+                <ChevronRight size={16} strokeWidth={2} />
+              </button>
+            </a>
+            <div className="flex items-center gap-3 lg:hidden justify-end">
+              <button
+                type="button"
+                onClick={() => scrollByCard(-1)}
+                aria-label="Previous condition"
+                className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-primary text-bg transition-colors duration-200 hover:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+              >
+                <ChevronLeft size={16} strokeWidth={1.6} />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollByCard(1)}
+                aria-label="Next condition"
+                className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-primary text-bg transition-colors duration-200 hover:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+              >
+                <ChevronRight size={16} strokeWidth={1.6} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
