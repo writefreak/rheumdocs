@@ -21,9 +21,9 @@ interface ButtonProps extends Omit<
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  accent: "bg-accent text-bg",
-  glass: "glass-card text-bg",
-  primary: "bg-primary text-bg",
+  accent: "bg-accent text-bg hover:brightness-110",
+  glass: "glass-card text-bg hover:brightness-110",
+  primary: "bg-primary text-bg hover:brightness-110",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -50,30 +50,16 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         whileHover="hover"
         whileFocus="hover"
         animate="rest"
-        className={`focus-ring group relative inline-flex items-center gap-2 overflow-hidden rounded-2xl font-body font-semibold transition-colors ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+        className={`focus-ring inline-flex items-center gap-2 rounded-2xl font-body font-semibold transition-colors duration-200 ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
       >
-        {/* Sheen sweep — diagonal light band that glides left to right on hover */}
-        <motion.span
-          aria-hidden
-          variants={{
-            rest: { x: "-130%" },
-            hover: { x: "130%" },
-          }}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="pointer-events-none absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-white/25"
-        />
-
-        <span className="relative z-10">{children}</span>
+        <span>{children}</span>
 
         {Icon && (
           <motion.span
             aria-hidden
-            variants={{
-              rest: { x: 0 },
-              hover: { x: 4 },
-            }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
-            className="relative z-10 flex items-center"
+            variants={{ rest: { x: 0 }, hover: { x: 3 } }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="flex items-center"
           >
             <Icon size={16} strokeWidth={2.25} />
           </motion.span>
