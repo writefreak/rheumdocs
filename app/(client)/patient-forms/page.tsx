@@ -70,20 +70,19 @@ function FormCard({
       transition={{ duration: 0.5, delay }}
       className="group flex flex-col overflow-hidden rounded-xl border border-ink/10 bg-bg shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_16px_32px_-12px_rgba(0,0,0,0.14)]"
     >
-      <div className="relative aspect-[4/5] w-full overflow-hidden bg-bg-alt p-2 md:p-3">
-        <div className="relative h-full rounded-lg w-full overflow-hidden  border border-ink/10 shadow-[0_1px_3px_rgba(0,0,0,0.08)]">
+      <div className="relative aspect-[10/9] md:aspect-[4/5] w-full overflow-hidden bg-bg-alt p-1.5 md:p-3">
+        <div className="relative h-full rounded-md md:rounded-lg w-full overflow-hidden border border-ink/10 shadow-[0_1px_3px_rgba(0,0,0,0.08)]">
           <img
             src={image}
             alt={`Preview of ${title}`}
-            className="h-full rounded-lg w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+            className="h-full rounded-md md:rounded-lg w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
           />
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-3 border-t border-ink/10 px-4 py-3.5 md:px-5 md:py-4">
-        <p className="font-body text-sm font-semibold leading-snug text-ink md:text-[15px]">
+      <div className="flex items-center bg-primary justify-between gap-3 border-t border-ink/10 px-3.5 py-2.5 md:px-5 md:py-4">
+        <p className="font-body text-[13px] font-semibold leading-snug text-bg md:text-[15px]">
           {title}
-          <span className="mt-0.5 block h-px w-0 bg-primary transition-all duration-300 ease-out group-hover:w-6" />
         </p>
 
         <svg
@@ -113,7 +112,7 @@ export default function PatientFormsPage() {
       <PageHero pageName="Patient Forms" image="/exam-room.png" />
 
       <section className="bg-bg px-4 pt-16 pb-20 lg:px-14 lg:pt-24 lg:pb-28">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -186,8 +185,8 @@ export default function PatientFormsPage() {
           </motion.div>
         </div>
 
-        <div className="mx-auto mt-16 max-w-6xl md:mt-20">
-          <div className="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
+        <div className="mx-auto mt-16 md:max-w-6xl md:mt-20">
+          <div className="grid px-3 md:px-0 grid-cols-1 gap-3 sm:gap-5 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
             {FORMS.map((form, i) => (
               <FormCard
                 key={form.href}
