@@ -27,7 +27,7 @@ export default function Timeline({ items }: TimelineProps) {
         const paragraphs = Array.isArray(item.body) ? item.body : [item.body];
 
         return (
-          <li key={item.label} className="relative pb-12 last:pb-0 md:pl-10">
+          <li key={item.label} className="relative pb-12 last:pb-0">
             {i !== items.length - 1 && (
               <motion.span
                 initial={{ scaleY: 0 }}

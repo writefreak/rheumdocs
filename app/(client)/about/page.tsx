@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import PageHero from "@/components/shared/page-hero";
 import Timeline from "@/components/about/timeline";
+import Features from "@/components/about/features";
 
 const historyItems = [
   {
@@ -54,17 +55,6 @@ export default function AboutPage() {
 
       <section className="bg-bg px-6 py-20 lg:px-10 lg:py-30">
         <div className="mx-auto max-w-6xl">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.55 }}
-            className="mb-14 max-w-2xl font-display text-2xl font-semibold text-ink sm:text-3xl md:mb-20"
-          >
-            Rheumatology Consultants is the private practice of Okechukwu C.
-            Okoye, M.D.
-          </motion.p>
-
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             {/* LHS — timeline */}
             <div className="order-2 lg:order-1">
@@ -102,57 +92,9 @@ export default function AboutPage() {
               </motion.div>
             </div>
           </div>
-
-          {/*
-            --- Our Facilities section (holding for later) ---
-            Site copy for reference when this is built out:
-
-            DXA Scanners
-            GE/Lunar Prodigy Advance
-
-            X-Rays & Ultrasound
-            X-ray facility available on-site utilizing Gendex-Del and Digital Fuji CR equipment.
-            Onsite ultrasound utilizing Sonosite M-MSK
-            Progressive Radiology
-
-            Infusion Services
-            Individualized administration of the latest I.V. medicines for rheumatologic
-            conditions and osteoporosis.
-
-          <section className="mt-20 border-t border-primary/10 pt-14 md:mt-28 md:pt-20">
-            <h2 className="mb-8 font-display text-2xl font-semibold text-ink md:text-3xl">
-              Our Facilities
-            </h2>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-              <div>
-                <h4 className="mb-2 font-display text-base font-semibold text-ink md:text-lg">
-                  DXA Scanners
-                </h4>
-                <p className="font-body text-xs text-neutral-600 md:text-base">
-                  GE/Lunar Prodigy Advance
-                </p>
-              </div>
-              <div>
-                <h4 className="mb-2 font-display text-base font-semibold text-ink md:text-lg">
-                  X-Rays & Ultrasound
-                </h4>
-                <p className="font-body text-xs text-neutral-600 md:text-base">
-                  X-ray facility available on-site utilizing Gendex-Del and Digital Fuji CR
-                  equipment. Onsite ultrasound utilizing Sonosite M-MSK. Progressive Radiology.
-                </p>
-              </div>
-              <div>
-                <h4 className="mb-2 font-display text-base font-semibold text-ink md:text-lg">
-                  Infusion Services
-                </h4>
-                <p className="font-body text-xs text-neutral-600 md:text-base">
-                  Individualized administration of the latest I.V. medicines for rheumatologic
-                  conditions and osteoporosis.
-                </p>
-              </div>
-            </div>
-          </section>
-          */}
+          <div className="pt-10">
+            <Features />
+          </div>{" "}
         </div>
       </section>
     </main>
