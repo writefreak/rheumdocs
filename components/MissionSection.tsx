@@ -7,6 +7,19 @@ export default function MissionSection() {
   return (
     <section id="mission" className="bg-bg px-6 py-24 lg:px-10 lg:py-30">
       <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.55 }}
+          className="order-1 relative aspect-[4/3] w-full overflow-hidden rounded-2xl lg:order-none"
+        >
+          <img
+            src="/doc.jpg"
+            alt="Rheumatology Consultants exam room in Hagerstown, Maryland"
+            className="h-full w-full object-cover"
+          />
+        </motion.div>
         <div className="order-2 flex flex-col lg:order-none">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -47,19 +60,6 @@ export default function MissionSection() {
             <ArrowRight size={16} strokeWidth={2.25} />
           </motion.a>
         </div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.55 }}
-          className="order-1 relative aspect-[4/3] w-full overflow-hidden rounded-2xl lg:order-none"
-        >
-          <img
-            src="/doc.jpg"
-            alt="Rheumatology Consultants exam room in Hagerstown, Maryland"
-            className="h-full w-full object-cover"
-          />
-        </motion.div>
       </div>
     </section>
   );

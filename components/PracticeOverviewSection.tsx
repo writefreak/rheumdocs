@@ -1,7 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import {
   Syringe,
   ScanLine,
@@ -56,7 +61,14 @@ const offerings = [
 export default function PracticeOverviewSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const active = activeIndex !== null ? offerings[activeIndex] : null;
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
 
   const scrollByCard = (dir: 1 | -1) => {
     const el = scrollerRef.current;
@@ -67,15 +79,30 @@ export default function PracticeOverviewSection() {
   };
 
   return (
-    <section id="services" className="bg-bg-alt px-4 py-24 lg:px-14 lg:py-30">
-      <div className="mx-auto max-w-7xl">
+    <section
+      ref={sectionRef}
+      id="services"
+      className="relative overflow-hidden px-4 py-20 lg:px-14 lg:py-30"
+    >
+      {/* Background image with soft overlay */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <motion.img
+          src="/exam-room.png"
+          alt=""
+          style={{ y: imageY }}
+          className="h-[124%] w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[#1f4548]/55" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl">
         <div className="flex flex-col gap-4">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55 }}
-            className="max-w-2xl font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl"
+            className="max-w-2xl font-display text-3xl font-semibold leading-tight text-white sm:text-4xl"
           >
             What Our <br className="md:hidden" /> Practice Offers
           </motion.h2>
@@ -85,7 +112,7 @@ export default function PracticeOverviewSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55 }}
-            className="max-w-2xl font-body text-xs md:text-base leading-relaxed text-neutral-600"
+            className="max-w-2xl font-body text-xs md:text-base leading-relaxed text-white/90"
           >
             Rheumatology Consultants is the principal provider of rheumatologic{" "}
             <br className="md:block hidden" /> and comprehensive osteoporosis
@@ -110,15 +137,15 @@ export default function PracticeOverviewSection() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.4, delay: i * 0.06 }}
                 whileHover={{ y: -3 }}
-                className="group w-[78vw] shrink-0 snap-start appearance-none rounded-card bg-bg md:p-7 p-5 text-left shadow-card transition-shadow duration-300 ease-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 sm:w-80"
+                className="group w-[78vw] shrink-0 snap-start appearance-none rounded-card border border-white/20 bg-white/10 md:p-7 p-5 text-left shadow-card backdrop-blur-xl transition-shadow duration-300 ease-out hover:shadow-lg hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 sm:w-80"
               >
-                <div className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-[#1f4548]/10">
-                  <Icon size={18} strokeWidth={1.75} className="text-primary" />
+                <div className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-white/15 backdrop-blur-md">
+                  <Icon size={18} strokeWidth={1.75} className="text-white" />
                 </div>
-                <h3 className="mt-5 font-display text-lg md:text-xl font-semibold text-ink">
+                <h3 className="mt-5 font-display text-lg md:text-xl font-semibold text-white">
                   {title}
                 </h3>
-                <p className="mt-2 line-clamp-3 font-body text-xs md:text-sm leading-relaxed text-ink-muted">
+                <p className="mt-2 line-clamp-3 font-body text-xs md:text-sm leading-relaxed text-white/90">
                   {description}
                 </p>
               </motion.button>
@@ -131,7 +158,7 @@ export default function PracticeOverviewSection() {
             type="button"
             onClick={() => scrollByCard(-1)}
             aria-label="Previous services"
-            className="flex md:h-12 md:w-12 h-9 w-9 items-center justify-center rounded-full bg-primary text-bg shadow-card transition-colors duration-200 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+            className="flex md:h-12 md:w-12 h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-card backdrop-blur-xl transition-colors duration-200 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -139,7 +166,7 @@ export default function PracticeOverviewSection() {
             type="button"
             onClick={() => scrollByCard(1)}
             aria-label="Next services"
-            className="flex h-9 w-9 md:h-12 md:w-12  items-center justify-center rounded-full bg-primary text-bg shadow-card transition-colors duration-200 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+            className="flex h-9 w-9 md:h-12 md:w-12  items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-card backdrop-blur-xl transition-colors duration-200 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
@@ -157,7 +184,7 @@ export default function PracticeOverviewSection() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
               onClick={() => setActiveIndex(null)}
-              className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
             />
 
             <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
@@ -169,7 +196,7 @@ export default function PracticeOverviewSection() {
                   damping: 36,
                   mass: 0.7,
                 }}
-                className="relative w-full max-w-lg rounded-card bg-bg p-8 shadow-lg"
+                className="relative w-full max-w-sm rounded-card bg-bg p-8 shadow-lg"
               >
                 <button
                   type="button"
