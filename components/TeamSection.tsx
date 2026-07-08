@@ -117,7 +117,7 @@ export default function TeamSection() {
   return (
     <section id="team" className="bg-bg-alt px-6 py-24 lg:px-10 lg:py-30">
       <div className="mx-auto max-w-7xl">
-        <div className="flex items-end justify-between gap-4">
+        <div className="flex flex-col gap-4">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -125,8 +125,20 @@ export default function TeamSection() {
             transition={{ duration: 0.55 }}
             className="max-w-2xl font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl"
           >
-            The physicians and research staff who see you at every visit.
+            Meet Our Elite Team
           </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.55 }}
+            className="max-w-lg font-body text-xs md:text-base leading-relaxed text-neutral-600"
+          >
+            With us you will receive advanced rheumatology care available
+            because the physicians and staff are a part of the latest advances
+            in care through extensive clinical study participation.
+          </motion.p>
 
           {/* <div className="hidden shrink-0 items-center gap-2 sm:flex">
             <button
