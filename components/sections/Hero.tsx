@@ -79,7 +79,10 @@ export default function Hero() {
             of other options.
           </motion.p> */}
 
-          <motion.div variants={item} className="mt-10 flex items-center gap-4">
+          <motion.div
+            variants={item}
+            className="mt-10 flex md:flex-row flex-col md:items-center gap-4"
+          >
             <a href="/contact">
               <Button variant="accent">Schedule an Appointment</Button>
             </a>

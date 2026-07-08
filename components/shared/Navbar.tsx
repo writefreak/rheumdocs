@@ -2,13 +2,20 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, CalendarCheck, ArrowRight } from "lucide-react";
+import { Menu, CalendarCheck, ArrowRight, ChevronDown } from "lucide-react";
 import MobileNav from "./MobileNav";
 
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Services", href: "/services" },
+  {
+    label: "Services",
+    href: "/services",
+    children: [
+      { label: "Our Practice", href: "/our-practice" },
+      { label: "Clinical Trial Research", href: "/clinical-trial-research" },
+    ],
+  },
   { label: "Patient Forms", href: "/patient-forms" },
   { label: "Contact Us", href: "/contact" },
 ];
@@ -16,6 +23,7 @@ export const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -41,19 +49,60 @@ export default function Navbar() {
               />
             </Link>
             <nav className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className={`focus-ring rounded font-body text-sm font-medium transition-colors ${
-                    scrolled
-                      ? "text-neutral-900 hover:text-primary"
-                      : "text-[#f8f5ef]/60 hover:text-white"
-                  }`}
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.children ? (
+                  <div
+                    key={link.href}
+                    className="relative"
+                    onMouseEnter={() => setServicesOpen(true)}
+                    onMouseLeave={() => setServicesOpen(false)}
+                  >
+                    <a
+                      href={link.href}
+                      className={`focus-ring flex items-center gap-1 rounded font-body text-sm font-medium transition-colors ${
+                        scrolled
+                          ? "text-neutral-900 hover:text-primary"
+                          : "text-[#f8f5ef]/60 hover:text-white"
+                      }`}
+                    >
+                      {link.label}
+                      <ChevronDown
+                        size={14}
+                        strokeWidth={2}
+                        className={`transition-transform ${servicesOpen ? "rotate-180" : ""}`}
+                      />
+                    </a>
+
+                    {servicesOpen && (
+                      <div className="absolute left-0 top-full pt-3">
+                        <div className="w-56 rounded-xl border border-ink/10 bg-bg py-2 shadow-card">
+                          {link.children.map((child) => (
+                            <a
+                              key={child.href}
+                              href={child.href}
+                              className="block px-4 py-2.5 font-body text-sm text-ink-muted transition-colors hover:bg-primary/5 hover:text-ink"
+                            >
+                              {child.label}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className={`focus-ring rounded font-body text-sm font-medium transition-colors ${
+                      scrolled
+                        ? "text-neutral-900 hover:text-primary"
+                        : "text-[#f8f5ef]/60 hover:text-white"
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                ),
+              )}
             </nav>
 
             <button
