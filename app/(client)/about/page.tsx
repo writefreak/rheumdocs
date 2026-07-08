@@ -53,7 +53,7 @@ export default function AboutPage() {
     <main>
       <PageHero pageName="About Us" image="/exam-room.jpg" />
 
-      <section className="bg-bg px-6 py-20 lg:px-10 lg:py-30">
+      <section className="bg-bg px-4 py-20 lg:px-14 lg:py-30">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             {/* LHS — timeline */}
@@ -92,9 +92,9 @@ export default function AboutPage() {
               </motion.div>
             </div>
           </div>
-          <div className="pt-10">
+          <div className="pt-10 md:pt-16">
             <Features />
-          </div>{" "}
+          </div>
         </div>
       </section>
     </main>
