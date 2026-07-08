@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Award, Stethoscope, Syringe } from "lucide-react";
+import { Button } from "../ui/button";
 
 const trustCards = [
   {
@@ -78,21 +79,15 @@ export default function Hero() {
             of other options.
           </motion.p> */}
 
-          <motion.div
-            variants={item}
-            className="mt-10 flex flex-wrap items-center gap-4"
-          >
-            <a href="#contact">
-              <button className="inline-flex items-center gap-2 rounded-2xl bg-accent text-bg px-5 md:px-7 py-3.5 font-body text-xs md:text-sm font-semibold transition-transform hover:scale-[1.02]">
-                Schedule an Appointment
-                <ArrowRight size={16} strokeWidth={2.25} />
-              </button>
+          <motion.div variants={item} className="mt-10 flex items-center gap-4">
+            <a href="/contact">
+              <Button variant="accent">Schedule an Appointment</Button>
             </a>
             <a href="/services">
-              <button className="inline-flex items-center gap-2 rounded-2xl glass-card px-5 md:px-7 py-3.5 text-bg font-body text-xs md:text-sm font-semibold transition-transform hover:scale-[1.02]">
+              <Button variant="glass" icon={null}>
                 Explore Our Services
                 {/* <ArrowRight size={16} strokeWidth={2.25} /> */}
-              </button>
+              </Button>
             </a>
           </motion.div>
         </div>

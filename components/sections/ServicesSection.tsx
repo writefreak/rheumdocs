@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "../ui/button";
 
 type Condition = {
   title: string;
@@ -129,11 +130,8 @@ export default function ConditionsCarouselSection() {
               </p>
             </div>
 
-            <a href="#" className="hidden md:block">
-              <button className="mt-8 inline-flex w-fit items-center gap-2 rounded-2xl bg-primary px-6 py-3 text-sm font-medium text-bg transition-colors duration-200 hover:bg-ink hover:text-bg">
-                Explore Our Services
-                <ArrowRight size={16} strokeWidth={2} />
-              </button>
+            <a href="#" className="hidden md:block pt-6">
+              <Button variant="primary">Explore Our Services</Button>
             </a>
           </motion.div>
 
@@ -194,10 +192,7 @@ export default function ConditionsCarouselSection() {
             {" "}
             {/* Mobile nav arrows, below the cards */}
             <a href="#">
-              <button className=" inline-flex w-fit items-center gap-2 rounded-2xl bg-primary px-6 py-3 text-xs font-medium text-bg transition-colors duration-200 hover:bg-ink hover:text-bg">
-                Explore Services
-                <ChevronRight size={16} strokeWidth={2} />
-              </button>
+              <Button variant="primary">Explore Our Services</Button>
             </a>
             <div className="flex items-center gap-3 lg:hidden justify-end">
               <button

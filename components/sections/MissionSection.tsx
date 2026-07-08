@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Button } from "../ui/button";
 
 export default function MissionSection() {
   return (
@@ -48,16 +49,15 @@ export default function MissionSection() {
             with compassion, expertise, and integrity.
           </motion.p>
 
-          <motion.button
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55, delay: 0.2 }}
-            className="focus-ring mt-8 gap-2 flex w-fit items-center rounded-2xl bg-primary px-6 py-3 font-body text-sm font-semibold text-bg transition-transform hover:scale-[1.02]"
+            className="focus-ring mt-8 gap-2 flex w-fit items-center rounded-2xl font-body text-sm font-semibold text-bg transition-transform hover:scale-[1.02]"
           >
-            Learn More About Us
-            <ArrowRight size={16} strokeWidth={2.25} />
-          </motion.button>
+            <Button variant="primary">Learn More About Us</Button>
+          </motion.div>
         </div>
       </div>
     </section>
