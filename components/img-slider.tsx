@@ -69,12 +69,7 @@ export default function ImgageSlider({ images }: { images: SlideImage[] }) {
             animate="center"
             exit="exit"
             transition={{ type: "spring", stiffness: 300, damping: 32 }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.15}
-            dragSnapToOrigin
-            onDragEnd={handleDragEnd}
-            className="absolute inset-0 flex cursor-grab items-center justify-center active:cursor-grabbing"
+            className="absolute inset-0 flex items-center justify-center"
           >
             <img
               src={images[index].src}
