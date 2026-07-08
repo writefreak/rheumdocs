@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { submitContactForm, type ContactFormState } from "@/app/actions";
 import { Select } from "@/components/ui/select";
+import { Button } from "../ui/button";
 
 const initialState: ContactFormState = { status: "idle", message: "" };
 
@@ -409,19 +410,11 @@ export default function ContactSection() {
                   </p>
                 )}
 
-                <motion.button
-                  type="submit"
-                  disabled={isPending}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.55, delay: 0.2 }}
-                  className="focus-ring mt-8 flex w-fit items-center gap-2 rounded-2xl bg-primary px-6 py-3 font-body text-sm font-semibold text-bg transition-transform hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100"
-                >
+                <Button variant="primary" icon={null}>
                   {isPending
                     ? "Submitting Application..."
                     : "Submit Application"}
-                </motion.button>
+                </Button>
               </form>
             )}
           </motion.div>

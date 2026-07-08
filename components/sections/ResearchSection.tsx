@@ -4,6 +4,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import ImgageSlider from "../ui/img-slider";
+import { Button } from "../ui/button";
 
 const researchImages = [
   {
@@ -84,10 +85,7 @@ export default function ResearchSection() {
                 please contact us.
               </p>
               <a href="#contact">
-                <button className="inline-flex items-center gap-2 rounded-2xl bg-accent text-bg px-5 md:px-7 py-3.5 font-body text-xs md:text-sm font-semibold transition-transform hover:scale-[1.02]">
-                  Explore Research Opportunities
-                  <ArrowRight size={16} strokeWidth={1.5} />
-                </button>
+                <Button variant="accent">Schedule an Appointment</Button>
               </a>
             </motion.div>
           </div>
