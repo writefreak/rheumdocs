@@ -6,6 +6,8 @@ interface TimelineItem {
   label: string;
   title: string;
   body: string | string[];
+  /** Mobile only — renders inline above this stop's text, right after the previous stop. Ignored on lg+, where images live in the sticky RHS column instead. */
+  image?: { src: string; alt: string };
 }
 
 interface TimelineProps {
@@ -25,10 +27,7 @@ export default function Timeline({ items }: TimelineProps) {
         const paragraphs = Array.isArray(item.body) ? item.body : [item.body];
 
         return (
-          <li
-            key={item.label}
-            className="relative pb-12 pl-8 last:pb-0 md:pl-10"
-          >
+          <li key={item.label} className="relative pb-12 last:pb-0 md:pl-10">
             {i !== items.length - 1 && (
               <motion.span
                 initial={{ scaleY: 0 }}
@@ -50,15 +49,21 @@ export default function Timeline({ items }: TimelineProps) {
               aria-hidden
             />
 
-            {/* <motion.span
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="mb-1 block font-body text-xs font-semibold uppercase tracking-wide text-accent"
-            >
-              {item.label}
-            </motion.span> */}
+            {item.image && (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5 }}
+                className="mb-4 aspect-[4/3] w-full overflow-hidden rounded-2xl lg:hidden"
+              >
+                <img
+                  src={item.image.src}
+                  alt={item.image.alt}
+                  className="h-full w-full object-cover"
+                />
+              </motion.div>
+            )}
 
             <motion.h3
               initial={{ opacity: 0, y: 12 }}

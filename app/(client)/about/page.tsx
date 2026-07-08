@@ -8,6 +8,10 @@ const historyItems = [
   {
     label: "1985 – 1994",
     title: "A Private Rheumatology Practice",
+    image: {
+      src: "https://images.squarespace-cdn.com/content/v1/6509cd15b3df9c53da70a6a5/76f7b520-d4a0-445c-b8d1-3b3b1f3af6a4/IMG_0121.jpg",
+      alt: "Staff member at the front desk of Rheumatology Consultants",
+    },
     body: [
       "Rheumatology Consultants was started in 1985 as a private rheumatology practice and in 1994 expanded to include comprehensive osteoporosis care.",
       "With the acquisition of a Hologic QDR 1000 DXA Scanner in 1994, The Osteoporosis Center was opened in Hagerstown. Because of the success of The Osteoporosis Center in Hagerstown we formed The Osteoporosis and Clinical Trials Center. To keep pace with technology we currently have a GE Lunar Prodigy DXA system.",
@@ -16,6 +20,10 @@ const historyItems = [
   {
     label: "Since 1995",
     title: "Clinical Trial Research",
+    image: {
+      src: "https://images.squarespace-cdn.com/content/v1/6509cd15b3df9c53da70a6a5/385c1852-a5ce-4a8e-87b7-698611f282f9/IMG_9984.jpg",
+      alt: "Patient receiving a DXA bone density scan",
+    },
     body: [
       "Since 1995 we have participated in many phase II and phase III clinical trials. To date our areas of study have focused on Ankylosing Spondylitis, Psoriatic Arthritis, Rheumatoid Arthritis, Systemic Lupus Erythematosus, Gout, Osteoarthritis, Osteoporosis in women and men, Osteopenia and Steroid Induced Osteoporosis.",
       "Clinical research organizations we have worked with include Kendle, MTRA, Parexel, PPD and Quintiles. Sponsors we have participated with include Abbott, AutoImmune, Boehringer Mannheim, Eli Lilly, G.D. Searle, Hoechst Marion Roussel, Hyal Pharmaceutical, NPS Allelix, Pfizer, Proctor & Gamble and Roche.",
@@ -44,7 +52,7 @@ export default function AboutPage() {
     <main>
       <PageHero pageName="About Us" image="/exam-room.jpg" />
 
-      <section className="bg-bg px-6 py-24 lg:px-10 lg:py-30">
+      <section className="bg-bg px-6 py-20 lg:px-10 lg:py-30">
         <div className="mx-auto max-w-6xl">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -63,8 +71,8 @@ export default function AboutPage() {
               <Timeline items={historyItems} />
             </div>
 
-            {/* RHS — two images, sticky on desktop so they stay in view while the timeline scrolls */}
-            <div className="order-1 flex flex-col gap-6 lg:order-2 lg:sticky lg:top-28 lg:h-fit lg:gap-8">
+            {/* RHS — two images, sticky on desktop so they stay in view while the timeline scrolls. On mobile these are hidden — the same two images render inline inside the timeline stops instead. */}
+            <div className="order-1 hidden flex-col gap-6 lg:order-2 lg:flex lg:sticky lg:top-28 lg:h-fit lg:gap-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

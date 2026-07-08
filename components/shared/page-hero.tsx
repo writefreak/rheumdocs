@@ -28,7 +28,7 @@ export default function PageHero({ pageName }: PageHeroProps) {
         }}
       />
 
-      <div className="relative z-10 flex h-full items-end px-6 pb-8 md:px-12 md:pb-10">
+      <div className="relative z-10 flex h-full items-end px-4 pb-8 md:px-12 md:pb-10">
         <h1 className="font-display text-2xl text-bg md:text-4xl">
           {pageName}
         </h1>
