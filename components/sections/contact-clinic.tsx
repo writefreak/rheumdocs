@@ -46,7 +46,7 @@ type FieldErrors = {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default function ContactSection({ className }: Props) {
+export default function ContactClinic({ className }: Props) {
   const [state, formAction, isPending] = useActionState(
     submitContactForm,
     initialState,
@@ -112,14 +112,14 @@ export default function ContactSection({ className }: Props) {
   }
 
   const inputBase =
-    "focus-ring mt-1.5 w-full rounded-lg border bg-bg px-4 py-2.5 font-body text-sm text-ink placeholder:text-sm md:placeholder:text-xs placeholder:text-ink-muted/50 transition-colors";
+    "focus-ring mt-1.5 w-full rounded-lg border bg-bg px-4  py-2.5 font-body text-sm text-ink placeholder:text-sm md:placeholder:text-xs placeholder:text-ink-muted/50 transition-colors";
   const inputOk = "border-ink/15";
   const inputBad = "border-red-400 focus:border-red-500";
 
   return (
     <section
       id="contact"
-      className={cn("bg-bg px-4 py-24 lg:px-14 lg:py-28", className)}
+      className={cn("bg-bg px-4 md:pb-28 pb-24 pt-10 lg:px-14", className)}
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
