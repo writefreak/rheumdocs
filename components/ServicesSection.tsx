@@ -137,40 +137,40 @@ export default function ConditionsCarouselSection() {
             </a>
           </motion.div>
 
-          {/* Right: slidable cards */}
-          <div
-            ref={scrollerRef}
-            className="overflow-x-auto overflow-y-hidden overscroll-x-contain scroll-smooth snap-x snap-mandatory py-2 [-webkit-overflow-scrolling:touch] scrollbar-none [&::-webkit-scrollbar]:hidden"
-          >
-            <div className="flex gap-4 md:gap-5">
-              {conditions.map((item, i) => (
-                <motion.div
-                  key={item.title}
-                  data-condition-card
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.4, delay: i * 0.05 }}
-                  className="w-[78vw] shrink-0 snap-start rounded-2xl border border-primary/30 bg-[#1f4548]/10 shadow-sm md:p-7 p-5 sm:w-80"
-                >
-                  <img
-                    src={item.image}
-                    alt=""
-                    className="h-16 w-16 rounded-full object-cover"
-                  />
-                  <h3 className="mt-6 font-display text-xl font-semibold text-ink">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 font-body text-sm leading-relaxed text-ink-muted">
-                    {item.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+          {/* Right: slidable cards + nav (nav lives OUTSIDE the scroller) */}
+          <div className="flex min-w-0 flex-col">
             <div
-              className="lg:flex items-center gap-3 hidden justify-end pt-8
-            "
+              ref={scrollerRef}
+              className="overflow-x-auto overflow-y-hidden overscroll-x-contain scroll-smooth snap-x snap-mandatory py-2 [-webkit-overflow-scrolling:touch] scrollbar-none [&::-webkit-scrollbar]:hidden"
             >
+              <div className="flex gap-4 md:gap-5">
+                {conditions.map((item, i) => (
+                  <motion.div
+                    key={item.title}
+                    data-condition-card
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.4, delay: i * 0.05 }}
+                    className="w-[78vw] shrink-0 snap-start rounded-2xl border border-primary/30 bg-[#1f4548]/5 shadow-sm md:p-7 p-5 sm:w-80"
+                  >
+                    <img
+                      src={item.image}
+                      alt=""
+                      className="h-16 w-16 rounded-full object-cover"
+                    />
+                    <h3 className="mt-6 font-display text-xl font-semibold text-ink">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 font-body text-sm leading-relaxed text-ink-muted">
+                      {item.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            <div className="hidden items-center justify-end gap-3 pt-8 lg:flex">
               <button
                 type="button"
                 onClick={() => scrollByCard(-1)}
