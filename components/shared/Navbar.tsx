@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, CalendarCheck, ArrowRight, ChevronDown } from "lucide-react";
 import MobileNav from "./MobileNav";
 
@@ -21,6 +22,7 @@ export const navLinks = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -60,6 +62,10 @@ export default function Navbar() {
                     <a
                       href={link.href}
                       className={`focus-ring flex items-center gap-1 rounded font-body text-sm font-medium transition-colors ${
+                        link.children.some((child) => child.href === pathname)
+                          ? "underline underline-offset-4"
+                          : ""
+                      } ${
                         scrolled
                           ? "text-neutral-900 hover:text-primary"
                           : "text-[#f8f5ef]/60 hover:text-white"
@@ -80,7 +86,11 @@ export default function Navbar() {
                             <a
                               key={child.href}
                               href={child.href}
-                              className="block px-4 py-2.5 font-body text-sm text-ink-muted transition-colors hover:bg-primary/5 hover:text-ink"
+                              className={`block px-4 py-2.5 font-body text-sm text-ink-muted transition-colors hover:bg-primary/5 hover:text-ink ${
+                                child.href === pathname
+                                  ? "underline underline-offset-4"
+                                  : ""
+                              }`}
                             >
                               {child.label}
                             </a>
@@ -94,6 +104,10 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     className={`focus-ring rounded font-body text-sm font-medium transition-colors ${
+                      link.href === pathname
+                        ? "underline underline-offset-4"
+                        : ""
+                    } ${
                       scrolled
                         ? "text-neutral-900 hover:text-primary"
                         : "text-[#f8f5ef]/60 hover:text-white"
