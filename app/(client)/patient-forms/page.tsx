@@ -68,7 +68,7 @@ function FormCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, delay }}
-      className="group flex flex-col overflow-hidden rounded-xl border border-ink/10 bg-bg shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_16px_32px_-12px_rgba(0,0,0,0.14)]"
+      className="group flex w-full flex-col overflow-hidden rounded-xl border border-ink/10 bg-bg shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_16px_32px_-12px_rgba(0,0,0,0.14)]"
     >
       <div className="relative aspect-[10/9] md:aspect-[4/5] w-full overflow-hidden bg-bg-alt p-1.5 md:p-3">
         <div className="relative h-full rounded-md md:rounded-lg w-full overflow-hidden border border-ink/10 shadow-[0_1px_3px_rgba(0,0,0,0.08)]">
@@ -86,7 +86,7 @@ function FormCard({
         </p>
 
         <svg
-          className="shrink-0 text-ink-muted transition-all duration-300 ease-out group-hover:translate-x-0.5 group-hover:text-primary"
+          className="shrink-0 text-primary transition-all duration-300 ease-out group-hover:translate-x-0.5 group-hover:text-ink-muted"
           width="15"
           height="15"
           viewBox="0 0 16 16"
@@ -107,6 +107,9 @@ function FormCard({
 }
 
 export default function PatientFormsPage() {
+  const firstRow = FORMS.slice(0, 4);
+  const lastRow = FORMS.slice(4);
+
   return (
     <main>
       <PageHero pageName="Patient Forms" image="/exam-room.png" />
@@ -118,7 +121,7 @@ export default function PatientFormsPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55 }}
-            className="space-y-5 font-body text-sm leading-relaxed text-ink-muted md:text-base"
+            className="space-y-5 font-body text-xs leading-relaxed text-neutral-600 md:text-base"
           >
             <p>
               New patients will require a{" "}
@@ -186,7 +189,8 @@ export default function PatientFormsPage() {
         </div>
 
         <div className="mx-auto mt-16 md:max-w-6xl md:mt-20">
-          <div className="grid px-3 md:px-0 grid-cols-1 gap-3 sm:gap-5 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
+          {/* Below lg: unchanged, single flowing grid */}
+          <div className="grid px-3 md:px-0 grid-cols-1 gap-3 sm:gap-5 md:grid-cols-3 md:gap-6 lg:hidden">
             {FORMS.map((form, i) => (
               <FormCard
                 key={form.href}
@@ -196,6 +200,34 @@ export default function PatientFormsPage() {
                 delay={i * 0.05}
               />
             ))}
+          </div>
+
+          {/* Desktop (lg+): first 4 in a full grid row, last 3 centered below */}
+          <div className="hidden lg:block">
+            <div className="grid grid-cols-4 gap-6">
+              {firstRow.map((form, i) => (
+                <FormCard
+                  key={form.href}
+                  title={form.title}
+                  href={form.href}
+                  image={form.image}
+                  delay={i * 0.05}
+                />
+              ))}
+            </div>
+
+            <div className="mt-6 flex justify-center gap-6">
+              {lastRow.map((form, i) => (
+                <div key={form.href} className="w-[calc(25%-1.125rem)]">
+                  <FormCard
+                    title={form.title}
+                    href={form.href}
+                    image={form.image}
+                    delay={(firstRow.length + i) * 0.05}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
