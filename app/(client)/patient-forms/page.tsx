@@ -189,6 +189,15 @@ export default function PatientFormsPage() {
         </div>
 
         <div className="mx-auto mt-16 md:max-w-6xl md:mt-20">
+          <motion.h3
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5 }}
+            className="pb-7 font-display text-xl font-semibold text-ink md:text-2xl"
+          >
+            Click on the forms below to download a PDF copy.
+          </motion.h3>
           {/* Below lg: unchanged, single flowing grid */}
           <div className="grid px-3 md:px-0 grid-cols-1 gap-3 sm:gap-5 md:grid-cols-3 md:gap-6 lg:hidden">
             {FORMS.map((form, i) => (
@@ -201,7 +210,6 @@ export default function PatientFormsPage() {
               />
             ))}
           </div>
-
           {/* Desktop (lg+): first 4 in a full grid row, last 3 centered below */}
           <div className="hidden lg:block">
             <div className="grid grid-cols-4 gap-6">
