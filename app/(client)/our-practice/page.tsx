@@ -52,7 +52,7 @@ export default function page() {
                 <h3 className="font-display text-xl font-semibold text-ink md:text-2xl">
                   Your well-being, our expertise. Together, we thrive!
                 </h3>
-                <p className="mt-4 font-body text-sm leading-relaxed text-ink-muted md:text-base">
+                <p className="mt-4 font-body text-xs leading-relaxed text-ink-muted md:text-base">
                   We are committed to providing holistic care that empowers you
                   to live your best life. Trust us to be your partners in
                   managing rheumatological conditions and enhancing your quality
