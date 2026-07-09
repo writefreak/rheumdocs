@@ -20,7 +20,7 @@ export default function page() {
         <div className="mx-auto max-w-6xl">
           <div className="mt- grid gap-12 lg:grid-cols-2 lg:gap-16">
             {/* LHS — copy */}
-            <div className="flex flex-col gap-8">
+            <div className="order-2 flex flex-col gap-8 lg:order-1">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -74,7 +74,7 @@ export default function page() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.55, delay: 0.15 }}
-              className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl lg:sticky lg:top-28 lg:h-fit"
+              className="relative order-1 aspect-[4/3] w-full overflow-hidden rounded-2xl lg:order-2 lg:sticky lg:top-28 lg:h-fit"
             >
               <img
                 src="https://images.squarespace-cdn.com/content/v1/6509cd15b3df9c53da70a6a5/13420ce6-7b4e-49d5-9567-08493c4eaa28/IMG_9999.jpg"
