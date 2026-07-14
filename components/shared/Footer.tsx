@@ -15,6 +15,13 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
+            <div className="md:h-56 h-48 w-32 md:w-44 pb-6">
+              <img
+                src="/rheumlogo.jpg"
+                alt=""
+                className="h-full w-full object-cover"
+              />
+            </div>{" "}
             <p className="font-display text-lg md:text-xl font-semibold">
               Rheumatology Consultants
             </p>

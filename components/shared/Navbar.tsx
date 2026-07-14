@@ -43,12 +43,22 @@ export default function Navbar() {
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="flex h-20 items-center justify-between">
-            <Link href="/" className="h-14 md:h-18 pb-1">
-              <img
+            <Link href="/" className="">
+              {/* <img
                 src={scrolled ? "/rheumvar.png" : "/rheumwhite.png"}
                 alt=""
                 className="object-cover h-full w-full"
-              />
+              /> */}
+
+              <h2
+                className={
+                  scrolled
+                    ? "font-display text-primary text-lg md:text-xl"
+                    : "text-bg text-lg md:text-xl"
+                }
+              >
+                Rheumatology Consultants
+              </h2>
             </Link>
             <nav className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) =>

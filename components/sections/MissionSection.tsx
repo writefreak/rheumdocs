@@ -43,10 +43,7 @@ export default function MissionSection() {
             quality of life for patients affected by arthritis, lupus,
             osteoporosis, and other autoimmune diseases. We provide current
             standards of care as well as access to clinical trials that may
-            present cutting edge treatments to an underserved population. This
-            commitment guides every decision we make, from diagnosis through
-            long-term treatment. We remain dedicated to serving our patients
-            with compassion, expertise, and integrity.
+            present cutting edge treatments to an underserved population.
           </motion.p>
 
           <motion.div
