@@ -52,7 +52,6 @@ export default function MissionSection() {
       id="mission"
       className="bg-bg px-6 py-20 sm:py-24 lg:px-10 lg:py-36 bg-white"
     >
-      {/* ---------- MOBILE / TABLET (below lg) ---------- */}
       <div className="mx-auto flex max-w-6xl flex-col lg:hidden">
         {/* Text */}
         <motion.h2
@@ -62,7 +61,7 @@ export default function MissionSection() {
           transition={{ duration: 0.55, delay: 0.05 }}
           className="mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold leading-tight text-[var(--color-primary)] sm:text-4xl"
         >
-          Our Mission
+          About Us
         </motion.h2>
 
         <motion.p
@@ -105,11 +104,11 @@ export default function MissionSection() {
           transition={{ duration: 0.55, delay: 0.5 }}
           className="focus-ring mt-10 flex w-fit items-center gap-2 rounded-[var(--radius-card)] font-[family-name:var(--font-body)] text-sm font-semibold transition-transform hover:scale-[1.02]"
         >
-          <Button variant="primary">Learn About Us</Button>
+          <Button variant="primary">Learn More About Us</Button>
         </motion.div>
       </div>
 
-      {/* ---------- DESKTOP (lg and up) ---------- */}
+      {/*DESKTOP*/}
       <div className="mx-auto hidden max-w-6xl gap-16 lg:grid lg:grid-cols-2 lg:items-center">
         {/* Image */}
         <motion.div
@@ -135,7 +134,7 @@ export default function MissionSection() {
             transition={{ duration: 0.55, delay: 0.05 }}
             className="mt-3 font-[family-name:var(--font-display)] text-5xl font-semibold leading-tight text-[var(--color-primary)]"
           >
-            Our Mission
+            About Us
           </motion.h2>
 
           <motion.p
@@ -162,7 +161,7 @@ export default function MissionSection() {
             className="focus-ring mt-10 flex w-fit items-center gap-2 rounded-[var(--radius-card)] font-[family-name:var(--font-body)] text-sm font-semibold transition-transform hover:scale-[1.02]"
           >
             <Button variant="primary" className="bg-accent">
-              Learn About Us
+              Learn More About Us
             </Button>
           </motion.div>
         </div>

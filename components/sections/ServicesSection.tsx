@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
 
 type Condition = {
@@ -12,7 +12,8 @@ type Condition = {
   linkLabel: string;
 };
 
-const conditions: Condition[] = [
+// Featured first 5 items from the original list
+const featuredConditions: Condition[] = [
   {
     title: "Rheumatoid Arthritis",
     image:
@@ -37,62 +38,6 @@ const conditions: Condition[] = [
       "Swollen fingers or toes, nail pitting, joint pain alongside skin plaques, lower back pain, eye inflammation.",
     linkLabel: "Psoriatic arthritis care",
   },
-  {
-    title: "Psoriasis",
-    image:
-      "https://images.unsplash.com/photo-1624625021373-9ffc038e9d3d?w=240&h=240&fit=crop&q=80&auto=format",
-    description:
-      "Raised, scaly patches on the skin, itching or burning, dry cracked skin that may bleed, thickened or ridged nails.",
-    linkLabel: "Psoriasis care",
-  },
-  {
-    title: "Polymyalgia Rheumatica",
-    image:
-      "https://images.unsplash.com/photo-1587365403481-1120a2e0287f?w=240&h=240&fit=crop&q=80&auto=format",
-    description:
-      "Aching and stiffness in the shoulders and hips, worse in the morning, fatigue, low-grade fever, unintended weight loss.",
-    linkLabel: "Polymyalgia care",
-  },
-  {
-    title: "Ankylosing Spondylitis",
-    image:
-      "https://images.unsplash.com/photo-1540205895360-4ad4cffb3aa8?w=240&h=240&fit=crop&q=80&auto=format",
-    description:
-      "Chronic lower back and hip pain, stiffness that improves with movement, fatigue, reduced spinal flexibility over time.",
-    linkLabel: "Spondylitis care",
-  },
-  {
-    title: "Chronic Low Back Pain",
-    image:
-      "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=240&h=240&fit=crop&q=80&auto=format",
-    description:
-      "Persistent aching or stiffness in the lower back, pain that radiates to the legs, muscle tightness, reduced mobility.",
-    linkLabel: "Back pain care",
-  },
-  {
-    title: "Osteoporosis",
-    image:
-      "https://images.unsplash.com/photo-1590049405811-dd8770d073f6?w=240&h=240&fit=crop&q=80&auto=format",
-    description:
-      "Often silent until a fracture occurs, gradual height loss, stooped posture, back pain from a weakened or collapsed vertebra.",
-    linkLabel: "Osteoporosis care",
-  },
-  {
-    title: "Lupus",
-    image:
-      "https://images.unsplash.com/photo-1627738641656-aebd944716cb?w=240&h=240&fit=crop&q=80&auto=format",
-    description:
-      "Joint pain and swelling, a facial rash, fatigue, sensitivity to sunlight, fever, and symptoms that flare and subside.",
-    linkLabel: "Lupus care",
-  },
-  {
-    title: "Joint and Muscle Pain",
-    image:
-      "https://images.unsplash.com/photo-1701826510629-051bb954fb8f?w=240&h=240&fit=crop&q=80&auto=format",
-    description:
-      "Widespread aching, tenderness to touch, stiffness after inactivity, fatigue, pain that shifts between muscles and joints.",
-    linkLabel: "Pain management care",
-  },
 ];
 
 export default function ConditionsCarouselSection() {
@@ -109,108 +54,73 @@ export default function ConditionsCarouselSection() {
   return (
     <section id="conditions" className="bg-bg px-4 py-24 lg:px-14 lg:py-30">
       <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[380px_1fr] lg:gap-14">
-          {/* Left sidebar: heading, CTA, nav arrows */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.55 }}
-            className="flex flex-col justify-center lg:min-h-[420px]"
-          >
-            <div className="flex flex-col gap-4 md:pb-4">
-              <h2 className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
-                Our Consulting Services
-              </h2>
+        {/* Header section on top */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.55 }}
+          className="flex flex-col gap-6 pb-12"
+        >
+          <div className="flex flex-col gap-4 max-w-2xl">
+            <h2 className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
+              Our Consulting Services
+            </h2>
 
-              <p className="text-neutral-600 text-xs md:text-base">
-                We provide diagnosis and treatment of rheumatological diseases
-                and other related disorders affecting bones, muscles, and
-                joints, including:
-              </p>
-            </div>
+            <p className="text-neutral-600 text-xs md:text-base leading-relaxed">
+              We provide diagnosis and treatment of rheumatological diseases and
+              other related disorders affecting bones, muscles, and joints,
+              including:
+            </p>
+          </div>
+        </motion.div>
 
-            <a href="#" className="hidden md:block pt-6">
-              <Button variant="primary">Explore Our Services</Button>
-            </a>
-          </motion.div>
+        {/* Cards container */}
+        <div className="flex flex-col">
+          <div className="overflow-x-visible scroll-smooth py-2">
+            {/* Flexbox container: horizontal scroll on mobile, flex-wrap centered on desktop */}
+            <div className="flex md:grid grid-cols-3 flex-col lg:flex-wrap lg:justify-center gap-4 md:gap-6">
+              {featuredConditions.map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  data-condition-card
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  whileHover={{ y: -4 }}
+                  className="group relative flex flex-col justify-between shrink-0 snap-start rounded-2xl border border-primary/30 bg-white p-6 md:p-7 shadow-sm transition-all duration-300 ease-out hover:border-primary/50 hover:shadow-md"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="overflow-hidden rounded-full h-16 w-16 shrink-0 border border-primary/20">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                        />
+                      </div>
+                    </div>
 
-          {/* Right: slidable cards + nav (nav lives OUTSIDE the scroller) */}
-          <div className="flex min-w-0 flex-col">
-            <div
-              ref={scrollerRef}
-              className="overflow-x-auto overflow-y-hidden overscroll-x-contain scroll-smooth snap-x snap-mandatory py-2 [-webkit-overflow-scrolling:touch] scrollbar-none [&::-webkit-scrollbar]:hidden"
-            >
-              <div className="flex gap-4 md:gap-5">
-                {conditions.map((item, i) => (
-                  <motion.div
-                    key={item.title}
-                    data-condition-card
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-60px" }}
-                    transition={{ duration: 0.4, delay: i * 0.05 }}
-                    className="w-[78vw] shrink-0 snap-start rounded-2xl border border-primary/30 bg-[#0f2829]/5 shadow-sm md:p-7 p-5 sm:w-80"
-                  >
-                    <img
-                      src={item.image}
-                      alt=""
-                      className="h-16 w-16 rounded-full object-cover"
-                    />
-                    <h3 className="mt-6 font-display text-xl font-semibold text-ink">
+                    <h3 className="mt-6 font-display md:text-xl font-semibold text-ink transition-colors duration-200 group-hover:text-primary">
                       {item.title}
                     </h3>
-                    <p className="mt-3 font-body text-sm leading-relaxed text-ink-muted">
+
+                    <p className="mt-3 font-body text-xs md:text-sm leading-relaxed text-ink-muted">
                       {item.description}
                     </p>
-                  </motion.div>
-                ))}
+                  </div>
+                </motion.div>
+              ))}
+              <div className="flex items-center gap-1">
+                <a
+                  href="#"
+                  className="underline text-xs md:text-sm text-primary"
+                >
+                  <Button variant="primary">Explore Full Services</Button>
+                </a>
+                {/* <ArrowUpRight size={12} className="text-primary" /> */}
               </div>
-            </div>
-
-            <div className="hidden items-center justify-end gap-3 pt-8 lg:flex">
-              <button
-                type="button"
-                onClick={() => scrollByCard(-1)}
-                aria-label="Previous condition"
-                className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-primary text-bg transition-colors duration-200 hover:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-              >
-                <ChevronLeft size={16} strokeWidth={1.6} />
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollByCard(1)}
-                aria-label="Next condition"
-                className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-primary text-bg transition-colors duration-200 hover:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-              >
-                <ChevronRight size={16} strokeWidth={1.6} />
-              </button>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between gap-4 lg:hidden">
-            {" "}
-            {/* Mobile nav arrows, below the cards */}
-            <a href="#">
-              <Button variant="primary">Explore Our Services</Button>
-            </a>
-            <div className="flex items-center gap-3 lg:hidden justify-end">
-              <button
-                type="button"
-                onClick={() => scrollByCard(-1)}
-                aria-label="Previous condition"
-                className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-primary text-bg transition-colors duration-200 hover:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-              >
-                <ChevronLeft size={16} strokeWidth={1.6} />
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollByCard(1)}
-                aria-label="Next condition"
-                className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-primary text-bg transition-colors duration-200 hover:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-              >
-                <ChevronRight size={16} strokeWidth={1.6} />
-              </button>
             </div>
           </div>
         </div>

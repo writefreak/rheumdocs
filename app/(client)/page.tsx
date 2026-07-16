@@ -16,7 +16,7 @@ export default function Home() {
       <Hero />
       <MissionSection />
       <PracticeOverviewSection />
-      {/* <ServicesSection /> */}
+      <ServicesSection />
       {/* <ResearchSection /> */}
       {/* <TeamSection /> */}
       <ContactSection />
