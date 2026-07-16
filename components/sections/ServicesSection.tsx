@@ -79,7 +79,7 @@ export default function ConditionsCarouselSection() {
         <div className="flex flex-col">
           <div className="overflow-x-visible scroll-smooth py-2">
             {/* Flexbox container: horizontal scroll on mobile, flex-wrap centered on desktop */}
-            <div className="flex md:grid grid-cols-3 flex-col lg:flex-wrap lg:justify-center gap-4 md:gap-6">
+            <div className="flex md:grid grid-cols-3 flex-col lg:flex-wrap lg:justify-center gap-4 md:gap-5">
               {featuredConditions.map((item, i) => (
                 <motion.div
                   key={item.title}
@@ -112,15 +112,15 @@ export default function ConditionsCarouselSection() {
                   </div>
                 </motion.div>
               ))}
-              <div className="flex items-center gap-1">
-                <a
-                  href="#"
-                  className="underline text-xs md:text-sm text-primary"
-                >
-                  <Button variant="primary">Explore Full Services</Button>
-                </a>
-                {/* <ArrowUpRight size={12} className="text-primary" /> */}
-              </div>
+            </div>
+            <div className="flex items-center gap-1 justify-end pt-7">
+              <a
+                href="/our-practice"
+                className="underline text-xs md:text-sm text-primary"
+              >
+                <Button variant="primary">Explore Full Services</Button>
+              </a>
+              {/* <ArrowUpRight size={12} className="text-primary" /> */}
             </div>
           </div>
         </div>
