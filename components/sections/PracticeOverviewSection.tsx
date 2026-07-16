@@ -89,12 +89,12 @@ export default function PracticeOverviewSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55 }}
-            className="max-w-2xl font-display text-3xl font-semibold leading-tight text-primary sm:text-4xl"
+            className="max-w-2xl font-display text-3xl font-semibold leading-tight text-bg sm:text-4xl"
           >
             What Our <br className="md:hidden" /> Practice Offers
           </motion.h2>
 
-          <motion.p
+          {/* <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
@@ -104,7 +104,7 @@ export default function PracticeOverviewSection() {
             Rheumatology Consultants is the principal provider of rheumatologic{" "}
             <br className="md:block hidden" /> and comprehensive osteoporosis
             care in Western Maryland
-          </motion.p>
+          </motion.p> */}
         </div>
 
         <div
@@ -124,17 +124,17 @@ export default function PracticeOverviewSection() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.4, delay: i * 0.06 }}
                 whileHover={{ y: -3 }}
-                className="group w-[78vw] lg:w-auto shrink-0 snap-start appearance-none rounded-card border border-white/20 bg-white md:p-7 p-5 text-left shadow-sm backdrop-blur-xl transition-shadow duration-300 ease-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 sm:w-80"
+                className="group w-[78vw] lg:w-auto shrink-0 snap-start appearance-none rounded-card border border-white/20 bg-[#fafafa]/10 md:p-7 p-5 text-left shadow-sm backdrop-blur-xl transition-shadow duration-300 ease-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 sm:w-80"
               >
-                <div className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-accent backdrop-blur-md">
-                  <Icon size={18} strokeWidth={1.75} className="text-white" />
+                <div className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-bg backdrop-blur-md">
+                  <Icon size={18} strokeWidth={1.75} className="text-accent" />
                 </div>
-                <h3 className="mt-5 font-display text-lg md:text-xl font-semibold ">
+                <h3 className="mt-5 font-display text-bg text-lg md:text-xl font-semibold ">
                   {title}
                 </h3>
-                <p className="mt-2 line-clamp-3 font-body text-xs md:text-sm leading-relaxed text-neutral-70">
+                {/* <p className="mt-2 line-clamp-3 font-body text-xs md:text-sm leading-relaxed text-neutral-70">
                   {description}
-                </p>
+                </p> */}
               </motion.button>
             ))}
           </div>

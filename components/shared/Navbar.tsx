@@ -38,7 +38,7 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0  left-0 right-0 z-40 transition-colors duration-300 ${
-          scrolled ? "bg-bg shadow-md" : "bg-transparent shadow-none"
+          scrolled ? "bg-white shadow-md" : "bg-transparent shadow-none"
         }`}
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-10">

@@ -138,58 +138,6 @@ export default function ContactSection({ className }: Props) {
               family member, please use the contact form below and we will be in
               touch!
             </p>
-
-            <div className="pt-10 space-y-6">
-              <div className="flex items-start gap-4">
-                <MapPin
-                  size={16}
-                  strokeWidth={1.5}
-                  className="mt-1 shrink-0 text-primary"
-                />
-                <div>
-                  <p className="font-body text-sm font-semibold text-ink">
-                    Office Address
-                  </p>
-                  <p className="font-body text-xs text-ink-muted">
-                    346 Mill Street, Hagerstown, Maryland 21740
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <Phone
-                  size={20}
-                  strokeWidth={1.75}
-                  className="mt-1 shrink-0 text-primary"
-                />
-                <div>
-                  <p className="font-body text-sm font-semibold text-ink">
-                    Phone &amp; Fax
-                  </p>
-                  <p className="font-body text-xs text-ink-muted">
-                    Phone: 301-791-6680 &nbsp;·&nbsp; Fax: 301-714-1506
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <Clock
-                  size={20}
-                  strokeWidth={1.75}
-                  className="mt-1 shrink-0 text-primary"
-                />
-                <div>
-                  <p className="font-body text-sm font-semibold text-ink">
-                    Office Hours
-                  </p>
-                  <p className="font-body text-xs text-ink-muted">
-                    Monday to Thursday, 9:00 AM to 4:30 PM
-                    <br />
-                    Friday, 9:00 AM to 12:00 PM
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
 
           <motion.div
