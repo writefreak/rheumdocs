@@ -1,7 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import {
   Syringe,
   ScanLine,
@@ -59,6 +64,15 @@ export default function PracticeOverviewSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const active = activeIndex !== null ? offerings[activeIndex] : null;
 
+  // Track scroll position of the section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax transform (moves the taller image as you scroll)
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-40%", "40%"]);
+
   const scrollByCard = (dir: 1 | -1) => {
     const el = scrollerRef.current;
     if (!el) return;
@@ -75,13 +89,14 @@ export default function PracticeOverviewSection() {
     >
       {/* Background image with soft overlay */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <img
+        <motion.img
+          style={{ y: imageY }}
           src="/exam-room.png"
           alt=""
-          className="h-full w-full object-cover"
+          className="h-[130%] w-full object-cover brightness-50"
         />
       </div>
-      <div className="absolute inset-0 bg-[#1f4548]/55" />
+      <div className="absolute inset-0 bg-[#1f4548]/30" />
       <div className="relative mx-auto max-w-5xl">
         <div className="flex flex-col gap-4">
           <motion.h2
@@ -94,24 +109,21 @@ export default function PracticeOverviewSection() {
             What Our <br className="md:hidden" /> Practice Offers
           </motion.h2>
 
-          {/* <motion.p
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55 }}
-            className="max-w-2xl font-body text-xs md:text-base leading-relaxed text-neutral-700"
+            className="max-w-2xl font-body text-xs md:text-base leading-relaxed text-neutral-300"
           >
-            Rheumatology Consultants is the principal provider of rheumatologic{" "}
-            <br className="md:block hidden" /> and comprehensive osteoporosis
-            care in Western Maryland
-          </motion.p> */}
+            Rheumatology Consultants is the principal provider of rheumatologic
+            and comprehensive osteoporosis care in Western Maryland. Click a
+            card to view more details
+          </motion.p>
         </div>
 
-        <div
-          ref={scrollerRef}
-          className="pt-7 pb-4 md:pt-14 md:pb-6 overflow-x-auto lg:overflow-x-visible overflow-y-hidden overscroll-x-contain scroll-smooth snap-x snap-mandatory [-webkit-overflow-scrolling:touch] scrollbar-none [&::-webkit-scrollbar]:hidden"
-        >
-          <div className="flex lg:grid lg:grid-cols-3 gap-3 py-2 sm:gap-4 lg:gap-6">
+        <div className="pt-7 pb-4 md:pt-14 md:pb-6  lg:overflow-x-visible  overscroll-x-contain scroll-smooth">
+          <div className="grid grid-cols-2 gap-2 lg:grid-cols-3 py-2 sm:gap-4 lg:gap-6">
             {offerings.map(({ icon: Icon, title, description }, i) => (
               <motion.button
                 type="button"
@@ -124,12 +136,12 @@ export default function PracticeOverviewSection() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.4, delay: i * 0.06 }}
                 whileHover={{ y: -3 }}
-                className="group w-[78vw] lg:w-auto shrink-0 snap-start appearance-none rounded-card border border-white/20 bg-[#fafafa]/10 md:p-7 p-5 text-left shadow-sm backdrop-blur-xl transition-shadow duration-300 ease-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 sm:w-80"
+                className="group w-auto shrink-0 snap-start appearance-none rounded-card border border-white/20 bg-[#fafafa]/10 md:p-7 p-5 text-left shadow-sm backdrop-blur-xl transition-shadow duration-300 ease-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 sm:w-80"
               >
                 <div className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-bg backdrop-blur-md">
                   <Icon size={18} strokeWidth={1.75} className="text-accent" />
                 </div>
-                <h3 className="mt-5 font-display text-bg text-lg md:text-xl font-semibold ">
+                <h3 className="mt-5 font-display text-bg text-[14px] md:text-xl font-semibold ">
                   {title}
                 </h3>
                 {/* <p className="mt-2 line-clamp-3 font-body text-xs md:text-sm leading-relaxed text-neutral-70">
@@ -140,7 +152,7 @@ export default function PracticeOverviewSection() {
           </div>
         </div>
 
-        <div className="flex lg:hidden pt-5 justify-end items-center gap-2">
+        {/* <div className="flex lg:hidden pt-5 justify-end items-center gap-2">
           <button
             type="button"
             onClick={() => scrollByCard(-1)}
@@ -157,7 +169,7 @@ export default function PracticeOverviewSection() {
           >
             <ChevronRight className="h-4 w-4" />
           </button>
-        </div>
+        </div> */}
       </div>
 
       {/* Full offering dialog */}
