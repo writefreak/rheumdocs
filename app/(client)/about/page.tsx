@@ -85,7 +85,7 @@ export default function AboutPage() {
           <TextCarousel slides={historySlides} />
           <ParallaxImage className="relative hidden md:block aspect-[4/3] w-full overflow-hidden rounded-card shadow-sm" />
         </div>
-        <div className="pt-10 flex flex-col md:pt-16">
+        <div className="pt-10 flex flex-col gap-8 md:pt-16">
           <Features />
           <TeamSection />
         </div>

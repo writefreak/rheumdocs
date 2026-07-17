@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import PageHero from "@/components/shared/page-hero";
 import Features from "@/components/about/features";
 import { Button } from "@/components/ui/button";
+import Conditions from "@/components/services/conditions";
 
 export default function page() {
   return (
@@ -16,58 +17,9 @@ export default function page() {
             cutting-edge services to cater to your unique needs."
       />
 
-      <section className="bg-bg px-4 py-20 lg:px-14 lg:py-30">
+      <section className="bg-white px-4 py-20 lg:px-14 lg:py-30">
         <div className="mx-auto max-w-6xl">
-          <div className="mt- grid gap-12 lg:grid-cols-2 lg:gap-16">
-            {/* LHS — copy */}
-            <div className="order-2 flex flex-col gap-8 lg:order-1">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.55 }}
-              >
-                <h2 className="font-display text-2xl font-semibold text-ink md:text-3xl">
-                  Discover Rheumatology Consultants
-                </h2>
-                <p className="mt-4 font-body text-sm leading-relaxed text-ink-muted md:text-base">
-                  Our infusion suite provides a comfortable and serene
-                  environment for receiving advanced treatments under the expert
-                  care of our skilled medical team. With our in-house x-ray and
-                  DXA services, you'll experience the convenience of seamless
-                  diagnostics, enabling our specialists to tailor treatment
-                  plans with precision. Additionally, our fully-equipped
-                  laboratory ensures swift and accurate results, expediting your
-                  journey to optimal health.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.55, delay: 0.1 }}
-                className="rounded-2xl bg-bg-alt p-8"
-              >
-                <h3 className="font-display text-xl font-semibold text-ink md:text-2xl">
-                  Your well-being, our expertise. Together, we thrive!
-                </h3>
-                <p className="mt-4 font-body text-xs leading-relaxed text-ink-muted md:text-base">
-                  We are committed to providing holistic care that empowers you
-                  to live your best life. Trust us to be your partners in
-                  managing rheumatological conditions and enhancing your quality
-                  of life. Contact us today to schedule your appointment and
-                  experience the excellence of comprehensive rheumatology care.
-                </p>
-
-                <div className="mt-8">
-                  <Button variant="primary" href="/contact">
-                    Contact Us
-                  </Button>
-                </div>
-              </motion.div>
-            </div>
-
+          <div className="mt- grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
             {/* RHS — image, sticky on desktop matching the About page pattern */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -82,7 +34,72 @@ export default function page() {
                 className="h-full w-full object-cover"
               />
             </motion.div>
+            {/* LHS — copy */}
+            <div className="order-2 flex flex-col gap-8 lg:order-1">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.55 }}
+                className="flex flex-col gap-12 md:gap-7"
+              >
+                <div className="flex flex-col gap-4 md:pb-4">
+                  <h2 className="font-display text-primary text-2xl font-semibold md:text-4xl">
+                    Discover Rheumatology Consultants
+                  </h2>
+                  <p className="font-body text-xs leading-relaxed text-ink-muted md:text-sm">
+                    Our infusion suite provides a comfortable and serene
+                    environment for receiving advanced treatments under the
+                    expert care of our skilled medical team. With our in-house
+                    x-ray and DXA services, you'll experience the convenience of
+                    seamless diagnostics, enabling our specialists to tailor
+                    treatment plans with precision. Additionally, our
+                    fully-equipped laboratory ensures swift and accurate
+                    results, expediting your journey to optimal health.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-4 pb-6 md:pb-4">
+                  <h2 className="font-display text-primary text-2xl font-semibold leading-tight sm:text-4xl">
+                    Our Consulting Services
+                  </h2>
+
+                  <p className="text-neutral-600 text-xs md:text-sm">
+                    We provide diagnosis and treatment of rheumatological
+                    diseases and other related disorders affecting bones,
+                    muscles, and joints, including:
+                  </p>
+                </div>
+              </motion.div>
+            </div>
           </div>
+        </div>
+        <Conditions />
+
+        <div className="flex justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.55, delay: 0.1 }}
+            className="rounded-2xl max-w-3xl bg-bg-alt p-8 md:p-12"
+          >
+            <h3 className="font-display text-2xl font-semibold text-ink md:text-4xl">
+              Your well-being, our expertise. Together, we thrive!
+            </h3>
+            <p className="mt-4 font-body text-xs leading-relaxed text-ink-muted md:text-base">
+              We are committed to providing holistic care that empowers you to
+              live your best life. Trust us to be your partners in managing
+              rheumatological conditions and enhancing your quality of life.
+              Contact us today to schedule your appointment and experience the
+              excellence of comprehensive rheumatology care.
+            </p>
+
+            <div className="mt-8">
+              <Button variant="primary" href="/contact">
+                Contact Us
+              </Button>
+            </div>
+          </motion.div>
         </div>
       </section>
     </main>

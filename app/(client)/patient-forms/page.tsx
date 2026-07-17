@@ -114,7 +114,7 @@ export default function PatientFormsPage() {
     <main>
       <PageHero pageName="Patient Forms" />
 
-      <section className="bg-bg px-4 pt-16 pb-20 lg:px-14 lg:pt-24 lg:pb-28">
+      <section className="bg-white px-4 pt-16 pb-20 lg:px-14 lg:pt-24 lg:pb-28">
         <div className="mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

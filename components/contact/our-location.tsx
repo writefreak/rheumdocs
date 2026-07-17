@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export default function OurLocation() {
   return (
-    <section className="bg-bg px-4 pt-20 lg:px-14 lg:pt-28">
+    <section className="bg-white px-4 pt-20 lg:px-14 lg:pt-28">
       <div className="mx-auto max-w-3xl text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

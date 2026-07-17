@@ -119,7 +119,7 @@ export default function TeamSection() {
   const cards = [...team, ...team];
 
   return (
-    <section id="team" className="py-12 lg:py-14">
+    <section id="team" className="py-14 lg:py-17">
       {/* ADJUST SECTION WIDTH HERE: Adjust max-w-7xl, max-w-full, max-w-[1400px], etc. */}
       <div className="mx-auto max-w-8xl">
         <div className="flex flex-col gap-4">

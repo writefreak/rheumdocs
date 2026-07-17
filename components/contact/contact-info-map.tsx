@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function ContactInfoMap() {
   return (
-    <section className="bg-bg px-4 pb-16 md:pb-28 pt-4 lg:px-14">
+    <section className="bg-white px-4 pb-16 md:pb-28 pt-4 lg:px-14">
       <div className="mx-auto max-w-6xl">
         <div className="grid overflow-hidden rounded-2xl sm:grid-cols-2">
           {/* Office info — solid dark card, centered, matches source exactly */}

@@ -6,7 +6,7 @@ export default function ContactPage() {
   return (
     <main>
       <PageHero pageName="Contact Us" image="/exam-room.png" />
-      <div className="flex flex-col gap-5 md:gap-7">
+      <div className="flex flex-col bg-white gap-5 md:gap-7">
         <OurLocation />
         <ContactInfoMap />
       </div>
