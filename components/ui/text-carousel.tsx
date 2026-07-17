@@ -57,7 +57,7 @@ export default function TextCarousel({
             </span>
           )} */}
 
-          <h3 className="mt-3 text-2xl sm:text-3xl font-semibold text-primary">
+          <h3 className="mt-3 text-2xl md:text-3xl font-semibold text-primary">
             {current.title}
           </h3>
 
@@ -84,7 +84,7 @@ export default function TextCarousel({
               aria-current={i === active}
               className={`h-1.5 rounded-full transition-all duration-300 ${
                 i === active
-                  ? "w-6 bg-slate-900"
+                  ? "w-6 bg-primary"
                   : "w-1.5 bg-slate-300 hover:bg-slate-400"
               }`}
             />

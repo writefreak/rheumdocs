@@ -61,7 +61,7 @@ function ParallaxImage({ className }: { className: string }) {
       className={className}
     >
       <motion.img
-        src="/doc.jpg"
+        src="/about.jpg"
         alt="Rheumatology Consultants exam room in Hagerstown, Maryland"
         style={{ y: imageY }}
         className="absolute left-0 -top-[15%] h-[130%] w-full object-cover"
@@ -79,16 +79,15 @@ export default function AboutPage() {
         // image="/exam-room.png"
       />
 
-      <section className="bg-bg px-4 py-20 lg:px-14 lg:py-30">
+      <section className="bg-bg px-4 py-20 lg:px-14 lg:py-30 bg-white">
         <div className="mx-auto max-w-6xl grid grid-cols-1 gap-5 md:gap-10 md:grid-cols-2">
+          <ParallaxImage className="relative md:hidden aspect-[4/3] w-full overflow-hidden rounded-card shadow-sm" />
           <TextCarousel slides={historySlides} />
-          <ParallaxImage className="relative aspect-[4/3] w-full overflow-hidden rounded-card shadow-sm" />
-
-          {/* <div className="pt-10 md:pt-16">
-            <Features />
-          </div> */}
-
-          {/* <TeamSection /> */}
+          <ParallaxImage className="relative hidden md:block aspect-[4/3] w-full overflow-hidden rounded-card shadow-sm" />
+        </div>
+        <div className="pt-10 flex flex-col md:pt-16">
+          <Features />
+          <TeamSection />
         </div>
       </section>
     </main>

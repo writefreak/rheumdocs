@@ -119,15 +119,16 @@ export default function TeamSection() {
   const cards = [...team, ...team];
 
   return (
-    <section id="team" className="px-4 py-24 lg:px-14 lg:py-30">
-      <div className="mx-auto">
+    <section id="team" className="py-12 lg:py-14">
+      {/* ADJUST SECTION WIDTH HERE: Adjust max-w-7xl, max-w-full, max-w-[1400px], etc. */}
+      <div className="mx-auto max-w-8xl">
         <div className="flex flex-col gap-4">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55 }}
-            className="max-w-2xl font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl"
+            className="font-display text-2xl font-semibold leading-tight text-primary sm:text-4xl"
           >
             Meet Our Elite Team
           </motion.h2>
@@ -139,9 +140,8 @@ export default function TeamSection() {
             transition={{ duration: 0.55 }}
             className="max-w-lg font-body text-xs md:text-base leading-relaxed text-neutral-600"
           >
-            With us you will receive advanced rheumatology care available
-            because the physicians and staff are a part of the latest advances
-            in care through extensive clinical study participation.
+            Our physicians and staff are a part of the latest advances in care
+            through extensive clinical study participation.
           </motion.p>
         </div>
 
@@ -174,6 +174,7 @@ export default function TeamSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: (i % 4) * 0.06 }}
+                /* Original percentage calculation restored so card sizes stay uniform */
                 className="w-[78%] shrink-0 sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)]"
               >
                 <TeamCard member={member} />
@@ -187,7 +188,7 @@ export default function TeamSection() {
             type="button"
             onClick={() => nudge(-1)}
             aria-label="Previous team member"
-            className="flex md:h-12 md:w-12 h-9 w-9 items-center justify-center rounded-full bg-primary text-bg shadow-card transition-colors hover:bg-primary/10"
+            className="flex md:h-12 md:w-12 h-9 w-9 items-center justify-center rounded-full bg-primary text-bg  transition-colors hover:bg-primary/10"
           >
             <ChevronLeft size={16} strokeWidth={1.5} />
           </button>
@@ -195,7 +196,7 @@ export default function TeamSection() {
             type="button"
             onClick={() => nudge(1)}
             aria-label="Next team member"
-            className="flex md:h-12 md:w-12 h-9 w-9 items-center justify-center rounded-full bg-primary text-bg shadow-card transition-colors hover:bg-primary/10"
+            className="flex md:h-12 md:w-12 h-9 w-9 items-center justify-center rounded-full bg-primary text-bg  transition-colors hover:bg-primary/10"
           >
             <ChevronRight size={16} strokeWidth={1.5} />
           </button>
