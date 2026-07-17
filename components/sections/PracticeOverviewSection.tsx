@@ -123,7 +123,7 @@ export default function PracticeOverviewSection() {
         </div>
 
         <div className="pt-7 pb-4 md:pt-14 md:pb-6  lg:overflow-x-visible  overscroll-x-contain scroll-smooth">
-          <div className="grid grid-cols-2 gap-2 lg:grid-cols-3 py-2 sm:gap-4 lg:gap-6">
+          <div className="grid grid-cols-1 gap-2 lg:grid-cols-3 py-2 sm:gap-4 lg:gap-6">
             {offerings.map(({ icon: Icon, title, description }, i) => (
               <motion.button
                 type="button"
@@ -136,7 +136,7 @@ export default function PracticeOverviewSection() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.4, delay: i * 0.06 }}
                 whileHover={{ y: -3 }}
-                className="group w-auto shrink-0 snap-start appearance-none rounded-card border border-white/20 bg-[#fafafa]/10 md:p-7 p-5 text-left shadow-sm backdrop-blur-xl transition-shadow duration-300 ease-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 sm:w-80"
+                className="group md:w-auto w-80 shrink-0 snap-start appearance-none rounded-card border border-white/20 bg-[#fafafa]/10 md:p-7 p-5 text-left shadow-sm backdrop-blur-xl transition-shadow duration-300 ease-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 sm:w-80"
               >
                 <div className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-bg backdrop-blur-md">
                   <Icon size={18} strokeWidth={1.75} className="text-accent" />

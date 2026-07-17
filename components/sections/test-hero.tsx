@@ -63,7 +63,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-4 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-32">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-4 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36">
         <motion.div
           variants={container}
           initial="hidden"
@@ -78,7 +78,7 @@ export default function Hero() {
             1994.
           </motion.h1>
 
-          <motion.p className="text-[10px] md:text-sm font-body md:max-w-sm text-neutral-500">
+          <motion.p className="text-[10px] md:text-sm font-body md:max-w-sm text-neutral-700">
             Board certified rheumatologists providing compassionate,
             comprehensive care for arthritis, autoimmune conditions,{" "}
             <br className="md:hidden" />
