@@ -58,27 +58,28 @@ const offerings = [
   },
 ];
 
+const CARDS_PER_PAGE = 3;
+const totalPages = Math.ceil(offerings.length / CARDS_PER_PAGE);
+
 export default function PracticeOverviewSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [page, setPage] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const active = activeIndex !== null ? offerings[activeIndex] : null;
 
-  // Track scroll position of the section
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  // Parallax transform (moves the taller image as you scroll)
   const imageY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
 
-  const scrollByCard = (dir: 1 | -1) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-offering-card]");
-    const step = (card?.offsetWidth ?? 320) + 24;
-    el.scrollBy({ left: step * dir, behavior: "smooth" });
+  const pageItems = offerings
+    .map((offering, i) => ({ ...offering, index: i }))
+    .slice(page * CARDS_PER_PAGE, page * CARDS_PER_PAGE + CARDS_PER_PAGE);
+
+  const goToPage = (dir: 1 | -1) => {
+    setPage((p) => Math.min(Math.max(p + dir, 0), totalPages - 1));
   };
 
   return (
@@ -87,7 +88,6 @@ export default function PracticeOverviewSection() {
       id="services"
       className="relative overflow-hidden px-4 py-20 lg:px-14 lg:py-30"
     >
-      {/* Background image with soft overlay */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <motion.img
           style={{ y: imageY }}
@@ -98,13 +98,13 @@ export default function PracticeOverviewSection() {
       </div>
       <div className="absolute inset-0 bg-[#1f4548]/30" />
       <div className="relative mx-auto max-w-5xl">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 items-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55 }}
-            className="max-w-2xl font-display text-3xl font-semibold leading-tight text-bg sm:text-4xl"
+            className="max-w-2xl font-display text-center text-3xl font-semibold leading-tight text-bg sm:text-4xl"
           >
             What Our <br className="md:hidden" /> Practice Offers
           </motion.h2>
@@ -114,7 +114,7 @@ export default function PracticeOverviewSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55 }}
-            className="max-w-2xl font-body text-xs md:text-base leading-relaxed text-neutral-300"
+            className="max-w-2xl font-body text-center text-xs md:text-base leading-relaxed text-neutral-300"
           >
             Rheumatology Consultants is the principal provider of rheumatologic
             and comprehensive osteoporosis care in Western Maryland. Click a
@@ -122,57 +122,89 @@ export default function PracticeOverviewSection() {
           </motion.p>
         </div>
 
-        <div className="pt-7 pb-4 md:pt-14 md:pb-6  lg:overflow-x-visible  overscroll-x-contain scroll-smooth">
-          <div className="grid grid-cols-1 gap-2 lg:grid-cols-3 py-2 sm:gap-4 lg:gap-6">
-            {offerings.map(({ icon: Icon, title, description }, i) => (
-              <motion.button
-                type="button"
-                data-offering-card
-                key={title}
-                layoutId={`offering-card-${i}`}
-                onClick={() => setActiveIndex(i)}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
-                whileHover={{ y: -3 }}
-                className="group md:w-auto w-80 shrink-0 snap-start appearance-none rounded-card border border-white/20 bg-[#fafafa]/10 md:p-7 p-5 text-left shadow-sm backdrop-blur-xl transition-shadow duration-300 ease-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 sm:w-80"
-              >
-                <div className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full bg-bg backdrop-blur-md">
-                  <Icon size={18} strokeWidth={1.75} className="text-accent" />
-                </div>
-                <h3 className="mt-5 font-display text-bg text-[14px] md:text-xl font-semibold ">
-                  {title}
-                </h3>
-                {/* <p className="mt-2 line-clamp-3 font-body text-xs md:text-sm leading-relaxed text-neutral-70">
-                  {description}
-                </p> */}
-              </motion.button>
-            ))}
+        {/* MOBILE: paginated column of 3 */}
+        <div className="pt-7 pb-4 lg:hidden">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={page}
+              initial={{ opacity: 0, x: 12 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -12 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="flex flex-col gap-3"
+            >
+              {pageItems.map(({ icon: Icon, title, index }) => (
+                <motion.button
+                  type="button"
+                  key={title}
+                  layoutId={`offering-card-${index}`}
+                  onClick={() => setActiveIndex(index)}
+                  whileTap={{ scale: 0.98 }}
+                  className="group flex flex-col gap-3 rounded-card border border-white/20 bg-[#fafafa]/10 px-5 py-5 text-left shadow-sm backdrop-blur-xl transition-shadow duration-300 ease-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                >
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-bg backdrop-blur-md">
+                    <Icon
+                      size={22}
+                      strokeWidth={1.75}
+                      className="text-accent"
+                    />
+                  </div>
+                  <h3 className="font-display text-bg text-[16px] font-semibold">
+                    {title}
+                  </h3>
+                </motion.button>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="flex justify-end items-center gap-2 pt-4">
+            <button
+              type="button"
+              onClick={() => goToPage(-1)}
+              disabled={page === 0}
+              aria-label="Previous services"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-card backdrop-blur-xl transition-colors duration-200 hover:bg-white/20 disabled:opacity-30 disabled:hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => goToPage(1)}
+              disabled={page === totalPages - 1}
+              aria-label="Next services"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-card backdrop-blur-xl transition-colors duration-200 hover:bg-white/20 disabled:opacity-30 disabled:hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
           </div>
         </div>
 
-        {/* <div className="flex lg:hidden pt-5 justify-end items-center gap-2">
-          <button
-            type="button"
-            onClick={() => scrollByCard(-1)}
-            aria-label="Previous services"
-            className="flex md:h-12 md:w-12 h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-card backdrop-blur-xl transition-colors duration-200 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollByCard(1)}
-            aria-label="Next services"
-            className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-card backdrop-blur-xl transition-colors duration-200 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </button>
-        </div> */}
+        {/* DESKTOP: unchanged grid of all cards */}
+        <div className="hidden lg:grid lg:grid-cols-3 lg:gap-6 pt-14 pb-6">
+          {offerings.map(({ icon: Icon, title, description }, i) => (
+            <motion.button
+              type="button"
+              key={title}
+              layoutId={`offering-card-${i}`}
+              onClick={() => setActiveIndex(i)}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.4, delay: i * 0.06 }}
+              whileHover={{ y: -3 }}
+              className="group appearance-none rounded-card border border-white/20 bg-[#fafafa]/10 p-7 text-left shadow-sm backdrop-blur-xl transition-shadow duration-300 ease-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-bg backdrop-blur-md">
+                <Icon size={18} strokeWidth={1.75} className="text-accent" />
+              </div>
+              <h3 className="mt-5 font-display text-bg text-xl font-semibold">
+                {title}
+              </h3>
+            </motion.button>
+          ))}
+        </div>
       </div>
 
-      {/* Full offering dialog */}
       <AnimatePresence>
         {active && activeIndex !== null && (
           <>

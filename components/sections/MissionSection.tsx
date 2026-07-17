@@ -126,7 +126,7 @@ export default function MissionSection() {
   return (
     <section
       id="mission"
-      className="bg-bg px-6 py-20 sm:py-24 lg:px-10 lg:py-36 bg-white"
+      className="bg-bg px-6 py-20 sm:py-24 lg:px-10 lg:py-36 bg-white border-t border-t-gray-100"
     >
       <div className="mx-auto flex max-w-6xl flex-col lg:hidden">
         {/* Text */}

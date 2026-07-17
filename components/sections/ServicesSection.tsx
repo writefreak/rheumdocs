@@ -52,8 +52,11 @@ export default function ConditionsCarouselSection() {
   };
 
   return (
-    <section id="conditions" className="bg-bg px-4 py-24 lg:px-14 lg:py-30">
-      <div className="mx-auto max-w-7xl">
+    <section
+      id="conditions"
+      className="bg-bg px-4 py-24 lg:px-14 lg:py-30 bg-white border-b border-b-gray-200"
+    >
+      <div className="mx-auto max-w-6xl flex flex-col items-center">
         {/* Header section on top */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -63,11 +66,11 @@ export default function ConditionsCarouselSection() {
           className="flex flex-col gap-6 pb-12"
         >
           <div className="flex flex-col gap-4 max-w-2xl">
-            <h2 className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
+            <h2 className="font-display text-primary text-center text-3xl font-semibold leading-tight sm:text-4xl">
               Our Consulting Services
             </h2>
 
-            <p className="text-neutral-600 text-xs md:text-base leading-relaxed">
+            <p className="text-neutral-600 text-center text-xs md:text-base leading-relaxed">
               We provide diagnosis and treatment of rheumatological diseases and
               other related disorders affecting bones, muscles, and joints,
               including:
@@ -76,10 +79,10 @@ export default function ConditionsCarouselSection() {
         </motion.div>
 
         {/* Cards container */}
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
           <div className="overflow-x-visible scroll-smooth py-2">
             {/* Flexbox container: horizontal scroll on mobile, flex-wrap centered on desktop */}
-            <div className="flex md:grid grid-cols-3 flex-col lg:flex-wrap lg:justify-center gap-4 md:gap-5">
+            <div className="flex md:grid grid-cols-3 flex-col lg:flex-wrap lg:justify-center gap-3">
               {featuredConditions.map((item, i) => (
                 <motion.div
                   key={item.title}
