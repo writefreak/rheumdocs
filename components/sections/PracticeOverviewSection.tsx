@@ -71,7 +71,7 @@ export default function PracticeOverviewSection() {
   });
 
   // Parallax transform (moves the taller image as you scroll)
-  const imageY = useTransform(scrollYProgress, [0, 1], ["-40%", "40%"]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
 
   const scrollByCard = (dir: 1 | -1) => {
     const el = scrollerRef.current;

@@ -112,7 +112,7 @@ export default function PatientFormsPage() {
 
   return (
     <main>
-      <PageHero pageName="Patient Forms" image="/exam-room.png" />
+      {/* <PageHero pageName="Patient Forms" image="/exam-room.png" /> */}
 
       <section className="bg-bg px-4 pt-16 pb-20 lg:px-14 lg:pt-24 lg:pb-28">
         <div className="mx-auto">

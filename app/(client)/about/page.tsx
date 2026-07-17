@@ -51,11 +51,11 @@ const historyItems = [
 export default function AboutPage() {
   return (
     <main>
-      <PageHero
+      {/* <PageHero
         pageName="About Us"
         description="Rheumatology Consultants is the private practice of Okechukwu C. Okoye, M.D."
         image="/exam-room.png"
-      />
+      /> */}
 
       <section className="bg-bg px-4 py-20 lg:px-14 lg:py-30">
         <div className="mx-auto max-w-6xl">

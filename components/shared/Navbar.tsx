@@ -37,29 +37,22 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0  left-0 right-0 z-40 transition-colors duration-300 ${
-          scrolled ? "bg-white shadow-md" : "bg-transparent shadow-none"
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+          scrolled
+            ? "md:bg-white/95 bg-transparent shadow-sm backdrop-blur-sm"
+            : "bg-white/60 shadow-sm backdrop-blur-md"
         }`}
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="flex h-20 items-center justify-between">
-            <Link href="/" className="">
-              {/* <img
-                src={scrolled ? "/rheumvar.png" : "/rheumwhite.png"}
-                alt=""
-                className="object-cover h-full w-full"
-              /> */}
-
+            <Link href="/">
               <h2
-                className={
-                  scrolled
-                    ? "font-display text-primary text-lg md:text-xl"
-                    : "text-bg text-lg md:text-xl"
-                }
+                className={`font-display text-primary text-lg md:text-xl ${scrolled ? "text-primary" : "text-bg"}`}
               >
                 Rheumatology Consultants
               </h2>
             </Link>
+
             <nav className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) =>
                 link.children ? (
@@ -71,14 +64,10 @@ export default function Navbar() {
                   >
                     <a
                       href={link.href}
-                      className={`focus-ring flex items-center gap-1 rounded font-body text-sm font-medium transition-colors ${
+                      className={`focus-ring flex items-center gap-1 rounded font-body text-sm font-medium text-neutral-900 transition-colors hover:text-primary ${
                         link.children.some((child) => child.href === pathname)
                           ? "underline underline-offset-4"
                           : ""
-                      } ${
-                        scrolled
-                          ? "text-neutral-900 hover:text-primary"
-                          : "text-[#f8f5ef]/60 hover:text-white"
                       }`}
                     >
                       {link.label}
@@ -113,29 +102,30 @@ export default function Navbar() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className={`focus-ring rounded font-body text-sm font-medium transition-colors ${
+                    className={`focus-ring rounded font-body text-sm font-medium text-neutral-900 transition-colors hover:text-primary ${
                       link.href === pathname
                         ? "underline underline-offset-4"
                         : ""
-                    } ${
-                      scrolled
-                        ? "text-neutral-900 hover:text-primary"
-                        : "text-[#f8f5ef]/60 hover:text-white"
                     }`}
                   >
                     {link.label}
                   </a>
                 ),
               )}
+
+              <a href="/contact">
+                <span className="focus-ring inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 font-body text-sm font-medium text-white transition-opacity hover:opacity-90">
+                  <CalendarCheck size={16} strokeWidth={2} />
+                  Schedule
+                </span>
+              </a>
             </nav>
 
             <button
               type="button"
               aria-label="Open navigation menu"
               onClick={() => setMobileOpen(true)}
-              className={`focus-ring rounded-md p-2 lg:hidden ${
-                scrolled ? "text-primary" : "text-bg"
-              }`}
+              className="focus-ring rounded-md p-2 text-primary lg:hidden"
             >
               <Menu size={28} strokeWidth={2} />
             </button>

@@ -8,13 +8,13 @@ import { Button } from "@/components/ui/button";
 export default function page() {
   return (
     <main>
-      <PageHero
+      {/* <PageHero
         pageName="Our Practice"
         image="/med.jpg"
         description="At our state-of-the-art rheumatology office, your
             well-being is our top priority. We proudly offer a range of
             cutting-edge services to cater to your unique needs."
-      />
+      /> */}
 
       <section className="bg-bg px-4 py-20 lg:px-14 lg:py-30">
         <div className="mx-auto max-w-6xl">
