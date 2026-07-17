@@ -139,7 +139,7 @@ export default function ContactSection({ className }: Props) {
               touch!
             </p>
 
-            <div className="pt-10 space-y-6">
+            <div className="pt-10 space-y-6 hidden md:block">
               <div className="flex items-start gap-4">
                 <MapPin
                   size={16}

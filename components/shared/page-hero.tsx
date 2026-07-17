@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 interface PageHeroProps {
   pageName: string;
@@ -9,53 +10,56 @@ interface PageHeroProps {
 }
 
 /**
- * Reusable page-title banner — editorial split layout instead of a
- * full-bleed photo backdrop. Solid brand-color panel on the left with
- * title/description, optional image chip on the right (desktop only).
- * No scroll-based parallax — just a one-time reveal on mount.
+ * Reusable page-title banner.
+ * Fixed 300px height, background image with a soft primary-color overlay.
+ * Background image parallaxes at a slower rate than scroll for depth.
  * Drop this at the top of any interior page: <PageHero pageName="About Us" description="..." />
  */
 export default function PageHero({
   pageName,
   description,
-  image,
+  image = "/exam-room.png",
 }: PageHeroProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Image drifts down slightly slower than the page scrolls past it,
+  // giving the classic parallax "background is further away" feel.
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+
   return (
-    <section className="relative w-full overflow-hidden bg-[#1f4548] pt-32 pb-14 md:pt-40 md:pb-20">
-      <div className="mx-auto flex max-w-7xl items-end justify-between gap-10 px-4 md:px-12">
-        <div className="flex max-w-2xl flex-col gap-4">
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.05 }}
-            className="text-[26px] font-semibold leading-[1.08] text-bg sm:text-4xl lg:text-5xl"
+    <section
+      ref={sectionRef}
+      className="relative h-[300px] md:h-[350px] w-full overflow-hidden"
+    >
+      <motion.img
+        src={image}
+        alt={pageName}
+        style={{ y }}
+        className="absolute brightness-50 inset-0 h-[130%] w-full object-cover"
+      />
+
+      <div className="absolute inset-0 bg-[#1f4548]/30 md:bg-[#1f4548]/40" />
+
+      <div className="relative z-10 flex flex-col items-center gap-4 h-full  justify-center pt-40 md:pt-40 px-4 pb-8 md:px-12 md:pb-10">
+        <h1 className="text-[26px] font-semibold leading-[1.08] text-bg sm:text-4xl lg:text-6xl">
+          {pageName}
+        </h1>{" "}
+        {description && (
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.55 }}
+            className="mb-14 max-w-xl text-center font-body text-sm font-medium text-neutral-300 md:text-lg md:mb-20"
           >
-            {pageName}
-          </motion.h1>
-
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{
-              duration: 0.6,
-              delay: 0.15,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            style={{ originX: 0 }}
-            className="h-[3px] w-16 rounded-full bg-accent"
-          />
-
-          {description && (
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="max-w-lg font-body text-base font-medium text-neutral-300 sm:text-lg"
-            >
-              {description}
-            </motion.p>
-          )}
-        </div>
+            {description}
+          </motion.p>
+        )}
       </div>
     </section>
   );

@@ -22,12 +22,12 @@ const CONDITIONS = [
 export default function ClinicalTrialResearchPage() {
   return (
     <main>
-      {/* <PageHero
+      <PageHero
         pageName="Clinical Trial Research Opportunities"
-        image="/exam-room.png"
+        // image="/exam-room.png"
         description="Participate in groundbreaking rheumatology studies and
             help shape the future of treatment right here in Hagerstown."
-      /> */}
+      />
       {/* Diagnoses — numbered list, sticky image */}
       <section className="bg-bg px-4 py-20 lg:px-14 lg:py-28">
         <div className="mx-auto max-w-6xl">

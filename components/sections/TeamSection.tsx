@@ -119,8 +119,8 @@ export default function TeamSection() {
   const cards = [...team, ...team];
 
   return (
-    <section id="team" className="bg-bg-alt px-4 py-24 lg:px-14 lg:py-30">
-      <div className="mx-auto max-w-7xl">
+    <section id="team" className="px-4 py-24 lg:px-14 lg:py-30">
+      <div className="mx-auto">
         <div className="flex flex-col gap-4">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}

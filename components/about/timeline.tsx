@@ -1,6 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface TimelineItem {
   label: string;
@@ -14,11 +16,70 @@ interface TimelineProps {
   items: TimelineItem[];
 }
 
+function ParagraphCarousel({
+  paragraphs,
+  delayBase,
+}: {
+  paragraphs: string[];
+  delayBase: number;
+}) {
+  const [index, setIndex] = useState(0);
+  const hasMultiple = paragraphs.length > 1;
+
+  const goTo = (dir: 1 | -1) => {
+    setIndex((prev) =>
+      Math.min(Math.max(prev + dir, 0), paragraphs.length - 1),
+    );
+  };
+
+  return (
+    <div>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.p
+          key={index}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -12 }}
+          transition={{ duration: 0.4, delay: index === 0 ? delayBase : 0 }}
+          className="font-body text-xs leading-relaxed text-neutral-600 md:text-base"
+        >
+          {paragraphs[index]}
+        </motion.p>
+      </AnimatePresence>
+
+      {hasMultiple && (
+        <div className="mt-3 flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => goTo(-1)}
+            disabled={index === 0}
+            aria-label="Previous paragraph"
+            className="flex h-7 w-7 items-center justify-center rounded-full border border-primary/20 text-ink transition-colors duration-200 hover:bg-primary/10 disabled:opacity-30 disabled:hover:bg-transparent"
+          >
+            <ChevronLeft className="h-3.5 w-3.5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => goTo(1)}
+            disabled={index === paragraphs.length - 1}
+            aria-label="Next paragraph"
+            className="flex h-7 w-7 items-center justify-center rounded-full border border-primary/20 text-ink transition-colors duration-200 hover:bg-primary/10 disabled:opacity-30 disabled:hover:bg-transparent"
+          >
+            <ChevronRight className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /**
  * Reusable vertical timeline bar for stacked text sections. Each stop
  * reveals on scroll, staggered, with the connecting line drawing in behind
  * it. Pass any array of { label, title, body }, body can be a single
- * paragraph or an array of short paragraphs for easier reading.
+ * paragraph or an array of short paragraphs for easier reading — when
+ * multiple paragraphs are passed, they render one at a time as a small
+ * carousel with pagination buttons instead of all stacked together.
  */
 export default function Timeline({ items }: TimelineProps) {
   return (
@@ -75,21 +136,10 @@ export default function Timeline({ items }: TimelineProps) {
               {item.title}
             </motion.h3>
 
-            {paragraphs.map((p, pi) => (
-              <motion.p
-                key={pi}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{
-                  duration: 0.5,
-                  delay: i * 0.15 + 0.1 + pi * 0.05,
-                }}
-                className="font-body text-xs leading-relaxed text-neutral-600 md:text-base"
-              >
-                {p}
-              </motion.p>
-            ))}
+            <ParagraphCarousel
+              paragraphs={paragraphs}
+              delayBase={i * 0.15 + 0.1}
+            />
           </li>
         );
       })}
