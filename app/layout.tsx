@@ -17,11 +17,14 @@ const inter = Inter({
   display: "swap",
 });
 
-const siteUrl = "https://www.rheumatologyconsultantsmd.com";
+const siteUrl = "https://www.rheumdocs.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Rheumatologist in Hagerstown, MD | Rheumatology Consultants",
+  title: {
+    default: "Rheumatologist in Hagerstown, MD | Rheumatology Consultants",
+    template: "%s | Rheumatology Consultants",
+  },
   description:
     "Rheumatology Consultants is Western Maryland's independent rheumatology and osteoporosis specialty practice in Hagerstown, MD, serving patients since 1994 with onsite infusion, imaging, and an in-house clinical trial research center.",
   alternates: {
