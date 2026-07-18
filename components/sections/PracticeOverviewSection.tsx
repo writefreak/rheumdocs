@@ -157,7 +157,7 @@ export default function PracticeOverviewSection() {
             </motion.div>
           </AnimatePresence>
 
-          <div className="flex justify-end items-center gap-2 pt-4">
+          <div className="flex justify-center items-center gap-2 pt-4">
             <button
               type="button"
               onClick={() => goToPage(-1)}

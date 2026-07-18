@@ -1,7 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import PageHero from "@/components/shared/page-hero";
 import ContactSection from "@/components/sections/ContactSection";
 import ContactClinic from "@/components/sections/contact-clinic";
@@ -9,24 +14,24 @@ import { ClientLogoStrip } from "@/components/services/client-logo-strip";
 import TextCarousel, { CarouselSlide } from "@/components/ui/text-carousel";
 import ResearchSection from "@/components/sections/ResearchSection";
 
-const CONDITIONS = [
-  "Rheumatoid arthritis",
-  "Lupus",
-  "Osteoarthritis",
-  "Osteoporosis",
-  "Gout",
-  "Psoriatic Arthritis",
-  "Sjogren's syndrome",
-  "Giant cell arteritis",
-  "Polymyalgia rheumatica (PMR)",
-  "Ankylosing spondylitis (AS)",
-];
+// const CONDITIONS = [
+//   "Rheumatoid arthritis",
+//   "Lupus",
+//   "Osteoarthritis",
+//   "Osteoporosis",
+//   "Gout",
+//   "Psoriatic Arthritis",
+//   "Sjogren's syndrome",
+//   "Giant cell arteritis",
+//   "Polymyalgia rheumatica (PMR)",
+//   "Ankylosing spondylitis (AS)",
+// ];
 
 const SLIDES: CarouselSlide[] = [
-  {
-    title: "We work with the following:",
-    paragraph: CONDITIONS.map((condition) => `•  ${condition}`),
-  },
+  // {
+  //   title: "We work with the following:",
+  //   paragraph: CONDITIONS.map((condition) => `•  ${condition}`),
+  // },
   {
     title: "Rheumatology Consultants Clinical Trials",
     paragraph: [
@@ -50,6 +55,13 @@ export default function ClinicalTrialResearchPage() {
   const [activeSlide, setActiveSlide] = useState(0);
   const activeImage = SLIDE_IMAGES[activeSlide];
 
+  const imageWrapperRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: imageWrapperRef,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+
   return (
     <main>
       <PageHero
@@ -63,6 +75,7 @@ export default function ClinicalTrialResearchPage() {
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
             <motion.div
+              ref={imageWrapperRef}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
@@ -78,7 +91,8 @@ export default function ClinicalTrialResearchPage() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.35 }}
-                  className="absolute inset-0 h-full w-full object-cover"
+                  style={{ y: imageY }}
+                  className="absolute left-0 -top-[15%] h-[130%] w-full object-cover"
                 />
               </AnimatePresence>
             </motion.div>

@@ -1,12 +1,20 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import PageHero from "@/components/shared/page-hero";
 import Features from "@/components/about/features";
 import { Button } from "@/components/ui/button";
 import Conditions from "@/components/services/conditions";
 
 export default function page() {
+  const imageWrapperRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: imageWrapperRef,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+
   return (
     <main>
       <PageHero
@@ -22,16 +30,18 @@ export default function page() {
           <div className="mt- grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
             {/* RHS — image, sticky on desktop matching the About page pattern */}
             <motion.div
+              ref={imageWrapperRef}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.55, delay: 0.15 }}
               className="relative order-1 aspect-[4/3] w-full overflow-hidden rounded-2xl lg:order-2 lg:sticky lg:top-28 lg:h-fit"
             >
-              <img
+              <motion.img
                 src="https://images.squarespace-cdn.com/content/v1/6509cd15b3df9c53da70a6a5/13420ce6-7b4e-49d5-9567-08493c4eaa28/IMG_9999.jpg"
                 alt="A nurse drawing blood from a seated patient in an examination room"
-                className="h-full w-full object-cover"
+                style={{ y: imageY }}
+                className="absolute left-0 -top-[15%] h-[130%] w-full object-cover"
               />
             </motion.div>
             {/* LHS — copy */}
@@ -81,12 +91,12 @@ export default function page() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="rounded-2xl max-w-3xl bg-bg-alt p-8 md:p-12"
+            className="rounded-2xl max-w-3xl bg-bg-alt p-8 md:p-12 flex flex-col md:items-center"
           >
-            <h3 className="font-display text-2xl font-semibold text-ink md:text-4xl">
+            <h3 className="font-display md:text-center text-2xl font-semibold text-ink md:text-4xl">
               Your well-being, our expertise. Together, we thrive!
             </h3>
-            <p className="mt-4 font-body text-xs leading-relaxed text-ink-muted md:text-base">
+            <p className="mt-4 font-body md:text-center text-xs leading-relaxed text-ink-muted md:text-base">
               We are committed to providing holistic care that empowers you to
               live your best life. Trust us to be your partners in managing
               rheumatological conditions and enhancing your quality of life.
