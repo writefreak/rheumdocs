@@ -76,7 +76,7 @@ export default function Hero() {
         <img
           src="/bg.jpg"
           alt=""
-          className="h-full w-full object-cover opacity-20"
+          className="h-full w-full object-cover opacity-10"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 to-transparent" />
       </div>

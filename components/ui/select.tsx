@@ -99,12 +99,12 @@ export function Select({
             if (!open) openMenu();
           } else if (e.key === "Escape") setOpen(false);
         }}
-        className={`focus-ring flex w-full items-center justify-between gap-2 rounded-lg border bg-bg px-4 py-2.5 text-left font-body text-sm transition-colors ${
+        className={`focus-ring flex w-full items-center justify-between gap-2 rounded-lg border bg-white px-4 py-2.5 text-left font-body text-sm transition-colors ${
           invalid ? "border-red-400" : "border-ink/15"
         }`}
       >
         <span
-          className={`flex items-center gap-2 ${selected ? "text-ink" : "text-ink-muted/60"}`}
+          className={`flex items-center text-xs md:text-sm bg-white gap-2 ${selected ? "text-ink" : "text-ink-muted/60"}`}
         >
           {selected?.icon && (
             <selected.icon
@@ -143,7 +143,7 @@ export function Select({
                   aria-selected={isSelected}
                   onMouseEnter={() => setActiveIndex(i)}
                   onClick={() => selectOption(i)}
-                  className={`flex cursor-pointer items-center gap-2.5 px-4 py-2.5 font-body text-sm transition-colors ${
+                  className={`flex cursor-pointer bg-white items-center gap-2.5 px-4 py-2.5 font-body text-xs md:text-sm transition-colors ${
                     i === activeIndex
                       ? "bg-primary/10 text-ink"
                       : "text-ink-muted"

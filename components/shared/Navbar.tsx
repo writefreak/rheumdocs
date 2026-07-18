@@ -108,7 +108,7 @@ export default function Navbar() {
               </nav>
 
               <a href="/contact">
-                <span className="focus-ring inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 font-body text-sm font-medium text-white transition-opacity hover:opacity-90">
+                <span className="focus-ring inline-flex items-center gap-2 rounded-2xl bg-primary px-5 py-2.5 font-body text-sm font-medium text-white transition-opacity hover:opacity-90">
                   <CalendarCheck size={16} strokeWidth={2} />
                   Schedule
                 </span>

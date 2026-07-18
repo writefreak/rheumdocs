@@ -151,9 +151,9 @@ export default function Conditions() {
           <div
             ref={scrollerRef}
             onScroll={checkScroll}
-            className="block overflow-x-auto overflow-y-hidden overscroll-x-contain scroll-smooth snap-x snap-mandatory py-2 [-webkit-overflow-scrolling:touch] scrollbar-none [&::-webkit-scrollbar]:hidden lg:hidden"
+            className="block overflow-x-auto overflow-y-hidden overscroll-x-contain scroll-smooth snap-x snap-mandatory py-2 -my-2 [-webkit-overflow-scrolling:touch] scrollbar-none [&::-webkit-scrollbar]:hidden lg:hidden"
           >
-            <div className="flex gap-4 md:gap-5">
+            <div className="flex gap-4 md:gap-5 py-2 -my-2">
               {conditions.map((item, i) => (
                 <motion.div
                   key={item.title}
@@ -162,19 +162,34 @@ export default function Conditions() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.4, delay: i * 0.05 }}
-                  className="w-[78vw] shrink-0 snap-start rounded-2xl border border-primary/30 bg-white p-5 shadow-sm sm:w-80 md:p-7"
+                  whileHover={{ y: -4 }}
+                  className="group relative w-[78vw] shrink-0 snap-start rounded-2xl border border-primary/30 bg-white p-5 shadow-md transition-all duration-300 ease-out hover:border-primary/50 hover:shadow-md sm:w-80 md:p-7"
                 >
-                  <img
-                    src={item.image}
-                    alt=""
-                    className="h-16 w-16 rounded-full object-cover"
-                  />
-                  <h3 className="mt-6 font-display text-xl font-semibold text-ink">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 font-body text-xs md:text-sm leading-relaxed text-ink-muted">
-                    {item.description}
-                  </p>
+                  <div className="pointer-events-none absolute inset-0 rounded-2xl overflow-hidden">
+                    <div className="absolute -right-6 -top-6 h-28 w-28 rounded-full overflow-hidden">
+                      <img
+                        src={item.image}
+                        alt=""
+                        className="h-full w-full object-cover opacity-60"
+                      />
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          backgroundColor: "#31696e",
+                          mixBlendMode: "multiply",
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="pt-10">
+                    <h3 className="font-display text-sm font-semibold text-ink transition-colors duration-200 group-hover:text-primary">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 font-body text-xs md:text-sm leading-relaxed text-ink-muted">
+                      {item.description}
+                    </p>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -191,19 +206,34 @@ export default function Conditions() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.3, delay: i * 0.05 }}
-                    className="rounded-2xl border border-primary/30 bg-white p-7 shadow-sm"
+                    whileHover={{ y: -4 }}
+                    className="group relative rounded-2xl border border-primary/30 bg-white p-7 shadow-md transition-all duration-300 ease-out hover:border-primary/50 hover:shadow-md"
                   >
-                    <img
-                      src={item.image}
-                      alt=""
-                      className="h-16 w-16 rounded-full object-cover"
-                    />
-                    <h3 className="mt-6 font-display text-xl font-semibold text-ink">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 font-body text-xs md:text-sm leading-relaxed text-ink-muted">
-                      {item.description}
-                    </p>
+                    <div className="pointer-events-none absolute inset-0 rounded-2xl overflow-hidden">
+                      <div className="absolute -right-6 -top-6 h-28 w-28 rounded-full overflow-hidden">
+                        <img
+                          src={item.image}
+                          alt=""
+                          className="h-full w-full object-cover opacity-60"
+                        />
+                        <div
+                          className="absolute inset-0"
+                          style={{
+                            backgroundColor: "#31696e",
+                            mixBlendMode: "multiply",
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="pt-10">
+                      <h3 className="font-display text-xl font-semibold text-ink transition-colors duration-200 group-hover:text-primary">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 font-body text-xs md:text-sm leading-relaxed text-ink-muted">
+                        {item.description}
+                      </p>
+                    </div>
                   </motion.div>
                 ))}
               </AnimatePresence>

@@ -43,28 +43,37 @@ export default function Features() {
         Our Facilities
       </motion.h3>
 
-      <div className="md:grid md:grid-cols-3 md:gap-5 flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {FEATURES.map((step) => {
+      <div className="md:grid md:grid-cols-3 md:gap-5 md:overflow-visible flex overflow-x-auto snap-x snap-mandatory gap-4 py-4 -my-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {FEATURES.map((step, i) => {
           const Icon = step.icon;
           return (
-            <article
+            <motion.article
               key={step.title}
-              className="group border rounded-2xl relative flex shadow-sm flex-col gap-4 min-h-[180px] md:h-full w-72 md:w-auto shrink-0 snap-start"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              whileHover={{ y: -4 }}
+              className="group relative flex flex-col shrink-0 snap-start rounded-2xl border border-primary/30 bg-white p-6 md:p-7 shadow-md transition-all duration-300 ease-out hover:border-primary/50 hover:shadow-md min-h-[180px] md:h-full w-72 md:w-auto"
             >
-              <div className="p-4 md:p-6 flex flex-col gap-4">
-                <div className="flex flex-col gap-3">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#a36b2b]/20 text-accent">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="font-display text-sm md:text-base font-bold text-foreground">
-                    {step.title}
-                  </h3>
+              <div className="pointer-events-none absolute inset-0 rounded-2xl overflow-hidden">
+                <div className="absolute -right-6 -top-6 flex h-28 w-28 items-center justify-center rounded-full bg-[#a36b2b]/20">
+                  <Icon
+                    className="h-10 w-10 text-[#a36b2b] transition-transform duration-300 group-hover:scale-110"
+                    strokeWidth={1.75}
+                  />
                 </div>
-                <p className="font-sans text-xs md:text-sm text-neutral-600 leading-relaxed">
+              </div>
+
+              <div className="pt-10">
+                <h3 className="font-display text-sm md:text-base font-bold text-foreground transition-colors duration-200 group-hover:text-primary">
+                  {step.title}
+                </h3>
+                <p className="mt-3 font-sans text-xs md:text-sm text-neutral-600 leading-relaxed">
                   {step.description}
                 </p>
               </div>
-            </article>
+            </motion.article>
           );
         })}
       </div>

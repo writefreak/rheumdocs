@@ -112,7 +112,7 @@ export default function ContactSection({ className }: Props) {
   }
 
   const inputBase =
-    "focus-ring mt-1.5 w-full rounded-lg border bg-bg px-4 py-2.5 font-body text-sm text-ink placeholder:text-sm md:placeholder:text-xs placeholder:text-ink-muted/50 transition-colors";
+    "focus-ring mt-1.5 w-full rounded-lg border bg-white px-4 py-2.5 font-body text-xs md:text-sm text-ink placeholder:text-xs md:placeholder:text-sm placeholder:text-ink-muted/50 transition-colors";
   const inputOk = "border-ink/15";
   const inputBad = "border-red-400 focus:border-red-500";
 
@@ -197,7 +197,7 @@ export default function ContactSection({ className }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="rounded-card bg-bg p-8"
+            className="rounded-card bg-bg-alt p-8"
           >
             {state.status === "success" ? (
               <div className="flex flex-col items-center justify-center py-10 text-center">
@@ -209,7 +209,7 @@ export default function ContactSection({ className }: Props) {
                 <p className="mt-4 font-display text-xl font-semibold text-ink">
                   Message sent.
                 </p>
-                <p className="mt-2 max-w-sm font-body text-sm text-ink-muted">
+                <p className="mt-2 max-w-sm font-body text-xs md:text-sm text-ink-muted">
                   {state.message}
                 </p>
               </div>
@@ -385,7 +385,7 @@ export default function ContactSection({ className }: Props) {
                     aria-describedby={
                       showError("message") ? "message-error" : undefined
                     }
-                    className={`${inputBase} text-xs resize-none ${showError("message") ? inputBad : inputOk}`}
+                    className={`${inputBase} resize-none overscroll-contain ${showError("message") ? inputBad : inputOk}`}
                   />
                   <AnimatePresence>
                     {showError("message") && (
@@ -408,7 +408,7 @@ export default function ContactSection({ className }: Props) {
                 </div>
 
                 {state.status === "error" && state.message && (
-                  <p className="flex items-center gap-1.5 font-body text-sm font-medium text-red-700">
+                  <p className="flex items-center gap-1.5 font-body text-xs md:text-sm font-medium text-red-700">
                     <AlertCircle
                       size={14}
                       strokeWidth={2}

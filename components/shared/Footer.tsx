@@ -4,7 +4,6 @@ const navLinks = [
   { label: "Mission", href: "#mission" },
   { label: "Services", href: "#services" },
   { label: "Conditions", href: "#conditions" },
-  { label: "Research", href: "#research" },
   { label: "Our Team", href: "#team" },
   { label: "Contact", href: "#contact" },
 ];
@@ -13,29 +12,30 @@ export default function Footer() {
   return (
     <footer className="bg-[#0f2829] px-6 py-16 text-bg lg:px-10">
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <div className="md:h-56 h-48 w-32 md:w-44 pb-6">
-              <img
-                src="/rheumlogo.jpg"
-                alt=""
-                className="h-full w-full object-cover"
-              />
-            </div>{" "}
-            <p className="font-display text-lg md:text-xl font-semibold">
-              Rheumatology Consultants
-            </p>
-            <p className="mt-3 font-body text-sm leading-relaxed text-neutral-300">
+        <div className="flex md:flex-row flex-col gap-10 md:justify-between">
+          <div className="sm:col-span-2 lg:col-span-4">
+            <div className="flex flex-col gap-3 pb-5">
+              <div className="h-36 w-28 shrink-0 overflow-hidden">
+                <img
+                  src="/rheumlogo.jpg"
+                  alt=""
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <p className="font-display text-lg md:text-xl font-semibold">
+                Rheumatology Consultants
+              </p>
+            </div>
+            <p className="font-body max-w-sm text-xs md:text-sm leading-relaxed text-neutral-300">
               Western Maryland&apos;s independent rheumatology and osteoporosis
               specialty practice, serving patients since 1994.
             </p>
           </div>
-
-          <div>
+          <div className="lg:col-span-3">
             <p className="font-body text-sm md:text-base font-semibold uppercase tracking-wide text-bg/60">
               Navigate
             </p>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-4 grid md:grid-cols-2 gap-x-4 gap-y-2.5 lg:grid-cols-1">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
@@ -48,8 +48,7 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-
-          <div>
+          <div className="lg:col-span-3">
             <p className="font-body text-sm md:text-base font-semibold uppercase tracking-wide text-bg/60">
               Office
             </p>
@@ -81,8 +80,8 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
-            <p className="font-body text-sm font-semibold uppercase tracking-wide text-bg/60">
+          <div className="lg:col-span-2">
+            <p className="font-body text-sm md:text-base font-semibold uppercase tracking-wide text-bg/60">
               Hours
             </p>
             <div className="mt-4 flex items-start gap-3">
@@ -104,7 +103,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex items-center text-center md:items-start md:text-left border-t border-bg/15 pt-6">
+        <div className="mt-12 border-t border-bg/15 pt-6 text-center md:text-left">
           <p className="font-body text-xs text-bg/55">
             © {new Date().getFullYear()} Rheumatology Consultants. All rights
             reserved.
