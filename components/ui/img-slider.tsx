@@ -82,40 +82,30 @@ export default function ImgageSlider({ images }: { images: SlideImage[] }) {
       </div>
 
       <div className="">
-        {/* <div className="flex items-center gap-2">
-          {images.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              aria-label={`Go to slide ${i + 1}`}
-              onClick={() => {
-                setDirection(i > index ? 1 : -1);
-                setIndex(i);
-                restartTimer();
-              }}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === index ? "w-6 bg-accent" : "w-1.5 bg-bg/25"
-              }`}
-            />
-          ))}
-        </div> */}
-
         <div className="flex items-center justify-center gap-2">
           <button
             type="button"
             aria-label="Previous image"
             onClick={() => handleManualNav(-1)}
-            className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full border border-bg/25 text-bg transition-colors duration-200 hover:bg-bg/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+            className="flex h-9 w-9 md:h-10 md:w-10 items-center justify-center rounded-full border border-bg/25 text-bg transition-colors duration-200 hover:bg-bg/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
           >
-            <ChevronLeft size={16} strokeWidth={1.75} />
+            <ChevronLeft
+              size={16}
+              strokeWidth={1.75}
+              className="text-neutral-700"
+            />
           </button>
           <button
             type="button"
             aria-label="Next image"
             onClick={() => handleManualNav(1)}
-            className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full border border-bg/25 text-bg transition-colors duration-200 hover:bg-bg/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+            className="flex h-9 w-9 md:h-10 md:w-10 items-center justify-center rounded-full border border-bg/25 text-bg transition-colors duration-200 hover:bg-bg/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
           >
-            <ChevronRight size={16} strokeWidth={1.75} />
+            <ChevronRight
+              size={16}
+              strokeWidth={1.75}
+              className="text-neutral-700"
+            />
           </button>
         </div>
       </div>

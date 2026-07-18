@@ -48,11 +48,8 @@ const researchImages = [
 
 export default function ResearchSection() {
   return (
-    <section
-      id="research"
-      className="bg-primary px-4 py-24 text-bg lg:px-14 lg:py-30"
-    >
-      <div className="mx-auto max-w-7xl">
+    <section id="research" className="text-bg">
+      <div className="mx-auto">
         <div className="grid md:gap-12 gap-12 items-center lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
           <div>
             <motion.h2
@@ -60,9 +57,9 @@ export default function ResearchSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.55 }}
-              className="font-display text-3xl font-semibold leading-tight sm:text-4xl"
+              className="font-display text-primary text-2xl font-semibold leading-tight sm:text-3xl"
             >
-              World Class Research Work
+              World Class <br className="md:hidden" /> Research Work
             </motion.h2>
 
             <motion.div
@@ -72,7 +69,7 @@ export default function ResearchSection() {
               transition={{ duration: 0.55, delay: 0.1 }}
               className="mt-6 flex flex-col gap-8 font-body text-lg leading-relaxed text-bg/85"
             >
-              <p className="text-xs md:text-base text-neutral-300 max-w-xl">
+              <p className="text-xs md:text-sm text-neutral-700 md:max-w-xl">
                 The Osteoporosis and Clinical Trial Research Center is a local
                 facility where World-class research work focuses on the
                 development of investigational products and devices for treating
@@ -84,9 +81,6 @@ export default function ResearchSection() {
                 in participating in arthritis or osteoporosis research trials
                 please contact us.
               </p>
-              <a href="#contact">
-                <Button variant="accent">Schedule an Appointment</Button>
-              </a>
             </motion.div>
           </div>
 
