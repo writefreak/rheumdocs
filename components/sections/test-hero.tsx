@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useCallback } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Award, Stethoscope, Syringe } from "lucide-react";
 import { Button } from "../ui/button";
@@ -31,22 +31,40 @@ const container = {
 };
 
 const item = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, x: -32 },
   visible: {
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+    x: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
+const imageVariants = {
+  hidden: { opacity: 0, x: 80 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
   const imageY = useTransform(scrollYProgress, [0, 1], ["-40%", "40%"]);
+
+  // handles both cold loads (onLoad fires) and cached loads
+  // (image is already .complete before onLoad ever attaches)
+  const imgRefCallback = useCallback((node: HTMLImageElement | null) => {
+    if (node && node.complete) {
+      setImgLoaded(true);
+    }
+  }, []);
 
   return (
     <section
@@ -78,7 +96,10 @@ export default function Hero() {
             1994.
           </motion.h1>
 
-          <motion.p className="text-[10px] md:text-sm font-body md:max-w-sm text-neutral-700">
+          <motion.p
+            variants={item}
+            className="text-[10px] md:text-sm font-body md:max-w-sm text-neutral-700"
+          >
             Board certified rheumatologists providing compassionate,
             comprehensive care for arthritis, autoimmune conditions,{" "}
             <br className="md:hidden" />
@@ -102,12 +123,22 @@ export default function Hero() {
 
         <div className="relative h-[300px] w-full overflow-hidden rounded-2xl md:h-[420px]">
           <motion.img
+            ref={imgRefCallback}
             src="/doctor2.jpg"
             alt="..."
+            onLoad={() => setImgLoaded(true)}
+            initial="hidden"
+            animate={imgLoaded ? "visible" : "hidden"}
+            variants={imageVariants}
             style={{ y: imageY }}
             className="h-[130%] w-full object-cover absolute -top-[15%] left-0"
           />
-          <div className="absolute inset-0 bg-[#1f4548]/10" />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: imgLoaded ? 1 : 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute inset-0 bg-[#1f4548]/10"
+          />
         </div>
       </div>
     </section>

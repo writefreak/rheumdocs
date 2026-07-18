@@ -2,7 +2,14 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
+  Hand,
+  Bone,
+  Sparkles,
+} from "lucide-react";
 import { Button } from "../ui/button";
 
 type Condition = {
@@ -10,6 +17,7 @@ type Condition = {
   image: string;
   description: string;
   linkLabel: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
 };
 
 // Featured first 5 items from the original list
@@ -21,6 +29,7 @@ const featuredConditions: Condition[] = [
     description:
       "Joint pain and swelling, morning stiffness lasting over an hour, fatigue, symmetrical joint involvement, low-grade fever.",
     linkLabel: "Rheumatoid arthritis care",
+    icon: Hand, // swollen/painful joints in hands
   },
   {
     title: "Osteoarthritis",
@@ -29,6 +38,7 @@ const featuredConditions: Condition[] = [
     description:
       "Joint pain that worsens with activity, stiffness after rest, reduced range of motion, grinding sensation in the joint.",
     linkLabel: "Osteoarthritis care",
+    icon: Bone, // bone/joint wear
   },
   {
     title: "Psoriatic Arthritis",
@@ -37,6 +47,7 @@ const featuredConditions: Condition[] = [
     description:
       "Swollen fingers or toes, nail pitting, joint pain alongside skin plaques, lower back pain, eye inflammation.",
     linkLabel: "Psoriatic arthritis care",
+    icon: Sparkles, // skin plaques
   },
 ];
 
@@ -83,38 +94,46 @@ export default function ConditionsCarouselSection() {
           <div className="overflow-x-visible scroll-smooth py-2">
             {/* Flexbox container: horizontal scroll on mobile, flex-wrap centered on desktop */}
             <div className="flex md:grid grid-cols-3 flex-col lg:flex-wrap lg:justify-center gap-3">
-              {featuredConditions.map((item, i) => (
-                <motion.div
-                  key={item.title}
-                  data-condition-card
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.4, delay: i * 0.05 }}
-                  whileHover={{ y: -4 }}
-                  className="group relative flex flex-col justify-between shrink-0 snap-start rounded-2xl border border-primary/30 bg-white p-6 md:p-7 shadow-sm transition-all duration-300 ease-out hover:border-primary/50 hover:shadow-md"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="overflow-hidden rounded-full h-16 w-16 shrink-0 border border-primary/20">
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-                        />
-                      </div>
+              {featuredConditions.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={item.title}
+                    data-condition-card
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.4, delay: i * 0.05 }}
+                    whileHover={{ y: -4 }}
+                    className="group relative flex flex-col shrink-0 snap-start rounded-2xl border border-primary/30 bg-white p-6 md:p-7 shadow-md transition-all duration-300 ease-out hover:border-primary/50 hover:shadow-md overflow-hidden"
+                  >
+                    {/* subtle stock photo, tucked in the corner, tinted with brand color */}
+                    <div className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full overflow-hidden">
+                      <img
+                        src={item.image}
+                        alt=""
+                        className="h-full w-full object-cover opacity-60"
+                      />
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          backgroundColor: "#31696e",
+                          mixBlendMode: "multiply",
+                        }}
+                      />
                     </div>
 
-                    <h3 className="mt-6 font-display md:text-xl font-semibold text-ink transition-colors duration-200 group-hover:text-primary">
-                      {item.title}
-                    </h3>
-
-                    <p className="mt-3 font-body text-xs md:text-sm leading-relaxed text-ink-muted">
-                      {item.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+                    <div className="pt-10">
+                      <h3 className="mt-6 font-display md:text-lg font-semibold text-ink transition-colors duration-200 group-hover:text-primary">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 font-body text-xs md:text-sm leading-relaxed text-ink-muted">
+                        {item.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
             <div className="flex items-center gap-1 justify-end pt-7">
               <a

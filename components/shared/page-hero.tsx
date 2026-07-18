@@ -46,7 +46,7 @@ export default function PageHero({
       <div className="absolute inset-0 bg-[#1f4548]/30 md:bg-[#1f4548]/40" />
 
       <div className="relative z-10 flex flex-col items-center gap-4 h-full  justify-center pt-40 md:pt-40 px-4 pb-8 md:px-12 md:pb-10">
-        <h1 className="text-[26px] font-semibold leading-[1.08] text-bg sm:text-4xl lg:text-6xl">
+        <h1 className="text-[26px] text-center font-semibold leading-[1.08] text-bg sm:text-4xl lg:text-6xl">
           {pageName}
         </h1>{" "}
         {description && (
