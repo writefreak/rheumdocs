@@ -1,66 +1,35 @@
 "use client";
 
-import { useRef } from "react";
 import { motion } from "framer-motion";
-import {
-  ArrowUpRight,
-  ChevronLeft,
-  ChevronRight,
-  Hand,
-  Bone,
-  Sparkles,
-} from "lucide-react";
+import { useState } from "react";
 import { Button } from "../ui/button";
 
 type Condition = {
   title: string;
-  image: string;
   description: string;
-  linkLabel: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
 };
 
 // Featured first 5 items from the original list
 const featuredConditions: Condition[] = [
   {
     title: "Rheumatoid Arthritis",
-    image:
-      "https://images.unsplash.com/photo-1768839722722-b1b2cb93c71d?w=240&h=240&fit=crop&q=80&auto=format",
     description:
       "Joint pain and swelling, morning stiffness lasting over an hour, fatigue, symmetrical joint involvement, low-grade fever.",
-    linkLabel: "Rheumatoid arthritis care",
-    icon: Hand, // swollen/painful joints in hands
   },
   {
     title: "Osteoarthritis",
-    image:
-      "https://images.unsplash.com/photo-1769029262388-3ebd4e4e37d0?w=240&h=240&fit=crop&q=80&auto=format",
     description:
       "Joint pain that worsens with activity, stiffness after rest, reduced range of motion, grinding sensation in the joint.",
-    linkLabel: "Osteoarthritis care",
-    icon: Bone, // bone/joint wear
   },
   {
     title: "Psoriatic Arthritis",
-    image:
-      "https://images.unsplash.com/photo-1626524815950-559398d5abea?w=240&h=240&fit=crop&q=80&auto=format",
     description:
       "Swollen fingers or toes, nail pitting, joint pain alongside skin plaques, lower back pain, eye inflammation.",
-    linkLabel: "Psoriatic arthritis care",
-    icon: Sparkles, // skin plaques
   },
 ];
 
 export default function ConditionsCarouselSection() {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-
-  const scrollByCard = (dir: 1 | -1) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-condition-card]");
-    const step = (card?.offsetWidth ?? 320) + 24;
-    el.scrollBy({ left: step * dir, behavior: "smooth" });
-  };
+  const [hovered, setHovered] = useState<number | null>(null);
 
   return (
     <section
@@ -89,62 +58,60 @@ export default function ConditionsCarouselSection() {
           </div>
         </motion.div>
 
-        {/* Cards container */}
-        <div className="flex flex-col ">
-          <div className="overflow-x-visible scroll-smooth py-2">
-            {/* Flexbox container: horizontal scroll on mobile, flex-wrap centered on desktop */}
-            <div className="flex md:grid grid-cols-3 flex-col lg:flex-wrap lg:justify-center gap-3">
-              {featuredConditions.map((item, i) => {
-                const Icon = item.icon;
-                return (
-                  <motion.div
-                    key={item.title}
-                    data-condition-card
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-60px" }}
-                    transition={{ duration: 0.4, delay: i * 0.05 }}
-                    whileHover={{ y: -4 }}
-                    className="group relative flex flex-col shrink-0 snap-start rounded-2xl border border-primary/30 bg-white p-6 md:p-7 shadow-md transition-all duration-300 ease-out hover:border-primary/50 hover:shadow-md overflow-hidden"
+        {/* List */}
+        <div className="flex flex-col md:max-w-5xl w-full">
+          {featuredConditions.map((condition, i) => (
+            <motion.div
+              key={condition.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.4, delay: i * 0.07 }}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
+              className="group border-t last:border-b cursor-default border-primary/30"
+            >
+              <div className="flex items-center justify-between py-7 md:py-8 gap-8">
+                {/* Left */}
+                <div className="flex items-center gap-6 md:gap-10">
+                  <span className="h-2 w-2 rounded-full bg-primary shrink-0"></span>
+                  <h3
+                    className={`font-display text-base md:text-xl font-semibold transition-all duration-500 ${
+                      hovered === i
+                        ? "text-primary translate-x-1"
+                        : hovered !== null
+                          ? "text-ink/30"
+                          : "text-ink"
+                    }`}
                   >
-                    {/* subtle stock photo, tucked in the corner, tinted with brand color */}
-                    <div className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full overflow-hidden">
-                      <img
-                        src={item.image}
-                        alt=""
-                        className="h-full w-full object-cover opacity-60"
-                      />
-                      <div
-                        className="absolute inset-0"
-                        style={{
-                          backgroundColor: "#31696e",
-                          mixBlendMode: "multiply",
-                        }}
-                      />
-                    </div>
+                    {condition.title}
+                  </h3>
+                </div>
+              </div>
 
-                    <div className="pt-10">
-                      <h3 className="mt-6 font-display md:text-lg font-semibold text-ink transition-colors duration-200 group-hover:text-primary">
-                        {item.title}
-                      </h3>
-                      <p className="mt-3 font-body text-xs md:text-sm leading-relaxed text-ink-muted">
-                        {item.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-            <div className="flex items-center gap-1 justify-end pt-7">
-              <a
-                href="/our-practice"
-                className="underline text-xs md:text-sm text-primary"
+              {/* Description */}
+              <motion.div
+                animate={{
+                  height: hovered === i ? "auto" : 0,
+                  opacity: hovered === i ? 1 : 0,
+                }}
+                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                className="overflow-hidden"
               >
-                <Button variant="primary">Explore Full Services</Button>
-              </a>
-              {/* <ArrowUpRight size={12} className="text-primary" /> */}
-            </div>
-          </div>
+                <p className="pb-7 font-body text-xs md:text-sm text-ink-muted max-w-xl pl-8 md:pl-16 leading-relaxed">
+                  {condition.description}
+                </p>
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
+        <div className="flex items-center gap-1 pt-7 md:px-14 justify-end w-full">
+          <a
+            href="/our-practice"
+            className="underline text-xs md:text-sm text-primary"
+          >
+            <Button>Explore Full Services</Button>
+          </a>
         </div>
       </div>
     </section>

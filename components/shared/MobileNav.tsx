@@ -18,11 +18,11 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
       {open && (
         <motion.div
           key="drawer"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-50 h-full w-full bg-bg px-4 py-8 lg:hidden"
+          initial={{ x: "100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "100%" }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="fixed inset-0 z-50 h-full w-full bg-white px-4 py-8 lg:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"

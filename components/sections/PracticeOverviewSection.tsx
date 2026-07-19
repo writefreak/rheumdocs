@@ -63,9 +63,17 @@ const totalPages = Math.ceil(offerings.length / CARDS_PER_PAGE);
 
 export default function PracticeOverviewSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [activeSource, setActiveSource] = useState<"desktop" | "mobile">(
+    "desktop",
+  );
   const [page, setPage] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const active = activeIndex !== null ? offerings[activeIndex] : null;
+
+  const activeLayoutId =
+    activeSource === "mobile"
+      ? `mobile-offering-card-${activeIndex}`
+      : `offering-card-${activeIndex}`;
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -137,8 +145,11 @@ export default function PracticeOverviewSection() {
                 <motion.button
                   type="button"
                   key={title}
-                  layoutId={`offering-card-${index}`}
-                  onClick={() => setActiveIndex(index)}
+                  layoutId={`mobile-offering-card-${index}`}
+                  onClick={() => {
+                    setActiveIndex(index);
+                    setActiveSource("mobile");
+                  }}
                   whileTap={{ scale: 0.98 }}
                   className="group flex flex-col gap-3 rounded-card border border-white/20 bg-[#fafafa]/10 px-5 py-5 text-left shadow-sm backdrop-blur-xl transition-shadow duration-300 ease-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                 >
@@ -220,7 +231,7 @@ export default function PracticeOverviewSection() {
 
             <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
               <motion.div
-                layoutId={`offering-card-${activeIndex}`}
+                layoutId={activeLayoutId}
                 transition={{
                   type: "spring",
                   stiffness: 400,

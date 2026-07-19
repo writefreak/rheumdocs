@@ -81,7 +81,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-4 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36">
         <motion.div
           variants={container}
           initial="hidden"
@@ -90,7 +90,7 @@ export default function Hero() {
         >
           <motion.h1
             variants={item}
-            className="font-display text-[26px] text-primary font-semibold leading-[1.08] md:text-5xl"
+            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl"
           >
             Western Maryland's Trusted rheumatology and osteoporosis care since
             1994.
@@ -106,19 +106,19 @@ export default function Hero() {
             and bone health with onsite infusion and imaging.
           </motion.p>
 
-          <motion.div
+          {/* <motion.div
             variants={item}
             className="md:pt-10 pt-2 flex md:flex-row flex-col md:items-center gap-4"
-          >
-            <a href="/contact">
+          > */}
+          {/* <a href="/contact">
               <Button variant="primary">Schedule an Appointment</Button>
-            </a>
-            {/* <a href="/our-practice">
+            </a> */}
+          {/* <a href="/our-practice">
               <Button variant="accent" icon={null}>
                 Explore Our Services
               </Button>
             </a> */}
-          </motion.div>
+          {/* </motion.div> */}
         </motion.div>
 
         <div className="relative h-[300px] w-full overflow-hidden rounded-2xl md:h-[420px]">

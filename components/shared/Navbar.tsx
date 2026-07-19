@@ -40,7 +40,7 @@ export default function Navbar() {
         <div className="mx-auto max-w-7xl md:max-w-5xl">
           <div className="flex items-center justify-between gap-4 rounded-xl border border-ink/10 bg-white px-4 py-3 shadow-sm sm:px-5 lg:px-6">
             <Link href="/">
-              <h2 className="font-display text-sm md:text-lg text-ink whitespace-nowrap">
+              <h2 className="font-display text-base md:text-xl text-ink whitespace-nowrap">
                 Rheumatology Consultants
               </h2>
             </Link>

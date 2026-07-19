@@ -113,7 +113,7 @@ function ParallaxImage({ className }: { className: string }) {
       className={className}
     >
       <motion.img
-        src="/doc.jpg"
+        src="/heroimg.jpg"
         alt="Rheumatology Consultants exam room in Hagerstown, Maryland"
         style={{ y: imageY }}
         className="absolute left-0 -top-[15%] h-[130%] w-full object-cover"
@@ -212,9 +212,11 @@ export default function MissionSection() {
             transition={{ duration: 0.55, delay: 0.5 }}
             className="focus-ring mt-10 flex w-fit items-center gap-2 rounded-[var(--radius-card)] font-[family-name:var(--font-body)] text-sm font-semibold transition-transform hover:scale-[1.02]"
           >
-            <Button variant="primary" className="bg-accent">
-              Learn More About Us
-            </Button>
+            <a href="/contact">
+              <Button variant="primary" className="bg-accent">
+                Schedule Appointment
+              </Button>
+            </a>
           </motion.div>
         </div>
       </div>

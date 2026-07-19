@@ -20,8 +20,8 @@ export default function page() {
       <PageHero
         pageName="Our Practice"
         // image="/med.jpg"
-        description="At our state-of-the-art rheumatology office, your
-            well-being is our top priority. We proudly offer a range of
+        description="With us, your
+            well-being is a top priority. We proudly offer a range of
             cutting-edge services to cater to your unique needs."
       />
 
@@ -105,7 +105,7 @@ export default function page() {
             </p>
 
             <div className="mt-8">
-              <Button variant="primary" href="/contact">
+              <Button variant="primary" icon={null} href="/contact">
                 Contact Us
               </Button>
             </div>
