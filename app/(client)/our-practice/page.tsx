@@ -76,7 +76,7 @@ export default function page() {
                   <p className="text-neutral-600 text-xs md:text-sm">
                     We provide diagnosis and treatment of rheumatological
                     diseases and other related disorders affecting bones,
-                    muscles, and joints, including:
+                    muscles, and joints. Click each card to learn more
                   </p>
                 </div>
               </motion.div>

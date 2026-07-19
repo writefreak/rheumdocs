@@ -204,18 +204,20 @@ export default function Conditions() {
                     whileHover={{ y: -4 }}
                     className={`group relative w-[78vw] shrink-0 snap-start rounded-2xl border p-5 text-left shadow-md transition-all duration-300 ease-out hover:shadow-md sm:w-80 md:p-7 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
                       isOthers
-                        ? "border-dashed border-primary/40 bg-primary/5 hover:border-primary/60 flex items-center justify-center"
+                        ? "border border-primary/40 bg-primary/5 hover:border-primary/60 flex items-center justify-center"
                         : "border-primary/30 bg-white hover:border-primary/50"
                     }`}
                   >
                     {isOthers ? (
-                      <div className="flex flex-col items-center gap-3 py-6">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                          <Plus size={22} className="text-primary" />
-                        </div>
-                        <h3 className="font-display text-sm font-semibold text-primary">
+                      <div className="flex flex-col gap-2">
+                        <h3 className="font-display text-xl font-semibold text-primary">
                           And Others
                         </h3>
+                        <p className=" font-body text-xs md:text-sm leading-relaxed text-ink-muted">
+                          Vasculitis, Sjögren's syndrome, scleroderma, Raynaud's
+                          phenomenon, reactive arthritis, sarcoidosis, and other
+                          rheumatic and autoimmune conditions.
+                        </p>
                       </div>
                     ) : (
                       <>
@@ -270,18 +272,21 @@ export default function Conditions() {
                       whileHover={{ y: -4 }}
                       className={`group relative rounded-2xl border p-7 text-left shadow-md transition-all duration-300 ease-out hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
                         isOthers
-                          ? "border-dashed border-primary/40 bg-primary/5 hover:border-primary/60 flex items-center justify-center"
+                          ? "border border-primary/40 bg-primary/5 hover:border-primary/60 flex items-center justify-center"
                           : "border-primary/30 bg-white hover:border-primary/50"
                       }`}
                     >
                       {isOthers ? (
-                        <div className="flex flex-col items-center gap-3 py-6">
-                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                            <Plus size={22} className="text-primary" />
-                          </div>
+                        <div className="flex flex-col gap-2">
                           <h3 className="font-display text-xl font-semibold text-primary">
                             And Others
                           </h3>
+                          <p className=" font-body text-xs md:text-sm leading-relaxed text-ink-muted">
+                            Vasculitis, Sjögren's syndrome, scleroderma,
+                            Raynaud's phenomenon, reactive arthritis,
+                            sarcoidosis, and other rheumatic and autoimmune
+                            conditions.
+                          </p>
                         </div>
                       ) : (
                         <>
@@ -405,11 +410,11 @@ export default function Conditions() {
                   {activeItem.title}
                 </h3>
 
-                <p className="mt-4 text-balance font-body text-base leading-relaxed text-ink-muted">
+                <p className="mt-4 text-balance font-body text-xs md:text-sm leading-relaxed text-ink-muted">
                   {activeItem.description}
                 </p>
 
-                <p className="mt-5 font-body text-sm leading-relaxed text-primary">
+                <p className="mt-3 font-body text-xs md:text-sm leading-relaxed text-ink-muted">
                   We diagnose and treat this condition onsite, combining
                   in-house imaging, lab work, and a treatment plan tailored to
                   you.
