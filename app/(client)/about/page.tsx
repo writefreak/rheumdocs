@@ -6,6 +6,7 @@ import TextCarousel, { CarouselSlide } from "@/components/ui/text-carousel";
 import { useRef } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import ParallaxImage from "./parallax-image";
+import MissionSection from "@/components/sections/MissionSection";
 
 const historySlides: CarouselSlide[] = [
   {
@@ -52,7 +53,8 @@ export default function AboutPage() {
       />
 
       <section className="bg-bg px-4 py-20 lg:px-14 lg:py-30 bg-white">
-        <div className="mx-auto max-w-6xl grid grid-cols-1 gap-5 md:gap-10 md:grid-cols-2">
+        <MissionSection/>
+        <div className="mx-auto max-w-6xl xl:max-w-full grid grid-cols-1 gap-5 md:gap-10 md:grid-cols-2">
           <ParallaxImage className="relative md:hidden aspect-[4/3] w-full overflow-hidden rounded-card shadow-sm" />
           <TextCarousel slides={historySlides} />
           <ParallaxImage className="relative hidden md:block aspect-[4/3] w-full overflow-hidden rounded-card shadow-sm" />

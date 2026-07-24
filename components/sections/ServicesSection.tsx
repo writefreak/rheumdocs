@@ -47,7 +47,7 @@ export default function ConditionsCarouselSection() {
         >
           <div className="flex flex-col gap-4 max-w-2xl">
             <h2 className="font-display text-primary text-center text-3xl font-semibold leading-tight sm:text-4xl">
-              Our Consulting Services
+               Conditions We Treat
             </h2>
 
             <p className="text-neutral-600 text-center text-xs md:text-base leading-relaxed">

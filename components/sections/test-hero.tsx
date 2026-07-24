@@ -70,7 +70,8 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="top"
-      className="relative flex md:h-screen h-auto items-center overflow-hidden bg-white isolate"
+      // className="relative flex md:h-screen h-auto items-center overflow-hidden bg-white isolate"
+      className="relative flex items-center overflow-hidden bg-white isolate py-6 md:py-0 md:h-screen xl:h-auto xl:py-0"
     >
       <div className="absolute inset-0 -z-10">
         <img
@@ -81,7 +82,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl xl:px-20 xl:max-w-full grid-cols-1 xl:gap-14 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36">
         <motion.div
           variants={container}
           initial="hidden"
@@ -92,17 +93,17 @@ export default function Hero() {
             variants={item}
             className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl"
           >
-            Western Maryland's Trusted rheumatology and osteoporosis care since
+            Western Maryland's Trusted rheumatology <br className="hidden xl:block"/> and osteoporosis care <br className="hidden xl:block"/>since
             1994.
           </motion.h1>
 
           <motion.p
             variants={item}
-            className="text-[10px] md:text-sm font-body md:max-w-sm text-neutral-700"
+            className="text-[10px] md:text-sm font-body md:max-w-sm xl:text-base text-neutral-700"
           >
             Board certified rheumatologists providing compassionate,
             comprehensive care for arthritis, autoimmune conditions,{" "}
-            <br className="md:hidden" />
+            {/* <br className="md:hidden" /> */}
             and bone health with onsite infusion and imaging.
           </motion.p>
 
@@ -121,7 +122,7 @@ export default function Hero() {
           {/* </motion.div> */}
         </motion.div>
 
-        <div className="relative h-[300px] w-full overflow-hidden rounded-2xl md:h-[420px]">
+        <div className="relative h-[300px] w-full overflow-hidden rounded-2xl md:h-[420px] xl:h-[500px]">
           <motion.img
             ref={imgRefCallback}
             src="/doctor2.jpg"

@@ -1,4 +1,3 @@
-import Navbar from "@/components/shared/Navbar";
 import Hero from "@/components/sections/Hero";
 import PracticeOverviewSection from "@/components/sections/PracticeOverviewSection";
 import ServicesSection from "@/components/sections/ServicesSection";
@@ -14,7 +13,7 @@ export default function Home() {
     <main>
       <TestHero />
       {/* <Hero /> */}
-      <MissionSection />
+      {/* <MissionSection /> */}
       <PracticeOverviewSection />
       <ServicesSection />
       {/* <ResearchSection /> */}
