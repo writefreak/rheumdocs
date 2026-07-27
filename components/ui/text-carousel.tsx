@@ -41,7 +41,7 @@ export default function TextCarousel({
     : [current.paragraph];
 
   return (
-    <div className={`w-full max-w-2xl ${className}`}>
+    <div className={`w-full max-w-2xl md:max-w-full ${className}`}>
       <AnimatePresence mode="wait">
         <motion.div
           key={active}

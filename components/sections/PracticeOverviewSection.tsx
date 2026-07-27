@@ -112,7 +112,7 @@ export default function PracticeOverviewSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55 }}
-            className="max-w-2xl font-display text-center text-3xl font-semibold leading-tight text-bg sm:text-4xl"
+            className="max-w-2xl font-display text-center text-[22px] font-semibold leading-tight text-bg sm:text-4xl"
           >
             What Our <br className="md:hidden" /> Practice Offers
           </motion.h2>

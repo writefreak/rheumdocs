@@ -82,7 +82,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl xl:px-20 xl:max-w-full grid-cols-1 xl:gap-14 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl xl:max-w-full grid-cols-1 xl:gap-12 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 xl:pt-44 lg:pt-36">
         <motion.div
           variants={container}
           initial="hidden"
@@ -91,9 +91,9 @@ export default function Hero() {
         >
           <motion.h1
             variants={item}
-            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl"
+            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full"
           >
-            Western Maryland's Trusted rheumatology <br className="hidden xl:block"/> and osteoporosis care <br className="hidden xl:block"/>since
+            Western Maryland's Trusted rheumatology  and osteoporosis care since
             1994.
           </motion.h1>
 

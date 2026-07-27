@@ -61,7 +61,7 @@ function Counter({
   return (
     <p
       ref={ref}
-      className="font-display text-3xl font-semibold text-primary sm:text-4xl"
+      className="font-display text-2xl font-semibold text-primary md:text-4xl"
     >
       {count.toLocaleString()}
       {suffix}
@@ -69,7 +69,7 @@ function Counter({
   );
 }
 
-function StatGrid() {
+export function StatGrid() {
   return (
     <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 sm:gap-x-10">
       {STATS.map((stat, i) => (
@@ -126,19 +126,11 @@ export default function MissionSection() {
   return (
     <section
       id="mission"
-      className="bg-bg px-6 py-20 sm:py-24 lg:px-10 lg:py-36 bg-white border-t border-t-gray-100"
+      className="bg-white px-4 py-10 lg:px-14"
     >
-      <div className="mx-auto flex max-w-6xl flex-col lg:hidden">
+      <div className="mx-auto flex flex-col lg:hidden">
         {/* Text */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.55, delay: 0.05 }}
-          className="mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold leading-tight text-[var(--color-primary)] sm:text-4xl"
-        >
-          About Us
-        </motion.h2>
+        
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -154,72 +146,16 @@ export default function MissionSection() {
           present cutting edge treatments to an underserved population.
         </motion.p>
 
-        {/* Image */}
-        <ParallaxImage className="mt-10 relative aspect-[4/3] w-full overflow-hidden rounded-card shadow-sm" />
-
+        
         {/* Stat grid */}
         <StatGrid />
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.55, delay: 0.5 }}
-          className="focus-ring mt-10 flex w-fit items-center gap-2 rounded-[var(--radius-card)] font-[family-name:var(--font-body)] text-sm font-semibold transition-transform hover:scale-[1.02]"
-        >
-          <Button variant="primary">Learn More About Us</Button>
-        </motion.div>
+        
       </div>
 
       {/*DESKTOP*/}
-      <div className="mx-auto hidden max-w-6xl gap-16 lg:grid lg:grid-cols-2 lg:items-center">
-        {/* Text */}
-
-        {/* Image */}
-        <ParallaxImage className="relative aspect-[4/3] w-full overflow-hidden rounded-card shadow-sm" />
-        <div className="flex flex-col">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.55, delay: 0.05 }}
-            className="mt-3 font-[family-name:var(--font-display)] text-5xl font-semibold leading-tight text-[var(--color-primary)]"
-          >
-            About Us
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.55, delay: 0.15 }}
-            className="mt-5 font-body text-[10px] md:text-sm leading-relaxed text-text-muted"
-          >
-            Our mission is to provide excellent care aimed at improving the
-            quality of life for patients affected by arthritis, lupus,
-            osteoporosis, and other autoimmune diseases. We provide current
-            standards of care as well as access to clinical trials that may
-            present cutting edge treatments to an underserved population.
-          </motion.p>
-
-          <StatGrid />
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.55, delay: 0.5 }}
-            className="focus-ring mt-10 flex w-fit items-center gap-2 rounded-[var(--radius-card)] font-[family-name:var(--font-body)] text-sm font-semibold transition-transform hover:scale-[1.02]"
-          >
-            <a href="/contact">
-              <Button variant="primary" className="bg-accent">
-                Schedule Appointment
-              </Button>
-            </a>
-          </motion.div>
-        </div>
-      </div>
+      
     </section>
   );
 }

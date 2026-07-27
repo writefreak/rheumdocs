@@ -119,9 +119,9 @@ export default function ContactSection({ className }: Props) {
   return (
     <section
       id="contact"
-      className={cn("bg-bg px-4 py-24 lg:px-14 lg:py-28 bg-white", className)}
+      className={cn("bg-bg px-4 py-24 xl:px-28  lg:px-14 lg:py-28 bg-white", className)}
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto xl:max-w-full max-w-7xl">
         <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div>
             <motion.h2

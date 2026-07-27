@@ -36,7 +36,7 @@ export default function ConditionsCarouselSection() {
       id="conditions"
       className="bg-bg px-4 py-24 lg:px-14 lg:py-30 bg-white border-b border-b-gray-200"
     >
-      <div className="mx-auto max-w-6xl flex flex-col items-center">
+      <div className="mx-auto max-w-6xl xl:max-w-full flex flex-col items-center">
         {/* Header section on top */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -46,7 +46,8 @@ export default function ConditionsCarouselSection() {
           className="flex flex-col gap-6 pb-12"
         >
           <div className="flex flex-col gap-4 max-w-2xl">
-            <h2 className="font-display text-primary text-center text-3xl font-semibold leading-tight sm:text-4xl">
+            <h2 className="font-display text-primary text-center text-[22px] font-semibold leading-tight md:text-4xl 
+            ">
                Conditions We Treat
             </h2>
 
@@ -59,7 +60,7 @@ export default function ConditionsCarouselSection() {
         </motion.div>
 
         {/* List */}
-        <div className="flex flex-col md:max-w-5xl w-full">
+        <div className="flex flex-col md:max-w-5xl xl:max-w-[98rem] w-full">
           {featuredConditions.map((condition, i) => (
             <motion.div
               key={condition.title}
@@ -76,7 +77,7 @@ export default function ConditionsCarouselSection() {
                 <div className="flex items-center gap-6 md:gap-10">
                   <span className="h-2 w-2 rounded-full bg-primary shrink-0"></span>
                   <h3
-                    className={`font-display text-base md:text-xl font-semibold transition-all duration-500 ${
+                    className={`font-display text-base xl:text-2xl md:text-xl font-semibold transition-all duration-500 ${
                       hovered === i
                         ? "text-primary translate-x-1"
                         : hovered !== null
@@ -98,7 +99,7 @@ export default function ConditionsCarouselSection() {
                 transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                 className="overflow-hidden"
               >
-                <p className="pb-7 font-body text-xs md:text-sm text-ink-muted max-w-xl pl-8 md:pl-16 leading-relaxed">
+                <p className="pb-7 font-body text-xs xl:text-lg md:text-sm text-ink-muted max-w-xl pl-8 md:pl-16 leading-relaxed">
                   {condition.description}
                 </p>
               </motion.div>
