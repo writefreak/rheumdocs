@@ -58,8 +58,6 @@ export default function Hero() {
   });
   const imageY = useTransform(scrollYProgress, [0, 1], ["-40%", "40%"]);
 
-  // handles both cold loads (onLoad fires) and cached loads
-  // (image is already .complete before onLoad ever attaches)
   const imgRefCallback = useCallback((node: HTMLImageElement | null) => {
     if (node && node.complete) {
       setImgLoaded(true);
@@ -70,8 +68,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="top"
-      // className="relative flex md:h-screen h-auto items-center overflow-hidden bg-white isolate"
-      className="relative flex items-center overflow-hidden bg-white isolate py-6 md:py-0 md:h-screen xl:h-auto xl:py-0"
+      className="relative flex items-center overflow-hidden bg-white isolate py-6 md:py-0 md:h-screen xl:h-auto xl:py-0 2xl:min-h-screen 2xl:h-screen"
     >
       <div className="absolute inset-0 -z-10">
         <img
@@ -82,17 +79,16 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 to-transparent" />
       </div>
 
-      {/* <div className="relative z-10 mx-auto grid w-full max-w-7xl xl:max-w-full grid-cols-1 xl:gap-12 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 xl:pt-44 lg:pt-36"> */}
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36 xl:pt-44 xl:h-auto xl:pb-32 min-[1920px]:max-w-[2250px] min-[1920px]:gap-16">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36 xl:pt-44 xl:h-auto xl:pb-32 2xl:max-w-[1800px] 2xl:grid-cols-2 2xl:px-16 2xl:pt-0 2xl:pb-0 min-[1920px]:max-w-[2250px] min-[1920px]:gap-16">
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
-          className="max-w-3xl flex flex-col gap-7"
+          className="max-w-3xl flex flex-col gap-7 2xl:max-w-4xl"
         >
           <motion.h1
             variants={item}
-            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full"
+            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full 2xl:text-[50px] 2xl:max-w-xl"
           >
             Western Maryland's Trusted rheumatology and osteoporosis care since
             1994.
@@ -100,30 +96,16 @@ export default function Hero() {
 
           <motion.p
             variants={item}
-            className="text-[10px] md:text-sm font-body md:max-w-sm xl:text-base text-neutral-700"
+            className="text-[10px] md:text-sm font-body md:max-w-sm xl:text-base text-neutral-700 2xl:text-lg 2xl:max-w-xl"
           >
             Board certified rheumatologists providing compassionate,
-            comprehensive care for arthritis, autoimmune conditions,{" "}
-            {/* <br className="md:hidden" /> */}
-            and bone health with onsite infusion and imaging.
+            comprehensive care for arthritis, autoimmune conditions, and bone
+            health with onsite infusion and imaging.
           </motion.p>
-
-          {/* <motion.div
-            variants={item}
-            className="md:pt-10 pt-2 flex md:flex-row flex-col md:items-center gap-4"
-          > */}
-          {/* <a href="/contact">
-              <Button variant="primary">Schedule an Appointment</Button>
-            </a> */}
-          {/* <a href="/our-practice">
-              <Button variant="accent" icon={null}>
-                Explore Our Services
-              </Button>
-            </a> */}
-          {/* </motion.div> */}
         </motion.div>
 
-        <div className="relative h-[300px] w-full overflow-hidden rounded-2xl md:h-[420px] xl:h-[500px]">
+        {/* Further reduced image container height for 2xl / 1920px */}
+        <div className="relative h-[300px] w-full overflow-hidden rounded-2xl md:h-[420px] xl:h-[500px] 2xl:h-[500px] min-[1920px]:h-[560px]">
           <motion.img
             ref={imgRefCallback}
             src="/doctor2.jpg"
