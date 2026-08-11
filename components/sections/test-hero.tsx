@@ -68,10 +68,10 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="top"
-      className="relative flex items-center overflow-hidden bg-white isolate py-6 md:py-0 md:h-screen xl:h-auto xl:py-0 2xl:h-[1000px]"
+      className="relative flex items-center overflow-hidden bg-white isolate py-6 md:py-0 md:h-screen lg:h-screen xl:h-auto xl:py-0 2xl:h-[1000px]"
     >
-      {/* Standard background for Mobile / Desktop up to XL */}
-      <div className="absolute inset-0 -z-10 2xl:hidden">
+      {/* Background for Mobile and Tablet only (< lg) */}
+      <div className="absolute inset-0 -z-10 lg:hidden">
         <img
           src="/bg.jpg"
           alt=""
@@ -80,25 +80,25 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 to-transparent" />
       </div>
 
-      {/* Full image background layer active ONLY on ultra-wide screens (2xl+) */}
-      <div className="hidden 2xl:block absolute inset-0 -z-10 overflow-hidden">
+      {/* Full image background layer active on Normal Desktop and larger (lg+) */}
+      <div className="hidden lg:block absolute inset-0 -z-10 overflow-hidden">
         <motion.img
           src="/doctor2.jpg"
           alt=""
           style={{ y: imageY }}
           className="h-[130%] w-full object-cover absolute -top-[15%] left-0 object-right"
         />
-        {/* Soft overlay ensuring dark text remains crisp on the left side */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent w-3/4" />
+        {/* Subtle gradient overlay to keep readable text contrast on the left side */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent w-full md:w-3/4 lg:w-2/3 xl:w-1/2" />
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36 xl:pt-44 xl:h-auto xl:pb-32 2xl:max-w-[1700px] 2xl:grid-cols-12 2xl:gap-12 2xl:px-16 2xl:pt-0 2xl:pb-0 min-[1920px]:max-w-[2250px] min-[1920px]:gap-16">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-12 lg:gap-14 lg:px-14 lg:pt-36 xl:pt-44 xl:h-auto xl:pb-32 2xl:max-w-[1700px] 2xl:gap-12 2xl:px-16 2xl:pt-0 2xl:pb-0 min-[1920px]:max-w-[2250px] min-[1920px]:gap-16">
         {/* Text column */}
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
-          className="max-w-3xl flex flex-col gap-7 2xl:col-span-6 min-[1920px]:col-span-5 2xl:max-w-none"
+          className="max-w-3xl flex flex-col gap-7 lg:col-span-8 xl:col-span-6 2xl:col-span-6 min-[1920px]:col-span-5 lg:max-w-none"
         >
           <motion.h1
             variants={item}
@@ -110,7 +110,7 @@ export default function Hero() {
 
           <motion.p
             variants={item}
-            className="text-[10px] md:text-sm font-body md:max-w-sm xl:text-base text-neutral-700 2xl:text-lg min-[1920px]:text-xl 2xl:max-w-lg"
+            className="text-[10px] md:text-sm font-body md:max-w-sm xl:text-base text-neutral-700 2xl:text-lg min-[1920px]:text-xl lg:max-w-lg"
           >
             Board certified rheumatologists providing compassionate,
             comprehensive care for arthritis, autoimmune conditions, and bone
@@ -118,8 +118,8 @@ export default function Hero() {
           </motion.p>
         </motion.div>
 
-        {/* Foreground Image Card container (Hidden on 2xl+ since image is full background) */}
-        <div className="relative h-[300px] w-full overflow-hidden rounded-2xl md:h-[420px] xl:h-[500px] 2xl:hidden">
+        {/* Foreground Image Card container (Hidden on Desktop lg+ since photo is now section background) */}
+        <div className="relative h-[300px] w-full overflow-hidden rounded-2xl md:h-[420px] lg:hidden">
           <motion.img
             ref={imgRefCallback}
             src="/doctor2.jpg"
