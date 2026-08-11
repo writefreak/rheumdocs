@@ -68,7 +68,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="top"
-      className="relative flex items-center overflow-hidden bg-white isolate py-6 md:py-0 md:h-screen xl:h-auto xl:py-0  2xl:h-[1000px]"
+      className="relative flex items-center overflow-hidden bg-white isolate py-6 md:py-0 md:h-screen xl:h-auto xl:py-0 2xl:h-[1000px]"
     >
       <div className="absolute inset-0 -z-10">
         <img
@@ -79,16 +79,18 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36 xl:pt-44 xl:h-auto xl:pb-32 2xl:max-w-[1700px] 2xl:grid-cols-2 2xl:px-16 2xl:pt-0 2xl:pb-0 min-[1920px]:max-w-[2250px] min-[1920px]:gap-16">
+      {/* Grid switched to 12 columns on 2xl to allow an asymmetric split */}
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36 xl:pt-44 xl:h-auto xl:pb-32  2xl:max-w-[1700px] 2xl:grid-cols-12 2xl:gap-12 2xl:px-16 2xl:pt-20 2xl:pb-0 min-[1920px]:max-w-[2250px] min-[1920px]:gap-16">
+        {/* Text column restricted to 5 out of 12 columns on 2xl */}
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
-          className="max-w-3xl flex flex-col gap-7 2xl:max-w-4xl"
+          className="max-w-3xl flex flex-col gap-7 2xl:col-span-5 2xl:max-w-none"
         >
           <motion.h1
             variants={item}
-            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full 2xl:text-[76px] 2xl:max-w-4xl"
+            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full 2xl:text-[64px] min-[1920px]:text-[72px]"
           >
             Western Maryland's Trusted rheumatology and osteoporosis care since
             1994.
@@ -96,7 +98,7 @@ export default function Hero() {
 
           <motion.p
             variants={item}
-            className="text-[10px] md:text-sm font-body md:max-w-sm xl:text-base text-neutral-700 2xl:text-xl 2xl:max-w-xl"
+            className="text-[10px] md:text-sm font-body md:max-w-sm xl:text-base text-neutral-700 2xl:text-lg min-[1920px]:text-xl 2xl:max-w-lg"
           >
             Board certified rheumatologists providing compassionate,
             comprehensive care for arthritis, autoimmune conditions, and bone
@@ -104,8 +106,8 @@ export default function Hero() {
           </motion.p>
         </motion.div>
 
-        {/* Further reduced image container height for 2xl / 1920px */}
-        <div className="relative h-[300px] w-full overflow-hidden rounded-2xl md:h-[420px] xl:h-[500px] 2xl:h-[500px] min-[1920px]:h-[660px]">
+        {/* Image column expanded to 7 out of 12 columns on 2xl */}
+        <div className="relative h-[300px] w-full overflow-hidden rounded-2xl md:h-[420px] xl:h-[500px] 2xl:col-span-7 2xl:h-[650px] min-[1920px]:h-[680px]">
           <motion.img
             ref={imgRefCallback}
             src="/doctor2.jpg"
