@@ -68,7 +68,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="top"
-      className="relative flex items-center overflow-hidden bg-white isolate py-6 md:py-0 md:h-screen xl:h-auto xl:py-0 2xl:min-h-screen 2xl:h-screen"
+      className="relative flex items-center overflow-hidden bg-white isolate py-6 md:py-0 md:h-screen xl:h-auto xl:py-0  2xl:h-[1000px]"
     >
       <div className="absolute inset-0 -z-10">
         <img
@@ -79,7 +79,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36 xl:pt-44 xl:h-auto xl:pb-32 2xl:max-w-[1800px] 2xl:grid-cols-2 2xl:px-16 2xl:pt-0 2xl:pb-0 min-[1920px]:max-w-[2250px] min-[1920px]:gap-16">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36 xl:pt-44 xl:h-auto xl:pb-32 2xl:max-w-[1700px] 2xl:grid-cols-2 2xl:px-16 2xl:pt-0 2xl:pb-0 min-[1920px]:max-w-[2250px] min-[1920px]:gap-16">
         <motion.div
           variants={container}
           initial="hidden"
@@ -88,7 +88,7 @@ export default function Hero() {
         >
           <motion.h1
             variants={item}
-            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full 2xl:text-[50px] 2xl:max-w-xl"
+            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full 2xl:text-[70px] 2xl:max-w-3xl"
           >
             Western Maryland's Trusted rheumatology and osteoporosis care since
             1994.
@@ -96,7 +96,7 @@ export default function Hero() {
 
           <motion.p
             variants={item}
-            className="text-[10px] md:text-sm font-body md:max-w-sm xl:text-base text-neutral-700 2xl:text-lg 2xl:max-w-xl"
+            className="text-[10px] md:text-sm font-body md:max-w-sm xl:text-base text-neutral-700 2xl:text-xl 2xl:max-w-xl"
           >
             Board certified rheumatologists providing compassionate,
             comprehensive care for arthritis, autoimmune conditions, and bone

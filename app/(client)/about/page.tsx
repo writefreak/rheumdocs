@@ -46,52 +46,53 @@ const historySlides: CarouselSlide[] = [
 
 export default function AboutPage() {
   return (
-    <main>
+    <main className="bg-white">
       <PageHero
         pageName="About Us"
         description="Rheumatology Consultants is the private practice of Okechukwu C. Okoye, M.D."
         // image="/exam-room.png"
       />
 
-      <section className="bg-bg px-4 py-20 lg:px-14 lg:py-30 bg-white">
-        <div className="mx-auto max-w-6xl xl:max-w-full grid grid-cols-1 gap-5 md:gap-10 md:grid-cols-2">
-
+      <section className="bg-bg px-4 py-20 lg:px-14 lg:py-30 bg-white  2xl:max-w-[1850px] 2xl:mx-auto">
+        <div className="mx-auto max-w-6xl  xl:max-w-full grid grid-cols-1 gap-5 md:gap-10 md:grid-cols-2">
           <ParallaxImage className="relative hidden md:block aspect-[4/3] w-full overflow-hidden rounded-card shadow-sm" />
-           <div className="flex flex-col justify-between">
-           <div className="">
-          <h3 className="text-2xl xl:text-4xl text-primary font-semibold">Our Mission</h3>
-          <p className="mt-5 font-body text-[10px] md:text-sm leading-relaxed text-text-muted">
-            Our mission is to provide excellent care aimed at improving the
-            quality of life for patients affected by arthritis, lupus,
-            osteoporosis, and other autoimmune diseases. We provide current
-            standards of care as well as access to clinical trials that may
-            present cutting edge treatments to an underserved population.
-          </p>
+          <div className="flex flex-col justify-between">
+            <div className="">
+              <h3 className="text-2xl xl:text-4xl text-primary font-semibold">
+                Our Mission
+              </h3>
+              <p className="mt-5 font-body text-[10px] md:text-sm leading-relaxed text-text-muted">
+                Our mission is to provide excellent care aimed at improving the
+                quality of life for patients affected by arthritis, lupus,
+                osteoporosis, and other autoimmune diseases. We provide current
+                standards of care as well as access to clinical trials that may
+                present cutting edge treatments to an underserved population.
+              </p>
 
-          <StatGrid />
-           </div>
-<div className="flex items-end py-8 md:pt-0">
-        <Button>Contact Us</Button>
-  
-  </div>          
-        </div>
-            <ParallaxImage className="relative md:hidden aspect-[4/3] w-full overflow-hidden rounded-card shadow-sm" />
+              <StatGrid />
+            </div>
+            <div className="flex items-end py-8 md:pt-0">
+              <Button>Contact Us</Button>
+            </div>
+          </div>
+          <ParallaxImage className="relative md:hidden aspect-[4/3] w-full overflow-hidden rounded-card shadow-sm" />
           <div className="md:hidden max-w-6xl">
-          <TextCarousel slides={historySlides} />
+            <TextCarousel slides={historySlides} />
           </div>
         </div>
         <div className="pt-10 flex flex-col gap-8 md:pt-16">
           <div className="md:block hidden">
-          <TextCarousel slides={historySlides} />
+            <TextCarousel slides={historySlides} />
           </div>
-         
-         <div className="pt-10">
-           <Features />
-          
-          <TeamSection />
-         </div>
+
+          <div className="pt-10">
+            <div className="">
+              <Features />
+            </div>
+
+            <TeamSection />
+          </div>
         </div>
-        
       </section>
     </main>
   );
