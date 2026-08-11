@@ -88,7 +88,7 @@ export default function Hero() {
         >
           <motion.h1
             variants={item}
-            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full 2xl:text-[70px] 2xl:max-w-3xl"
+            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full 2xl:text-[76px] 2xl:max-w-4xl"
           >
             Western Maryland's Trusted rheumatology and osteoporosis care since
             1994.
@@ -105,7 +105,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Further reduced image container height for 2xl / 1920px */}
-        <div className="relative h-[300px] w-full overflow-hidden rounded-2xl md:h-[420px] xl:h-[500px] 2xl:h-[500px] min-[1920px]:h-[560px]">
+        <div className="relative h-[300px] w-full overflow-hidden rounded-2xl md:h-[420px] xl:h-[500px] 2xl:h-[500px] min-[1920px]:h-[660px]">
           <motion.img
             ref={imgRefCallback}
             src="/doctor2.jpg"
