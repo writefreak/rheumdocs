@@ -70,7 +70,8 @@ export default function Hero() {
       id="top"
       className="relative flex items-center overflow-hidden bg-white isolate py-6 md:py-0 md:h-screen xl:h-auto xl:py-0 2xl:h-[1000px]"
     >
-      <div className="absolute inset-0 -z-10">
+      {/* Standard background for Mobile / Desktop up to XL */}
+      <div className="absolute inset-0 -z-10 2xl:hidden">
         <img
           src="/bg.jpg"
           alt=""
@@ -79,14 +80,25 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 to-transparent" />
       </div>
 
-      {/* Grid switched to 12 columns on 2xl to allow an asymmetric split */}
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36 xl:pt-44 xl:h-auto xl:pb-32  2xl:max-w-[1700px] 2xl:grid-cols-12 2xl:gap-12 2xl:px-16 2xl:pt-20 2xl:pb-0 min-[1920px]:max-w-[2250px] min-[1920px]:gap-16">
-        {/* Text column restricted to 5 out of 12 columns on 2xl */}
+      {/* Full image background layer active ONLY on ultra-wide screens (2xl+) */}
+      <div className="hidden 2xl:block absolute inset-0 -z-10 overflow-hidden">
+        <motion.img
+          src="/doctor2.jpg"
+          alt=""
+          style={{ y: imageY }}
+          className="h-[130%] w-full object-cover absolute -top-[15%] left-0 object-right"
+        />
+        {/* Soft overlay ensuring dark text remains crisp on the left side */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent w-3/4" />
+      </div>
+
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-2 lg:gap-14 lg:px-14 lg:pt-36 xl:pt-44 xl:h-auto xl:pb-32 2xl:max-w-[1700px] 2xl:grid-cols-12 2xl:gap-12 2xl:px-16 2xl:pt-0 2xl:pb-0 min-[1920px]:max-w-[2250px] min-[1920px]:gap-16">
+        {/* Text column */}
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
-          className="max-w-3xl flex flex-col gap-7 2xl:col-span-5 2xl:max-w-none"
+          className="max-w-3xl flex flex-col gap-7 2xl:col-span-6 min-[1920px]:col-span-5 2xl:max-w-none"
         >
           <motion.h1
             variants={item}
@@ -106,8 +118,8 @@ export default function Hero() {
           </motion.p>
         </motion.div>
 
-        {/* Image column expanded to 7 out of 12 columns on 2xl */}
-        <div className="relative h-[300px] w-full overflow-hidden rounded-2xl md:h-[420px] xl:h-[500px] 2xl:col-span-7 2xl:h-[650px] min-[1920px]:h-[680px]">
+        {/* Foreground Image Card container (Hidden on 2xl+ since image is full background) */}
+        <div className="relative h-[300px] w-full overflow-hidden rounded-2xl md:h-[420px] xl:h-[500px] 2xl:hidden">
           <motion.img
             ref={imgRefCallback}
             src="/doctor2.jpg"
