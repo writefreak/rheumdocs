@@ -81,12 +81,12 @@ export default function AboutPage() {
           </div>
         </div>
         <div className="pt-10 flex flex-col gap-8 md:pt-16">
-          <div className="md:block hidden">
+          <div className="md:block hidden max-w-3xl">
             <TextCarousel slides={historySlides} />
           </div>
 
           <div className="pt-10">
-            <div className="">
+            <div className="2xl:max-w-8xl 2xl:m">
               <Features />
             </div>
 
