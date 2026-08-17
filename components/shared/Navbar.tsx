@@ -66,7 +66,7 @@ export default function Navbar() {
                 transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                 className="overflow-hidden md:border-b border-ink/5"
               >
-                <div className="mx-auto max-w-7xl 2xl:max-w-full 2xl:px-16 px-8 py-3 2xl:py-5 flex items-center gap-6">
+                <div className=" 2xl:max-w-full px-16  py-3 2xl:py-5 flex items-center gap-6">
                   <Link href="/" className="flex-shrink-0">
                     <img
                       src="/rheumlogo.jpg"
@@ -87,7 +87,7 @@ export default function Navbar() {
           </AnimatePresence>
 
           {/* Bottom Bar: Links + Action Buttons */}
-          <div className="mx-auto 2xl:max-w-full 2xl:px-16 max-w-7xl px-8 flex items-center justify-between h-14 transition-all duration-300">
+          <div className="mx-auto 2xl:max-w-full px-16 flex items-center justify-between h-14 transition-all duration-300">
             <nav className="flex items-center gap-8 h-full">
               {navLinks.map((link) => {
                 const isActive =
