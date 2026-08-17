@@ -2,15 +2,16 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, CalendarCheck, ArrowRight, X } from "lucide-react";
+import { Menu, ArrowRight, X, ChevronDown } from "lucide-react";
 import MobileNav from "./MobileNav";
 
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   {
-    label: "Services",
+    label: "Our Services",
     href: "#",
     children: [
       { label: "Our Practice", href: "/our-practice" },
@@ -58,20 +59,91 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4 lg:px-28 min-[1920px]:px-40">
-        <div className="mx-auto max-w-7xl md:max-w-5xl min-[1920px]:max-w-[92rem]">
-          <div className="flex items-center justify-between gap-4 rounded-xl border border-ink/10 bg-white px-4 py-3 md:py-4 shadow-sm sm:px-5 lg:px-6 min-[1920px]:px-10 min-[1920px]:py-6">
+      <header className="fixed inset-x-0 top-0 z-50 md:bg-white md:border-b border-ink/10">
+        {/* Desktop Header Layout */}
+        <div className="hidden lg:block">
+          {/* Top Bar: Centered Portrait Logo */}
+          <div className="max-w-7xl px-8 border-b border-ink/5">
             <Link href="/">
-              <h2 className="font-display text-[17px] leading-tight lg:text-3xl min-[1920px]:text-5xl text-ink whitespace-nowrap">
-                Rheumatology <br className="md:hidden" />  Consultants
-              </h2>
+              <img
+                src="/rheumlogo.jpg"
+                alt="Rheumdocs Logo"
+                className="h-28 w-auto object-cover"
+              />
             </Link>
+          </div>
 
-            <div className="hidden lg:flex items-center gap-4 min-[1920px]:gap-8">
+          {/* Bottom Bar: Links + Action Buttons */}
+          <div className="mx-auto max-w-7xl px-8 flex items-center justify-between h-14">
+            <nav className="flex items-center gap-8 h-full">
+              {navLinks.map((link) => {
+                const isActive =
+                  pathname === link.href ||
+                  link.children?.some((child) => child.href === pathname);
+
+                if (link.children) {
+                  return (
+                    <div
+                      key={link.label}
+                      className="relative group h-full flex items-center"
+                    >
+                      <button
+                        type="button"
+                        className={`flex items-center gap-1 font-body text-sm font-medium transition-colors hover:text-primary ${
+                          isActive ? "text-primary font-semibold" : "text-ink"
+                        }`}
+                      >
+                        {link.label}
+                        <ChevronDown
+                          size={14}
+                          className="transition-transform group-hover:rotate-180"
+                        />
+                      </button>
+
+                      {/* Dropdown Menu */}
+                      <div className="absolute top-full left-0 w-56 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <div className="rounded-xl border border-ink/10 bg-white py-2 shadow-lg">
+                          {link.children.map((child) => (
+                            <Link
+                              key={child.href}
+                              href={child.href}
+                              className={`block px-4 py-2.5 text-sm transition-colors hover:bg-ink/5 hover:text-primary ${
+                                pathname === child.href
+                                  ? "text-primary font-medium"
+                                  : "text-ink"
+                              }`}
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`relative flex items-center h-full font-body text-sm font-medium transition-colors hover:text-primary ${
+                      isActive ? "text-primary font-semibold" : "text-ink"
+                    }`}
+                  >
+                    {link.label}
+                    {isActive && (
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className="flex items-center gap-3">
               <a href="/contact">
-                <span className="focus-ring inline-flex items-center gap-2 rounded-2xl bg-primary px-5 py-2.5 font-body text-sm font-medium text-white transition-opacity hover:opacity-90 min-[1920px]:px-10 min-[1920px]:py-5 min-[1920px]:text-lg">
-                  <CalendarCheck size={16} className="min-[1920px]:w-6 min-[1920px]:h-6" strokeWidth={2} />
-                  Schedule
+                <span className="focus-ring inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 font-body text-sm font-medium text-white transition-opacity hover:opacity-90">
+                  Schedule Appointment
+                  <ArrowRight size={14} />
                 </span>
               </a>
 
@@ -81,26 +153,40 @@ export default function Navbar() {
                 aria-haspopup="dialog"
                 aria-expanded={sheetOpen}
                 aria-label="Open menu"
-                className="focus-ring inline-flex h-10 w-10 min-[1920px]:h-14 min-[1920px]:w-14 items-center justify-center rounded-lg border border-ink/15 text-ink transition-colors hover:bg-ink/5"
-              >
-                <Menu size={18} className="min-[1920px]:w-7 min-[1920px]:h-7" strokeWidth={2} />
-              </button>
-            </div>
-
-            <div className="flex items-center gap-2 lg:hidden">
-              <button
-                type="button"
-                aria-label="Open navigation menu"
-                onClick={() => setMobileOpen(true)}
-                className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-lg text-ink"
+                className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-lg border border-ink/15 text-ink transition-colors hover:bg-ink/5"
               >
                 <Menu size={18} strokeWidth={2} />
               </button>
             </div>
           </div>
         </div>
+
+        {/* Mobile View Header - Completely Untouched */}
+        <div className="block lg:hidden px-3 pt-3 sm:px-5 sm:pt-4">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex items-center justify-between gap-4 rounded-xl border border-ink/10 bg-white px-4 py-3 shadow-sm sm:px-5">
+              <Link href="/">
+                <h2 className="font-display text-[17px] leading-tight text-ink whitespace-nowrap">
+                  Rheumatology <br className="md:hidden" /> Consultants
+                </h2>
+              </Link>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  aria-label="Open navigation menu"
+                  onClick={() => setMobileOpen(true)}
+                  className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-lg text-ink"
+                >
+                  <Menu size={18} strokeWidth={2} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </header>
 
+      {/* Desktop Sheet Drawer */}
       <div
         role="dialog"
         aria-modal="true"
@@ -129,16 +215,20 @@ export default function Navbar() {
               type="button"
               aria-label="Close menu"
               onClick={() => setSheetOpen(false)}
-              className="inline-flex h-10 w-10 min-[1920px]:h-14 min-[1920px]:w-14 items-center justify-center rounded-lg  text-ink transition-colors hover:bg-ink/5"
+              className="inline-flex h-10 w-10 min-[1920px]:h-14 min-[1920px]:w-14 items-center justify-center rounded-lg text-ink transition-colors hover:bg-ink/5"
             >
-              <X size={20} className="min-[1920px]:w-7 min-[1920px]:h-7" strokeWidth={2} />
+              <X
+                size={20}
+                className="min-[1920px]:w-7 min-[1920px]:h-7"
+                strokeWidth={2}
+              />
             </button>
           </div>
 
           <div className="mx-auto flex w-full max-w-7xl min-[1920px]:max-w-[92rem] flex-1 flex-col justify-center px-8 min-[1920px]:px-24">
             <div className="flex flex-col divide-y divide-ink/10">
               {flatLinks.map((link) => (
-               <a 
+                <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setSheetOpen(false)}
@@ -159,6 +249,7 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Drawer - Untouched */}
       <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} />
     </>
   );

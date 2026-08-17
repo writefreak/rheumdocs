@@ -92,7 +92,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent w-full md:w-3/4 lg:w-2/3 xl:w-1/2" />
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-12 lg:gap-14 lg:px-14 lg:pt-36 xl:pt-44 xl:h-auto xl:pb-32 2xl:max-w-[1700px] 2xl:gap-12 2xl:px-16 2xl:pt-0 2xl:pb-0 min-[1920px]:max-w-[2250px] min-[1920px]:gap-16">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-12 lg:gap-14 lg:px-14 lg:pt-44 xl:pt-52 xl:h-auto xl:pb-32 2xl:max-w-[1700px] 2xl:gap-12 2xl:px-16 2xl:pt-44 2xl:pb-0 min-[1920px]:max-w-[2250px] min-[1920px]:gap-16">
         {/* Text column */}
         <motion.div
           variants={container}
