@@ -63,24 +63,24 @@ export default function Navbar() {
                 initial={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="overflow-hidden md:border-b 2xl:px-10 2xl:py-5 border-ink/5 flex items-center"
+                transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                className="overflow-hidden md:border-b border-ink/5"
               >
-                <div className="max-w-7xl 2xl:py-2 2xl:max-w-full px-8 flex justify-start pt-2">
-                  <Link href="/">
+                <div className="mx-auto max-w-7xl 2xl:max-w-full 2xl:px-16 px-8 py-3 2xl:py-5 flex items-center gap-6">
+                  <Link href="/" className="flex-shrink-0">
                     <img
                       src="/rheumlogo.jpg"
                       alt="Rheumdocs Logo"
-                      className="h-30 w-auto object-cover"
+                      className="h-24 2xl:h-28 w-auto object-contain"
                     />
                   </Link>
-                </div>
 
-                <div>
-                  <h2 className="font-display text-4xl text-primary font-semibold">
-                    Rheumatology <br />
-                    Consultants
-                  </h2>
+                  <div>
+                    <h2 className="font-display text-3xl 2xl:text-4xl text-primary font-semibold leading-tight">
+                      Rheumatology <br />
+                      Consultants
+                    </h2>
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -139,7 +139,7 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`relative flex items-center h-full font-body text-sm font-medium transition-colors hover:text-primary ${
+                    className={`relative flex items-center h-full font-body text-sm 2xl:text-base font-medium transition-colors hover:text-primary ${
                       isActive ? "text-primary font-semibold" : "text-ink"
                     }`}
                   >
@@ -174,7 +174,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile View Header - Completely Untouched */}
+        {/* Mobile View Header */}
         <div className="block lg:hidden px-3 pt-3 sm:px-5 sm:pt-4">
           <div className="mx-auto max-w-7xl">
             <div className="flex items-center justify-between gap-4 rounded-xl border border-ink/10 bg-white px-4 py-3 shadow-sm sm:px-5">
@@ -199,7 +199,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Drawer - Untouched */}
+      {/* Mobile Drawer */}
       <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} />
     </>
   );
