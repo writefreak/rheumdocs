@@ -68,7 +68,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="top"
-      className="relative flex items-center overflow-hidden bg-white isolate py-6 md:py-0 md:h-screen lg:h-screen xl:h-auto xl:py-0 2xl:h-[1000px]"
+      className="relative flex items-center overflow-hidden bg-white isolate py-6 md:py-0 md:h-screen lg:h-screen xl:h-auto xl:py-0 2xl:h-[900px]"
     >
       {/* Background for Mobile and Tablet only (< lg) */}
       <div className="absolute inset-0 -z-10 lg:hidden">
@@ -92,7 +92,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent w-full md:w-3/4 lg:w-2/3 xl:w-1/2" />
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-12 lg:gap-14 lg:px-14 lg:pt-44 xl:pt-52 xl:h-auto xl:pb-32 2xl:max-w-[1700px] 2xl:gap-12 2xl:px-16 2xl:pt-44 2xl:pb-0 min-[1920px]:max-w-[2250px] min-[1920px]:gap-16">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-20 lg:grid-cols-12 lg:gap-14 lg:px-14 lg:pt-52 xl:pt-56 xl:h-auto xl:pb-32 2xl:max-w-[1700px] 2xl:gap-12 2xl:px-16 2xl:pt-0 2xl:pb-0 min-[1920px]:max-w-[2250px] min-[1920px]:gap-16">
         {/* Text column */}
         <motion.div
           variants={container}
@@ -102,7 +102,7 @@ export default function Hero() {
         >
           <motion.h1
             variants={item}
-            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full 2xl:text-[64px] min-[1920px]:text-[72px]"
+            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full 2xl:text-[60px] min-[1920px]:text-[72px]"
           >
             Western Maryland's Trusted rheumatology and osteoporosis care since
             1994.

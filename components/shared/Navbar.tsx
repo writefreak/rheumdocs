@@ -64,9 +64,9 @@ export default function Navbar() {
                 exit={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="overflow-hidden border-b border-ink/5 flex items-center"
+                className="overflow-hidden md:border-b 2xl:px-10 2xl:py-5 border-ink/5 flex items-center"
               >
-                <div className="max-w-7xl px-8 flex justify-start">
+                <div className="max-w-7xl 2xl:py-2 2xl:max-w-full px-8 flex justify-start pt-2">
                   <Link href="/">
                     <img
                       src="/rheumlogo.jpg"
@@ -77,8 +77,9 @@ export default function Navbar() {
                 </div>
 
                 <div>
-                  <h2 className="font-display text-3xl text-primary font-semibold">
-                    Rheumatology Consultants
+                  <h2 className="font-display text-4xl text-primary font-semibold">
+                    Rheumatology <br />
+                    Consultants
                   </h2>
                 </div>
               </motion.div>
@@ -86,7 +87,7 @@ export default function Navbar() {
           </AnimatePresence>
 
           {/* Bottom Bar: Links + Action Buttons */}
-          <div className="mx-auto max-w-7xl px-8 flex items-center justify-between h-14 transition-all duration-300">
+          <div className="mx-auto 2xl:max-w-full 2xl:px-16 max-w-7xl px-8 flex items-center justify-between h-14 transition-all duration-300">
             <nav className="flex items-center gap-8 h-full">
               {navLinks.map((link) => {
                 const isActive =
@@ -101,7 +102,7 @@ export default function Navbar() {
                     >
                       <button
                         type="button"
-                        className={`flex items-center gap-1 font-body text-sm font-medium transition-colors hover:text-primary ${
+                        className={`flex items-center gap-1 font-body text-sm 2xl:text-base font-medium transition-colors hover:text-primary ${
                           isActive ? "text-primary font-semibold" : "text-ink"
                         }`}
                       >
