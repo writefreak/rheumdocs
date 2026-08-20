@@ -76,7 +76,7 @@ export default function Navbar() {
                   </Link>
 
                   <div>
-                    <h2 className="font-display text-3xl 2xl:text-4xl text-primary font-semibold leading-tight">
+                    <h2 className="font-display text-4xl 2xl:text-6xl text-primary font-semibold leading-tight">
                       Rheumatology <br />
                       Consultants
                     </h2>
