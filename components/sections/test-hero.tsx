@@ -68,7 +68,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="top"
-      className="relative flex items-center overflow-hidden bg-white isolate py-6 md:py-0 md:h-screen lg:h-screen xl:h-auto xl:py-0 2xl:h-[870px]"
+      className="relative flex items-center overflow-hidden bg-white isolate py-6 md:py-0 md:h-screen lg:h-screen xl:h-auto xl:py-0 2xl:h-[950px]"
     >
       {/* Background for Mobile and Tablet only (< lg) */}
       <div className="absolute inset-0 -z-10 lg:hidden">

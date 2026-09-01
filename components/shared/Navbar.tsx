@@ -3,7 +3,14 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, ArrowRight, ChevronDown } from "lucide-react";
+import {
+  Menu,
+  ArrowRight,
+  ChevronDown,
+  Phone,
+  Clock,
+  Mail,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import MobileNav from "./MobileNav";
 
@@ -66,20 +73,47 @@ export default function Navbar() {
                 transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                 className="overflow-hidden md:border-b border-ink/5"
               >
-                <div className=" 2xl:max-w-full px-16  py-3 2xl:py-5 flex items-center gap-6">
-                  <Link href="/" className="flex-shrink-0">
-                    <img
-                      src="/rheumlogo.jpg"
-                      alt="Rheumdocs Logo"
-                      className="h-24 2xl:h-28 w-auto object-contain"
-                    />
-                  </Link>
+                <div className=" 2xl:max-w-full px-16 py-3 2xl:py-5 flex items-center justify-between gap-6">
+                  <div className="flex items-center gap-6">
+                    <Link href="/" className="flex-shrink-0">
+                      <img
+                        src="/rheumlogo.jpg"
+                        alt="Rheumdocs Logo"
+                        className="h-24 2xl:h-28 w-auto object-contain"
+                      />
+                    </Link>
 
-                  <div>
-                    <h2 className="font-display text-4xl 2xl:text-6xl text-primary font-semibold leading-tight">
-                      Rheumatology <br />
-                      Consultants
-                    </h2>
+                    <div>
+                      <h2 className="font-display text-4xl 2xl:text-6xl text-primary font-semibold leading-tight">
+                        Rheumatology <br />
+                        Consultants
+                      </h2>
+                    </div>
+                  </div>
+
+                  {/* Top Bar Contact Info with Icons */}
+                  <div className="flex 2xl:text-2xl font-medium items-center gap-6 text-sm text-ink/80 font-body">
+                    <a
+                      href="tel:301-791-6680"
+                      className="flex items-center gap-2 hover:text-primary transition-colors"
+                    >
+                      <Phone size={18} className="text-primary" />
+                      <span>(301)-791-6680</span>
+                    </a>
+
+                    <div className="flex items-center gap-2">
+                      <Clock size={18} className="text-primary" />
+                      <span>Mon - Thurs: 9:00AM - 4:30PM</span>
+                      <span>Fri: 9:00AM - 12:00PM</span>
+                    </div>
+
+                    {/* <a
+                      href="mailto:info@rheumdocs.com"
+                      className="flex items-center gap-2 hover:text-primary transition-colors"
+                    >
+                      <Mail size={18} className="text-primary" />
+                      <span>info@rheumdocs.com</span>
+                    </a> */}
                   </div>
                 </div>
               </motion.div>
