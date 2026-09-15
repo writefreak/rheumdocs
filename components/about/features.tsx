@@ -13,7 +13,7 @@ const FEATURES = [
       "https://d2i9320pexmd8f.cloudfront.net/hologic-horizon-dxa15323703091532370309_resized.jpg",
   },
   {
-    title: "Design & Production",
+    title: "X-ray Facility",
     icon: Scan,
     description:
       "X-ray facility available on-site utilizing Gendex-Del and Digital Fuji CR equipment, Onsite ultrasound utilizing Sonosite M-MSK Progressive Radiology",

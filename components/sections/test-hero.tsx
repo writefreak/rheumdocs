@@ -100,12 +100,23 @@ export default function Hero() {
           animate="visible"
           className="max-w-3xl flex flex-col gap-7 lg:col-span-8 xl:col-span-6 2xl:col-span-6 min-[1920px]:col-span-5 lg:max-w-none"
         >
+          {/* <motion.h1
+            variants={item}
+            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full 2xl:text-[60px] min-[1920px]:text-[72px]"
+          >
+            Western Maryland's trusted rheumatology and osteoporosis care since
+            1994.
+          </motion.h1> */}
+
           <motion.h1
             variants={item}
             className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full 2xl:text-[60px] min-[1920px]:text-[72px]"
           >
-            Western Maryland's Trusted rheumatology and osteoporosis care since
-            1994.
+            <span className="text-[20px] md:text-[42px] 2xl:text-[51px] min-[1920px]:text-[56px]">
+              Western Maryland's
+            </span>{" "}
+            <br className="hidden md:block" />
+            trusted rheumatology and osteoporosis care since 1994.
           </motion.h1>
 
           <motion.p
