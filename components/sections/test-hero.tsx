@@ -110,7 +110,7 @@ export default function Hero() {
 
           <motion.h1
             variants={item}
-            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full 2xl:text-[60px] min-[1920px]:text-[72px]"
+            className="font-display text-[22px] md:w-full w-64 text-primary font-semibold leading-[1.08] md:text-5xl xl:w-full 2xl:text-[60px] min-[1920px]:text-[60px]"
           >
             <span className="text-[20px] md:text-[42px] 2xl:text-[51px] min-[1920px]:text-[56px]">
               Western Maryland's
