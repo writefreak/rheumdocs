@@ -11,14 +11,14 @@ import MissionSection from "@/components/sections/MissionSection";
 export default function Home() {
   return (
     <main>
-      <TestHero />
+      {/* <TestHero />
       {/* <Hero /> */}
       {/* <MissionSection /> */}
       <PracticeOverviewSection />
       <ServicesSection />
       {/* <ResearchSection /> */}
       {/* <TeamSection /> */}
-      <ContactSection />
+      <ContactSection /> */}
     </main>
   );
 }
