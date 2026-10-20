@@ -13,7 +13,7 @@ export default function Home() {
     <main>
       <TestHero />
       {/* <Hero /> */}
-      <MissionSection />
+      {/* <MissionSection /> */}
       <PracticeOverviewSection />
       <ServicesSection />
       <ResearchSection />
